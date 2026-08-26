@@ -182,6 +182,12 @@ export const applicationStatusSchema = z.object({
   status: z.enum(["submitted", "under_review", "shortlisted", "rejected", "hired"]),
 });
 
+export const adminMailSchema = z.object({
+  to: z.string().email("Enter a valid recipient email"),
+  subject: z.string().min(1, "Subject is required").max(200),
+  html: z.string().min(1, "Message body is required"),
+});
+
 export const createAdminSchema = z.object({
   name: z.string().min(2).max(120),
   email: z.string().email(),

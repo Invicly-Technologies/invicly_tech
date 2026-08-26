@@ -4,7 +4,7 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Loader2, Lock } from "lucide-react";
-import { Input, Label } from "@/components/ui/input";
+import { Input, PasswordInput, Label } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 export function LoginForm() {
@@ -58,9 +58,8 @@ export function LoginForm() {
         </div>
         <div>
           <Label htmlFor="password">Password</Label>
-          <Input
+          <PasswordInput
             id="password"
-            type="password"
             autoComplete="current-password"
             required
             value={values.password}

@@ -5,7 +5,7 @@ import { Ban, CheckCircle2, Crown, Loader2, Plus, Trash2 } from "lucide-react";
 import { Card, Badge } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Modal } from "@/components/ui/modal";
-import { Input, Label } from "@/components/ui/input";
+import { Input, PasswordInput, Label } from "@/components/ui/input";
 
 export function AdminsManager() {
   const [admins, setAdmins] = useState([]);
@@ -156,9 +156,8 @@ export function AdminsManager() {
           </div>
           <div>
             <Label htmlFor="password">Temporary password</Label>
-            <Input
+            <PasswordInput
               id="password"
-              type="password"
               required
               value={form.password}
               onChange={(e) => setForm((f) => ({ ...f, password: e.target.value }))}

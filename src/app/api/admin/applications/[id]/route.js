@@ -1,8 +1,9 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import { connectDB } from "@/lib/db";
 import Application from "@/models/Application";
 import { applicationStatusSchema } from "@/lib/validators";
 import { requireAdminOrResponse } from "@/lib/api-guard";
+import { sendApplicationStatusEmail } from "@/lib/mailer";
 
 export async function PUT(req, { params }) {
   const { response } = await requireAdminOrResponse();
@@ -16,7 +17,19 @@ export async function PUT(req, { params }) {
   }
 
   await connectDB();
-  const doc = await Application.findByIdAndUpdate(id, { status: parsed.data.status }, { new: true }).lean();
+  const doc = await Application.findByIdAndUpdate(id, { status: parsed.data.status }, { new: true })
+    .populate("job", "title slug type")
+    .lean();
   if (!doc) return NextResponse.json({ error: "Not found" }, { status: 404 });
+
+  after(() =>
+    sendApplicationStatusEmail({
+      to: doc.email,
+      fullName: doc.fullName,
+      jobTitle: doc.job?.title,
+      status: doc.status,
+    }).catch((err) => console.error("[applications] status email failed:", err.message))
+  );
+
   return NextResponse.json(doc);
 }

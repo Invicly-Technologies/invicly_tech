@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, ShieldCheck } from "lucide-react";
 import { resetPasswordSchema } from "@/lib/validators";
-import { Input, Label } from "@/components/ui/input";
+import { Input, PasswordInput, Label } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 export default function ResetPasswordPage() {
@@ -83,7 +83,7 @@ function ResetForm() {
           </div>
           <div>
             <Label htmlFor="newPassword">New password</Label>
-            <Input id="newPassword" type="password" {...register("newPassword")} />
+            <PasswordInput id="newPassword" {...register("newPassword")} />
             {errors.newPassword && <p className="mt-1 text-xs text-red-500">{errors.newPassword.message}</p>}
           </div>
 

@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, LogIn } from "lucide-react";
 import { candidateLoginSchema } from "@/lib/validators";
-import { Input, Label } from "@/components/ui/input";
+import { Input, PasswordInput, Label } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 export default function CandidateLoginPage() {
@@ -70,7 +70,7 @@ function LoginForm() {
           </div>
           <div>
             <Label htmlFor="password">Password</Label>
-            <Input id="password" type="password" {...register("password")} />
+            <PasswordInput id="password" {...register("password")} />
             {errors.password && <p className="mt-1 text-xs text-red-500">{errors.password.message}</p>}
           </div>
 

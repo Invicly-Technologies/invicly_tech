@@ -1,12 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Loader2, Ban, CheckCircle2, Trash2 } from "lucide-react";
+import { Loader2, Ban, CheckCircle2, Mail, Trash2 } from "lucide-react";
 import { Card, Badge } from "@/components/ui/card";
+import { MailComposeModal } from "@/components/admin/mail-compose-modal";
 
 export function CandidatesManager({ isSuperAdmin }) {
   const [candidates, setCandidates] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [mailTarget, setMailTarget] = useState(null);
 
   async function load() {
     setLoading(true);
@@ -54,7 +56,7 @@ export function CandidatesManager({ isSuperAdmin }) {
                 <th className="px-5 py-3 font-medium">Name</th>
                 <th className="px-5 py-3 font-medium">Email</th>
                 <th className="px-5 py-3 font-medium">Status</th>
-                {isSuperAdmin && <th className="px-5 py-3 text-right font-medium">Actions</th>}
+                <th className="px-5 py-3 text-right font-medium">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -67,31 +69,49 @@ export function CandidatesManager({ isSuperAdmin }) {
                       {c.disabled ? "Disabled" : c.emailVerified ? "Active" : "Unverified"}
                     </Badge>
                   </td>
-                  {isSuperAdmin && (
-                    <td className="px-5 py-3.5 text-right">
-                      <button
-                        onClick={() => toggleDisabled(c)}
-                        className="mr-2 rounded-lg p-2 text-muted-foreground hover:bg-muted hover:text-primary"
-                        aria-label={c.disabled ? "Enable" : "Disable"}
-                        title={c.disabled ? "Enable account" : "Disable account"}
-                      >
-                        {c.disabled ? <CheckCircle2 size={15} /> : <Ban size={15} />}
-                      </button>
-                      <button
-                        onClick={() => remove(c)}
-                        className="rounded-lg p-2 text-muted-foreground hover:bg-red-500/10 hover:text-red-500"
-                        aria-label="Delete"
-                      >
-                        <Trash2 size={15} />
-                      </button>
-                    </td>
-                  )}
+                  <td className="px-5 py-3.5 text-right">
+                    <button
+                      onClick={() => setMailTarget(c)}
+                      className="mr-2 rounded-lg p-2 text-muted-foreground hover:bg-muted hover:text-primary"
+                      aria-label="Email"
+                      title="Send email"
+                    >
+                      <Mail size={15} />
+                    </button>
+                    {isSuperAdmin && (
+                      <>
+                        <button
+                          onClick={() => toggleDisabled(c)}
+                          className="mr-2 rounded-lg p-2 text-muted-foreground hover:bg-muted hover:text-primary"
+                          aria-label={c.disabled ? "Enable" : "Disable"}
+                          title={c.disabled ? "Enable account" : "Disable account"}
+                        >
+                          {c.disabled ? <CheckCircle2 size={15} /> : <Ban size={15} />}
+                        </button>
+                        <button
+                          onClick={() => remove(c)}
+                          className="rounded-lg p-2 text-muted-foreground hover:bg-red-500/10 hover:text-red-500"
+                          aria-label="Delete"
+                        >
+                          <Trash2 size={15} />
+                        </button>
+                      </>
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         )}
       </Card>
+
+      <MailComposeModal
+        key={mailTarget?._id || "closed"}
+        open={Boolean(mailTarget)}
+        onClose={() => setMailTarget(null)}
+        to={mailTarget?.email}
+        recipientName={mailTarget?.name}
+      />
     </div>
   );
 }

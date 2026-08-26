@@ -97,3 +97,8 @@ body {
 ::selection {
   background: color-mix(in srgb, var(--primary) 35%, transparent);
 }
+
+[contenteditable][data-placeholder]:empty:before {
+  content: attr(data-placeholder);
+  color: var(--muted-foreground);
+}

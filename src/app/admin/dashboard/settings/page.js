@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Loader2, CheckCircle2 } from "lucide-react";
 import { SingletonForm } from "@/components/admin/singleton-form";
 import { Card } from "@/components/ui/card";
-import { Input, Label } from "@/components/ui/input";
+import { Input, PasswordInput, Label } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 const SETTINGS_FIELDS = [
@@ -57,9 +57,8 @@ function ChangePasswordCard() {
       <form onSubmit={onSubmit} className="mt-5 space-y-4">
         <div>
           <Label htmlFor="currentPassword">Current password</Label>
-          <Input
+          <PasswordInput
             id="currentPassword"
-            type="password"
             required
             value={values.currentPassword}
             onChange={(e) => setValues((v) => ({ ...v, currentPassword: e.target.value }))}
@@ -68,9 +67,8 @@ function ChangePasswordCard() {
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <Label htmlFor="newPassword">New password</Label>
-            <Input
+            <PasswordInput
               id="newPassword"
-              type="password"
               required
               value={values.newPassword}
               onChange={(e) => setValues((v) => ({ ...v, newPassword: e.target.value }))}
@@ -78,9 +76,8 @@ function ChangePasswordCard() {
           </div>
           <div>
             <Label htmlFor="confirmPassword">Confirm new password</Label>
-            <Input
+            <PasswordInput
               id="confirmPassword"
-              type="password"
               required
               value={values.confirmPassword}
               onChange={(e) => setValues((v) => ({ ...v, confirmPassword: e.target.value }))}

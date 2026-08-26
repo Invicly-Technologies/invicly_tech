@@ -10,8 +10,8 @@ export async function GET() {
   await connectDB();
   const docs = await Application.find({})
     .sort({ createdAt: -1 })
-    .populate("job", "title slug type")
-    .populate("candidate", "name email")
+    .populate("job", "title slug type location department")
+    .populate("candidate", "name email phone emailVerified disabled createdAt")
     .lean();
   return NextResponse.json(docs);
 }

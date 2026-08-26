@@ -39,12 +39,17 @@ const LINKS = [
 
 const SUPER_ADMIN_LINK = { href: "/admin/dashboard/admins", label: "Admin users", icon: Crown };
 
-export function Sidebar({ adminEmail, isSuperAdmin }) {
+export function Sidebar({ adminEmail, isSuperAdmin, open, onNavigate }) {
   const pathname = usePathname();
   const links = isSuperAdmin ? [...LINKS, SUPER_ADMIN_LINK] : LINKS;
 
   return (
-    <aside className="flex h-screen w-64 shrink-0 flex-col border-r border-border bg-card">
+    <aside
+      className={cn(
+        "fixed inset-y-0 left-0 z-50 flex h-screen w-64 shrink-0 flex-col border-r border-border bg-card transition-transform duration-200 md:sticky md:top-0 md:translate-x-0",
+        open ? "translate-x-0" : "-translate-x-full"
+      )}
+    >
       <div className="flex items-center justify-between border-b border-border px-6 py-5">
         <div>
           <p className="text-sm font-semibold text-foreground">Invicly Technologies</p>
@@ -61,6 +66,7 @@ export function Sidebar({ adminEmail, isSuperAdmin }) {
             <Link
               key={link.href}
               href={link.href}
+              onClick={onNavigate}
               className={cn(
                 "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
                 active ? "bg-primary/10 text-primary" : "text-foreground/80 hover:bg-muted"

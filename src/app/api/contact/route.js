@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import { connectDB } from "@/lib/db";
 import ContactSubmission from "@/models/ContactSubmission";
 import { contactSchema } from "@/lib/validators";
@@ -15,8 +15,12 @@ export async function POST(req) {
     await connectDB();
     const submission = await ContactSubmission.create(parsed.data);
 
-    sendContactNotification(parsed.data).catch((err) =>
-      console.error("[contact] email notification failed:", err.message)
+    // `after()` keeps the serverless function alive until the email finishes sending,
+    // which a fire-and-forget promise does not guarantee once the response is returned.
+    after(() =>
+      sendContactNotification(parsed.data).catch((err) =>
+        console.error("[contact] email notification failed:", err.message)
+      )
     );
 
     return NextResponse.json({ ok: true, id: submission._id.toString() }, { status: 201 });
