@@ -1,26 +1,99 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f7f8fb;
+  --foreground: #0b1120;
+  --card: #ffffff;
+  --card-foreground: #0b1120;
+  --muted: #eef1f7;
+  --muted-foreground: #5b6472;
+  --border: #e3e7ee;
+  --primary: #3b57e8;
+  --primary-foreground: #ffffff;
+  --accent: #06b6d4;
+  --accent-foreground: #04222a;
+  --ring: #3b57e8;
+  --radius: 1rem;
+}
+
+.dark {
+  --background: #06080f;
+  --foreground: #eef1f7;
+  --card: #0d1120;
+  --card-foreground: #eef1f7;
+  --muted: #121729;
+  --muted-foreground: #9aa4b6;
+  --border: #1c2237;
+  --primary: #5b74ff;
+  --primary-foreground: #05070f;
+  --accent: #22d3ee;
+  --accent-foreground: #04222a;
+  --ring: #5b74ff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-ring: var(--ring);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+.container-page {
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .container-page {
+    padding-inline: 2rem;
+  }
+}
+
+.gradient-text {
+  background-image: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gradient-bg {
+  background-image: radial-gradient(60% 60% at 20% 20%, color-mix(in srgb, var(--primary) 25%, transparent), transparent 60%),
+    radial-gradient(50% 50% at 85% 15%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 60%);
+}
+
+.card-surface {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--primary) 35%, transparent);
 }
