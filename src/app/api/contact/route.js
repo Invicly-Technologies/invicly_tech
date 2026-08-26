@@ -4,6 +4,10 @@ import ContactSubmission from "@/models/ContactSubmission";
 import { contactSchema } from "@/lib/validators";
 import { sendContactNotification } from "@/lib/mailer";
 
+// Gives the background email send (via after()) enough headroom on Vercel's default
+// function duration, which can otherwise be shorter than the mailer's own SMTP timeouts.
+export const maxDuration = 30;
+
 export async function POST(req) {
   try {
     const body = await req.json();

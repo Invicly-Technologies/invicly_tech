@@ -15,12 +15,13 @@ export default function AppleIcon() {
           justifyContent: "center",
           background: "linear-gradient(135deg, #3b57e8, #06b6d4)",
           color: "#ffffff",
-          fontSize: 110,
+          fontSize: 82,
           fontWeight: 700,
+          letterSpacing: -2,
           fontFamily: "Arial, Helvetica, sans-serif",
         }}
       >
-        I
+        IT
       </div>
     ),
     { ...size }

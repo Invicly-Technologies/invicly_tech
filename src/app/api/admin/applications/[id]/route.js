@@ -5,6 +5,10 @@ import { applicationStatusSchema } from "@/lib/validators";
 import { requireAdminOrResponse } from "@/lib/api-guard";
 import { sendApplicationStatusEmail } from "@/lib/mailer";
 
+// Gives the background email send (via after()) enough headroom on Vercel's default
+// function duration, which can otherwise be shorter than the mailer's own SMTP timeouts.
+export const maxDuration = 30;
+
 export async function PUT(req, { params }) {
   const { response } = await requireAdminOrResponse();
   if (response) return response;

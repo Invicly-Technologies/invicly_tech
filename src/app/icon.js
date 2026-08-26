@@ -16,12 +16,13 @@ export default function Icon() {
           background: "linear-gradient(135deg, #3b57e8, #06b6d4)",
           borderRadius: 7,
           color: "#ffffff",
-          fontSize: 20,
+          fontSize: 15,
           fontWeight: 700,
+          letterSpacing: -0.5,
           fontFamily: "Arial, Helvetica, sans-serif",
         }}
       >
-        I
+        IT
       </div>
     ),
     { ...size }
