@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Loader2, ExternalLink, Mail, ShieldCheck, ShieldAlert, Eye } from "lucide-react";
+import { Loader2, ExternalLink, Mail, ShieldCheck, ShieldAlert, Eye, AlertTriangle } from "lucide-react";
 import { Card, Badge } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Modal } from "@/components/ui/modal";
 import { MailComposeModal } from "@/components/admin/mail-compose-modal";
+import { statusRank } from "@/lib/application-status";
 
 const STATUS_OPTIONS = [
   { value: "submitted", label: "Submitted" },
@@ -32,11 +33,29 @@ function DetailRow({ label, children }) {
   );
 }
 
+function StatusSelect({ app, onRequestChange }) {
+  return (
+    <select
+      value={app.status}
+      onChange={(e) => onRequestChange(app, e.target.value)}
+      className={`h-9 rounded-full border px-3 text-xs font-medium capitalize outline-none ${STATUS_STYLES[app.status] || ""}`}
+    >
+      {STATUS_OPTIONS.map((opt) => (
+        <option key={opt.value} value={opt.value} disabled={opt.value !== app.status && statusRank(opt.value) < statusRank(app.status)}>
+          {opt.label}
+        </option>
+      ))}
+    </select>
+  );
+}
+
 export default function ApplicationsAdminPage() {
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [detailApp, setDetailApp] = useState(null);
   const [mailTarget, setMailTarget] = useState(null);
+  const [pendingChange, setPendingChange] = useState(null);
+  const [statusError, setStatusError] = useState("");
 
   async function load() {
     setLoading(true);
@@ -50,20 +69,45 @@ export default function ApplicationsAdminPage() {
     load();
   }, []);
 
-  async function updateStatus(id, status) {
-    setApplications((apps) => apps.map((a) => (a._id === id ? { ...a, status } : a)));
-    setDetailApp((d) => (d && d._id === id ? { ...d, status } : d));
-    await fetch(`/api/admin/applications/${id}`, {
+  function requestStatusChange(app, status) {
+    if (status === app.status) return;
+    setStatusError("");
+    setPendingChange({ app, status });
+  }
+
+  async function confirmStatusChange() {
+    if (!pendingChange) return;
+    const { app, status } = pendingChange;
+    setPendingChange(null);
+
+    setApplications((apps) => apps.map((a) => (a._id === app._id ? { ...a, status } : a)));
+    setDetailApp((d) => (d && d._id === app._id ? { ...d, status } : d));
+
+    const res = await fetch(`/api/admin/applications/${app._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status }),
     });
+
+    if (!res.ok) {
+      // Roll back the optimistic update if the server rejected the change.
+      setApplications((apps) => apps.map((a) => (a._id === app._id ? { ...a, status: app.status } : a)));
+      setDetailApp((d) => (d && d._id === app._id ? { ...d, status: app.status } : d));
+      const data = await res.json().catch(() => ({}));
+      setStatusError(data.error || "Could not update status.");
+    }
   }
 
   return (
     <div>
       <h1 className="text-2xl font-bold text-foreground">Applications</h1>
       <p className="mt-1 text-sm text-muted-foreground">Every application submitted through the Careers page.</p>
+
+      {statusError && (
+        <div className="mt-4 flex items-center gap-2 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-2.5 text-sm text-red-500">
+          <AlertTriangle size={15} /> {statusError}
+        </div>
+      )}
 
       <div className="mt-8 space-y-4">
         {loading ? (
@@ -86,17 +130,7 @@ export default function ApplicationsAdminPage() {
                     {app.job?.type && <Badge className="ml-2">{app.job.type}</Badge>}
                   </p>
                 </div>
-                <select
-                  value={app.status}
-                  onChange={(e) => updateStatus(app._id, e.target.value)}
-                  className={`h-9 rounded-full border px-3 text-xs font-medium capitalize outline-none ${STATUS_STYLES[app.status] || ""}`}
-                >
-                  {STATUS_OPTIONS.map((opt) => (
-                    <option key={opt.value} value={opt.value}>
-                      {opt.label}
-                    </option>
-                  ))}
-                </select>
+                <StatusSelect app={app} onRequestChange={requestStatusChange} />
               </div>
 
               <div className="mt-4 grid gap-3 text-sm sm:grid-cols-3">
@@ -155,17 +189,7 @@ export default function ApplicationsAdminPage() {
                 <p className="text-lg font-semibold text-foreground">{detailApp.fullName}</p>
                 <p className="break-all text-sm text-muted-foreground">{detailApp.email}</p>
               </div>
-              <select
-                value={detailApp.status}
-                onChange={(e) => updateStatus(detailApp._id, e.target.value)}
-                className={`h-9 rounded-full border px-3 text-xs font-medium capitalize outline-none ${STATUS_STYLES[detailApp.status] || ""}`}
-              >
-                {STATUS_OPTIONS.map((opt) => (
-                  <option key={opt.value} value={opt.value}>
-                    {opt.label}
-                  </option>
-                ))}
-              </select>
+              <StatusSelect app={detailApp} onRequestChange={requestStatusChange} />
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
@@ -242,6 +266,27 @@ export default function ApplicationsAdminPage() {
               >
                 <Mail size={15} /> Email applicant
               </Button>
+            </div>
+          </div>
+        )}
+      </Modal>
+
+      <Modal open={Boolean(pendingChange)} onClose={() => setPendingChange(null)} title="Confirm status change">
+        {pendingChange && (
+          <div className="space-y-4">
+            <p className="text-sm text-foreground/90">
+              Change <strong>{pendingChange.app.fullName}</strong>&apos;s status from{" "}
+              <strong>{STATUS_OPTIONS.find((o) => o.value === pendingChange.app.status)?.label}</strong> to{" "}
+              <strong>{STATUS_OPTIONS.find((o) => o.value === pendingChange.status)?.label}</strong>?
+            </p>
+            <p className="text-xs text-muted-foreground">
+              This can&apos;t be moved back to an earlier stage, and will email {pendingChange.app.email} about the update.
+            </p>
+            <div className="flex justify-end gap-3 pt-2">
+              <Button variant="outline" onClick={() => setPendingChange(null)}>
+                Cancel
+              </Button>
+              <Button onClick={confirmStatusChange}>Confirm</Button>
             </div>
           </div>
         )}

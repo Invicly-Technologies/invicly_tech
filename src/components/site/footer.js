@@ -21,7 +21,7 @@ export function Footer({ settings }) {
         <div className="md:col-span-2">
           <div className="flex items-center gap-2 text-lg font-semibold">
             <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground text-sm font-bold">
-              {settings?.siteName?.[0] || "I"}
+              IT
             </span>
             {settings?.siteName || "Invicly Technologies"}
           </div>

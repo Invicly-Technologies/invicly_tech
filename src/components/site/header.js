@@ -29,7 +29,7 @@ export function Header({ siteName, logoUrl }) {
             <Image src={logoUrl} alt={siteName} width={32} height={32} className="rounded-lg" />
           ) : (
             <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground text-sm font-bold">
-              {siteName?.[0] || "I"}
+              IT
             </span>
           )}
           <span>{siteName}</span>
