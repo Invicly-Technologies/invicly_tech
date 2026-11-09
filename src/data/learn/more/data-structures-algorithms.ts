@@ -1,0 +1,187 @@
+import type { LearningPath } from "../types";
+
+const L = (label: string, url: string) => ({ label, url });
+
+const path: LearningPath = {
+  slug: "data-structures-algorithms",
+  title: "Data Structures & Algorithms",
+  tagline: "Understand, implement and apply the classic toolkit.",
+  description:
+    "A full, language-neutral course in data structures and algorithms with Python examples. Every topic pairs theory and complexity analysis with your own implementation and a set of problems, from arrays and hashing through trees, graphs and dynamic programming to segment trees, ending with a personal algorithms library and timed problem sets.",
+  level: "Beginner → Intermediate",
+  category: "Foundations",
+  icon: "binary",
+  outcomes: [
+    "Analyse the time and space complexity of any algorithm you write or read",
+    "Implement core data structures from scratch and know their trade-offs",
+    "Apply sorting, searching, tree and graph algorithms to unfamiliar problems",
+    "Recognise greedy, dynamic programming and backtracking problems and derive solutions",
+    "Solve medium-level coding problems within a timed session and explain them clearly",
+  ],
+  tools: [
+    "Python 3",
+    "collections, heapq & bisect",
+    "pytest",
+    "timeit & cProfile",
+    "VS Code",
+    "Python Tutor",
+    "VisuAlgo",
+    "LeetCode",
+    "NeetCode roadmap",
+    "Git & GitHub",
+  ],
+  modules: [
+    {
+      key: "dsa-foundations",
+      title: "Complexity analysis & math basics",
+      summary: "The language for comparing algorithms, plus the math it rests on.",
+      links: [L("Big-O cheat sheet", "https://www.bigocheatsheet.com/"), L("Computer science roadmap", "https://roadmap.sh/computer-science")],
+      topics: [
+        { key: "asymptotic-notation", title: "Big-O, Big-Omega & Big-Theta", hours: 3, goal: "Describe an algorithm's growth rate with the correct asymptotic notation.", subtopics: ["Define upper, lower and tight bounds", "Drop constants and lower-order terms", "Rank common growth rates", "Separate best, average and worst case"] },
+        { key: "analyzing-code", title: "Analysing loops & recursive code", hours: 3, goal: "Derive the running time of loops, nested loops and simple recursions by inspection.", subtopics: ["Count work in sequential and nested loops", "Spot logarithmic halving loops", "Write recurrences for recursive functions", "Apply the master theorem to common recurrences"] },
+        { key: "amortized-space", title: "Amortised analysis & space complexity", hours: 2.5, goal: "Explain why some operations are cheap on average and measure the extra memory an algorithm uses.", subtopics: ["Use the aggregate method for amortised cost", "Count auxiliary space versus input space", "Include recursion stack depth in space", "Measure real runtimes with timeit"], links: [L("timeit", "https://docs.python.org/3/library/timeit.html")] },
+        { key: "math-basics", title: "Math for algorithms: logs, sums, modular arithmetic", hours: 3, goal: "Use logarithms, series, modular arithmetic and basic counting in algorithm analysis.", subtopics: ["Work with logarithms and powers of two", "Evaluate arithmetic and geometric series", "Compute with modular arithmetic", "Count permutations and combinations", "Implement fast exponentiation"], links: [L("Binary exponentiation", "https://cp-algorithms.com/algebra/binary-exp.html")] },
+        { key: "python-for-dsa", title: "Python built-ins and their costs", hours: 2.5, goal: "Pick the right built-in container for a task knowing the complexity of its operations.", subtopics: ["Review list, dict and set operation costs", "Use deque, Counter and defaultdict", "Use heapq and bisect modules", "Write quick tests with pytest"], links: [L("Python time complexity", "https://wiki.python.org/moin/TimeComplexity"), L("collections", "https://docs.python.org/3/library/collections.html")] },
+      ],
+    },
+    {
+      key: "dsa-arrays-strings",
+      title: "Arrays & strings",
+      summary: "Contiguous memory, resizing and the most common interview data type.",
+      links: [L("Python data structures", "https://docs.python.org/3/tutorial/datastructures.html")],
+      topics: [
+        { key: "static-arrays", title: "Static arrays & memory layout", hours: 2.5, goal: "Explain why array indexing is O(1) and insertion in the middle is O(n).", subtopics: ["Compute element addresses from the index", "Insert and delete by shifting elements", "Explain cache locality benefits", "Work with 2D arrays as row-major"] },
+        { key: "dynamic-arrays", title: "Dynamic arrays & resizing", hours: 3, goal: "Implement a growable array and prove append is amortised O(1).", subtopics: ["Track size versus capacity", "Grow by doubling and copy", "Implement append, pop, get and set", "Prove amortised O(1) append"] },
+        { key: "strings", title: "Strings, immutability & character counting", hours: 3.5, goal: "Manipulate strings efficiently and solve anagram, palindrome and parsing problems.", subtopics: ["Explain string immutability and its costs", "Build strings with join, not +=", "Count characters with arrays or Counter", "Solve palindrome and anagram problems", "Parse tokens from a string"], links: [L("String methods", "https://docs.python.org/3/library/stdtypes.html#string-methods")] },
+        { key: "prefix-sums", title: "Prefix sums & in-place array techniques", hours: 3, goal: "Answer range-sum queries in O(1) and rearrange arrays in place without extra memory.", subtopics: ["Build 1D prefix sum arrays", "Answer range queries in constant time", "Use 2D prefix sums for submatrices", "Reverse and rotate arrays in place", "Partition an array in one pass"] },
+      ],
+    },
+    {
+      key: "dsa-linear-structures",
+      title: "Linked lists, stacks, queues & deques",
+      summary: "Pointer-based sequences and the LIFO/FIFO structures built on them.",
+      links: [L("VisuAlgo: linked list, stack, queue", "https://visualgo.net/en/list")],
+      topics: [
+        { key: "singly-linked-lists", title: "Singly linked lists", hours: 3.5, goal: "Implement a singly linked list and reverse, merge and split lists with pointer manipulation.", subtopics: ["Implement node and list classes", "Insert and delete at head and tail", "Reverse a list iteratively and recursively", "Use a dummy head node", "Merge two sorted lists"] },
+        { key: "doubly-circular-lists", title: "Doubly linked & circular lists", hours: 2.5, goal: "Use doubly linked and circular lists and detect cycles with fast and slow pointers.", subtopics: ["Implement a doubly linked list with sentinels", "Remove a node in O(1)", "Detect cycles with Floyd's algorithm", "Find the middle with fast and slow pointers"] },
+        { key: "stacks", title: "Stacks & expression problems", hours: 3, goal: "Implement a stack and use it for bracket matching, expression evaluation and undo history.", subtopics: ["Implement a stack on a list", "Match brackets with a stack", "Evaluate postfix expressions", "Replace recursion with an explicit stack"] },
+        { key: "queues-deques", title: "Queues, circular buffers & deques", hours: 3, goal: "Implement a queue with a circular buffer and choose between queue and deque for a problem.", subtopics: ["Implement a ring buffer queue", "Explain why list.pop(0) is O(n)", "Use collections.deque at both ends", "Build a sliding window maximum with a deque"], links: [L("collections.deque", "https://docs.python.org/3/library/collections.html#collections.deque")] },
+        { key: "monotonic-stack", title: "Monotonic stacks", hours: 2.5, goal: "Solve next-greater-element and histogram problems in O(n) with a monotonic stack.", subtopics: ["Maintain an increasing or decreasing stack", "Find the next greater element", "Solve daily temperatures", "Find the largest rectangle in a histogram"] },
+      ],
+    },
+    {
+      key: "dsa-hashing",
+      title: "Hashing",
+      summary: "Constant-time lookup and the collisions that make it interesting.",
+      links: [L("VisuAlgo: hash table", "https://visualgo.net/en/hashtable")],
+      topics: [
+        { key: "hash-functions", title: "Hash functions", hours: 2.5, goal: "Explain what makes a good hash function and why keys must be immutable.", subtopics: ["Map keys to bucket indexes", "Explain uniformity and determinism", "Hash strings with polynomial rolling hashes", "Explain why mutable keys break hashing"], links: [L("String hashing", "https://cp-algorithms.com/string/string-hashing.html")] },
+        { key: "hash-tables", title: "Hash tables: chaining, open addressing & resizing", hours: 4, goal: "Implement a hash map with collision handling and resizing.", subtopics: ["Implement separate chaining", "Implement linear probing with tombstones", "Track load factor and rehash", "Compare average and worst-case costs"] },
+        { key: "hashing-patterns", title: "Problem patterns with maps & sets", hours: 3.5, goal: "Turn O(n^2) brute-force searches into O(n) solutions using hash maps and sets.", subtopics: ["Solve two-sum with a complement map", "Group items by a computed key", "Count frequencies and find top items", "Use prefix sums with a hash map", "Detect duplicates with a set"], links: [L("NeetCode roadmap", "https://neetcode.io/roadmap")] },
+      ],
+    },
+    {
+      key: "dsa-recursion-sorting",
+      title: "Recursion, sorting & searching",
+      summary: "Think recursively, divide and conquer, then sort and search efficiently.",
+      links: [L("VisuAlgo: sorting", "https://visualgo.net/en/sorting")],
+      topics: [
+        { key: "recursion", title: "Recursion & the call stack", hours: 3, goal: "Write correct recursive functions with clear base cases and trace them on the call stack.", subtopics: ["Identify base case and recursive case", "Trace calls on the call stack", "Draw recursion trees", "Know Python's recursion limit", "Convert simple recursion to iteration"] },
+        { key: "divide-and-conquer", title: "Divide and conquer", hours: 2.5, goal: "Split a problem into independent subproblems and combine their answers efficiently.", subtopics: ["Identify divide, conquer and combine steps", "Solve maximum subarray with divide and conquer", "Analyse with recurrences", "Count inversions during merging"] },
+        { key: "elementary-sorts", title: "Elementary sorts: bubble, selection, insertion", hours: 2, goal: "Implement the quadratic sorts and explain stability and when insertion sort wins.", subtopics: ["Implement bubble and selection sort", "Implement insertion sort", "Define stable and in-place sorting", "Explain insertion sort on nearly sorted data"] },
+        { key: "merge-sort", title: "Merge sort", hours: 2.5, goal: "Implement merge sort and explain its guaranteed O(n log n) time and O(n) extra space.", subtopics: ["Split recursively to single elements", "Merge two sorted halves", "Analyse the recursion tree", "Implement a bottom-up variant"] },
+        { key: "quicksort", title: "Quicksort & quickselect", hours: 3, goal: "Implement quicksort with a good pivot strategy and find the k-th element with quickselect.", subtopics: ["Partition with Lomuto and Hoare schemes", "Choose random or median-of-three pivots", "Explain the O(n^2) worst case", "Find the k-th smallest with quickselect"] },
+        { key: "counting-radix-sort", title: "Counting sort, radix sort & sorting in practice", hours: 2.5, goal: "Sort integers in linear time and use Python's sort with keys correctly.", subtopics: ["Implement counting sort", "Implement LSD radix sort", "Explain the comparison sort lower bound", "Sort with key functions and Timsort"], links: [L("Sorting HOW TO", "https://docs.python.org/3/howto/sorting.html")] },
+        { key: "binary-search", title: "Binary search & search on the answer", hours: 3.5, goal: "Write bug-free binary search and apply it to monotonic answer spaces.", subtopics: ["Write binary search with clear invariants", "Find first and last occurrence", "Search a rotated sorted array", "Binary search on the answer space", "Use the bisect module"], links: [L("bisect", "https://docs.python.org/3/library/bisect.html")] },
+      ],
+    },
+    {
+      key: "dsa-trees",
+      title: "Trees, heaps & tries",
+      summary: "Hierarchical structures for ordered data, priorities and prefixes.",
+      links: [L("VisuAlgo: BST", "https://visualgo.net/en/bst"), L("VisuAlgo: heap", "https://visualgo.net/en/heap")],
+      topics: [
+        { key: "tree-traversals", title: "Binary trees & traversals", hours: 3.5, goal: "Traverse a binary tree in pre-, in-, post- and level order, recursively and iteratively.", subtopics: ["Learn tree vocabulary: root, leaf, height", "Implement pre-, in- and post-order", "Implement level-order with a queue", "Write iterative traversals with a stack", "Compute height and diameter"] },
+        { key: "bst", title: "Binary search trees", hours: 3.5, goal: "Implement BST search, insert and delete and explain why balance matters.", subtopics: ["Implement search and insert", "Delete nodes with zero, one, two children", "Find successor and predecessor", "Validate a BST", "Show degeneration into a linked list"] },
+        { key: "balanced-trees", title: "Balanced trees: AVL & red-black concepts", hours: 3, goal: "Explain how rotations keep AVL and red-black trees at O(log n) height.", subtopics: ["Perform left and right rotations", "Track AVL balance factors", "State the red-black tree rules", "Compare AVL and red-black trade-offs", "Know where balanced trees appear in libraries"] },
+        { key: "binary-heaps", title: "Binary heaps", hours: 3, goal: "Implement an array-based min-heap with sift-up, sift-down and O(n) heapify.", subtopics: ["Map tree positions to array indexes", "Implement push with sift-up", "Implement pop with sift-down", "Build a heap in O(n)"] },
+        { key: "priority-queues", title: "Priority queues & heap sort", hours: 3, goal: "Use heaps for top-k, merging sorted lists and scheduling, and implement heap sort.", subtopics: ["Use heapq for push and pop", "Find top-k elements with a size-k heap", "Merge k sorted lists", "Track a running median with two heaps", "Implement heap sort"], links: [L("heapq", "https://docs.python.org/3/library/heapq.html")] },
+        { key: "tries", title: "Tries (prefix trees)", hours: 2.5, goal: "Implement a trie and use it for prefix search and autocomplete.", subtopics: ["Implement insert and search", "Answer startsWith prefix queries", "Collect words for autocomplete", "Compare tries with hash sets"] },
+      ],
+    },
+    {
+      key: "dsa-graphs",
+      title: "Graphs: representations & traversal",
+      summary: "Model relationships and explore them systematically.",
+      links: [L("VisuAlgo: graph traversal", "https://visualgo.net/en/dfsbfs"), L("cp-algorithms: graphs", "https://cp-algorithms.com/")],
+      topics: [
+        { key: "graph-representations", title: "Graph representations", hours: 2.5, goal: "Store directed, undirected and weighted graphs as adjacency lists, matrices and edge lists.", subtopics: ["Learn vertices, edges, degree and paths", "Build adjacency lists with dicts", "Compare adjacency matrix and list costs", "Treat grids as implicit graphs"], links: [L("VisuAlgo: graph structures", "https://visualgo.net/en/graphds")] },
+        { key: "bfs", title: "Breadth-first search", hours: 3, goal: "Use BFS to find shortest paths in unweighted graphs and grids.", subtopics: ["Implement BFS with a queue and visited set", "Reconstruct paths from parent links", "Run multi-source BFS", "Solve grid shortest-path problems"], links: [L("BFS", "https://cp-algorithms.com/graph/breadth-first-search.html")] },
+        { key: "dfs", title: "Depth-first search, components & cycles", hours: 3, goal: "Use DFS to count components, detect cycles and flood-fill grids.", subtopics: ["Implement recursive and iterative DFS", "Count connected components", "Detect cycles with three-colour marking", "Flood-fill islands in a grid"], links: [L("DFS", "https://cp-algorithms.com/graph/depth-first-search.html")] },
+        { key: "topological-sort", title: "Topological sort", hours: 2.5, goal: "Order tasks in a DAG with Kahn's algorithm or DFS and detect impossible orderings.", subtopics: ["Define DAGs and dependency order", "Implement Kahn's algorithm with in-degrees", "Implement DFS post-order topological sort", "Detect cycles in course schedules"], links: [L("Topological sort", "https://cp-algorithms.com/graph/topological-sort.html")] },
+        { key: "union-find", title: "Union-find (disjoint set union)", hours: 2.5, goal: "Implement union-find with path compression and union by rank for near-constant connectivity queries.", subtopics: ["Implement find and union", "Add path compression", "Add union by rank or size", "Count components dynamically"], links: [L("Disjoint set union", "https://cp-algorithms.com/data_structures/disjoint_set_union.html"), L("VisuAlgo: union-find", "https://visualgo.net/en/ufds")] },
+      ],
+    },
+    {
+      key: "dsa-weighted-graphs",
+      title: "Shortest paths & minimum spanning trees",
+      summary: "Weighted graph algorithms for routes and cheap networks.",
+      links: [L("VisuAlgo: shortest paths", "https://visualgo.net/en/sssp"), L("VisuAlgo: MST", "https://visualgo.net/en/mst")],
+      topics: [
+        { key: "dijkstra", title: "Dijkstra's algorithm", hours: 3.5, goal: "Find single-source shortest paths with non-negative weights using a heap.", subtopics: ["Relax edges and track distances", "Implement Dijkstra with heapq", "Skip stale heap entries", "Explain why negative weights break it"], links: [L("Dijkstra", "https://cp-algorithms.com/graph/dijkstra.html")] },
+        { key: "bellman-ford", title: "Bellman-Ford & Floyd-Warshall", hours: 3, goal: "Handle negative edge weights, detect negative cycles and compute all-pairs shortest paths.", subtopics: ["Relax all edges V-1 times", "Detect negative cycles", "Solve limited-stops shortest paths", "Implement Floyd-Warshall for all pairs"], links: [L("Bellman-Ford", "https://cp-algorithms.com/graph/bellman_ford.html")] },
+        { key: "mst", title: "Minimum spanning trees: Kruskal & Prim", hours: 3, goal: "Build a minimum spanning tree with Kruskal's and Prim's algorithms.", subtopics: ["State the cut property", "Implement Kruskal with union-find", "Implement Prim with a heap", "Choose between them by graph density"], links: [L("Kruskal", "https://cp-algorithms.com/graph/mst_kruskal.html")] },
+      ],
+    },
+    {
+      key: "dsa-greedy-dp",
+      title: "Greedy algorithms & dynamic programming",
+      summary: "Optimisation by local choice, or by reusing overlapping subproblems.",
+      links: [L("NeetCode roadmap", "https://neetcode.io/roadmap")],
+      topics: [
+        { key: "greedy", title: "Greedy algorithms", hours: 3.5, goal: "Recognise problems with the greedy-choice property and justify a greedy solution.", subtopics: ["Schedule intervals by earliest end time", "Merge overlapping intervals", "Prove greedy with an exchange argument", "Find counterexamples where greedy fails", "Solve jump game and gas station"] },
+        { key: "dp-fundamentals", title: "DP fundamentals: memoisation & 1D tabulation", hours: 4, goal: "Turn a recursive solution into memoised and bottom-up DP and solve classic 1D problems.", subtopics: ["Spot overlapping subproblems and optimal substructure", "Memoise with a dict or lru_cache", "Convert to bottom-up tabulation", "Solve climbing stairs and house robber", "Reduce space to O(1)"], links: [L("functools.cache", "https://docs.python.org/3/library/functools.html#functools.cache")] },
+        { key: "dp-2d", title: "2D DP: grids & two sequences", hours: 4, goal: "Define 2D states and fill grid and string DP tables in the right order.", subtopics: ["Count unique grid paths", "Find minimum path sum", "Compute edit distance", "Choose table fill order", "Reduce a 2D table to one row"] },
+        { key: "knapsack", title: "Knapsack problems", hours: 3.5, goal: "Solve 0/1 and unbounded knapsack and map subset-sum and coin-change problems onto them.", subtopics: ["Define the 0/1 knapsack state", "Iterate capacity backwards for 1D DP", "Solve unbounded knapsack and coin change", "Solve subset sum and partition"] },
+        { key: "lis-lcs", title: "LIS & LCS", hours: 3.5, goal: "Compute longest increasing and longest common subsequences and reconstruct the answers.", subtopics: ["Solve LIS in O(n^2) with DP", "Solve LIS in O(n log n) with patience", "Solve LCS with a 2D table", "Reconstruct the subsequence from the table"] },
+        { key: "interval-dp", title: "Interval DP", hours: 3, goal: "Solve problems over subarrays by iterating interval length, such as burst balloons and matrix chain.", subtopics: ["Define dp over intervals i to j", "Iterate by increasing interval length", "Solve matrix chain multiplication", "Solve palindromic substring problems"] },
+      ],
+    },
+    {
+      key: "dsa-backtracking-bits",
+      title: "Backtracking & bit manipulation",
+      summary: "Systematic search with pruning, and tricks with binary representations.",
+      links: [L("LeetCode problem set", "https://leetcode.com/problemset/")],
+      topics: [
+        { key: "backtracking", title: "Backtracking: subsets, permutations, combinations", hours: 3.5, goal: "Generate subsets, permutations and combinations with a choose-explore-unchoose template.", subtopics: ["Learn the choose, explore, unchoose template", "Generate all subsets", "Generate all permutations", "Generate combinations and combination sums", "Skip duplicates in sorted input"] },
+        { key: "constraint-search", title: "Constraint search & pruning", hours: 3, goal: "Solve N-Queens, Sudoku and word search efficiently by pruning invalid branches early.", subtopics: ["Solve N-Queens with column and diagonal sets", "Solve word search on a grid", "Write a Sudoku solver", "Prune branches with constraint checks"] },
+        { key: "bit-manipulation", title: "Bit manipulation", hours: 3, goal: "Use bitwise operators to test, set and count bits and represent sets as bitmasks.", subtopics: ["Use AND, OR, XOR, NOT and shifts", "Test, set and clear individual bits", "Count bits and isolate the lowest bit", "Find the single number with XOR", "Enumerate subsets with bitmasks"] },
+      ],
+    },
+    {
+      key: "dsa-advanced",
+      title: "Advanced patterns & range structures",
+      summary: "Linear-time array patterns and logarithmic range queries.",
+      links: [L("VisuAlgo: segment tree", "https://visualgo.net/en/segmenttree"), L("VisuAlgo: Fenwick tree", "https://visualgo.net/en/fenwicktree")],
+      topics: [
+        { key: "two-pointers", title: "Two pointers", hours: 3, goal: "Replace nested loops with converging or same-direction pointers on sorted arrays and lists.", subtopics: ["Use converging pointers on sorted arrays", "Solve two-sum II and three-sum", "Remove duplicates in place", "Solve container with most water"] },
+        { key: "sliding-window", title: "Sliding window", hours: 3, goal: "Solve substring and subarray problems in O(n) with fixed and variable windows.", subtopics: ["Use fixed-size windows for averages", "Grow and shrink variable windows", "Find the longest substring without repeats", "Find the minimum window substring"] },
+        { key: "fenwick-tree", title: "Fenwick tree (binary indexed tree)", hours: 3, goal: "Implement a Fenwick tree for prefix sums with point updates in O(log n).", subtopics: ["Explain the lowbit index trick", "Implement point update", "Implement prefix and range queries", "Count inversions with a Fenwick tree"], links: [L("Fenwick tree", "https://cp-algorithms.com/data_structures/fenwick.html")] },
+        { key: "segment-tree", title: "Segment trees", hours: 4, goal: "Implement a segment tree for range sum, min or max queries with point updates.", subtopics: ["Build the tree recursively", "Answer range queries", "Apply point updates", "Generalise to min, max and gcd", "Understand lazy propagation for range updates"], links: [L("Segment tree", "https://cp-algorithms.com/data_structures/segment_tree.html")] },
+      ],
+    },
+    {
+      key: "dsa-capstone",
+      title: "Capstone: library & timed problem sets",
+      summary: "Consolidate everything into your own tested library and timed practice.",
+      links: [L("LeetCode", "https://leetcode.com/"), L("NeetCode roadmap", "https://neetcode.io/roadmap")],
+      topics: [
+        { key: "algorithms-library", title: "Build a tested algorithms library", hours: 8, goal: "Publish a Python package of your own data structures and algorithms with tests and benchmarks.", subtopics: ["Implement core structures in one package", "Write pytest tests including edge cases", "Benchmark against built-ins with timeit", "Document complexity for every function", "Publish the repo with a README"] },
+        { key: "timed-problem-sets", title: "Timed problem-solving sessions", hours: 10, goal: "Solve mixed-topic medium problems within 30 to 45 minutes each using a repeatable method.", subtopics: ["Use a clarify, plan, code, test method", "Solve mixed sets under a timer", "Explain the approach out loud", "Log mistakes and pattern misses", "Revisit failed problems after a week"] },
+        { key: "pattern-review", title: "Pattern review & spaced repetition", hours: 4, goal: "Map any new problem to a known pattern and keep every topic fresh with spaced review.", subtopics: ["Build a pattern-to-problem cheat sheet", "Re-solve one problem per pattern", "Schedule spaced review of weak topics"] },
+      ],
+    },
+  ],
+};
+
+export default path;

@@ -1,0 +1,823 @@
+import type { LearningPath } from "./types";
+
+const L = (label: string, url: string) => ({ label, url });
+
+const python: LearningPath = {
+  slug: "python-from-zero",
+  title: "Python Programming from Zero",
+  tagline: "Your first language, learned properly.",
+  description:
+    "Start with no programming experience and finish writing tested, well-structured Python programs that read files, call APIs and automate real tasks. Every module ends with something you can run.",
+  level: "Beginner",
+  category: "Foundations",
+  icon: "code",
+  outcomes: [
+    "Write clear Python programs with functions, loops and the core data structures",
+    "Organise code into modules and packages and manage dependencies with venv and pip",
+    "Model problems with classes and dataclasses",
+    "Read and write files, CSV and JSON, and call web APIs",
+    "Test, debug and version your code with pytest and Git",
+  ],
+  tools: ["Python 3", "VS Code", "REPL", "venv", "pip", "pytest", "Ruff", "Git", "requests"],
+  modules: [
+    {
+      key: "getting-started",
+      title: "Getting started",
+      summary: "Install Python and write your first programs.",
+      links: [L("Python tutorial", "https://docs.python.org/3/tutorial/"), L("roadmap.sh Python", "https://roadmap.sh/python")],
+      topics: [
+        { key: "setup", title: "Installing Python, the REPL & an editor", hours: 2, goal: "Run Python from the terminal, the REPL and VS Code.", subtopics: ["Install Python 3 and check the version", "Start the REPL and try expressions", "Set up VS Code with the Python extension", "Run a script from the terminal"], links: [L("Python downloads", "https://www.python.org/downloads/")] },
+        { key: "values-types", title: "Values, variables & basic types", hours: 3, goal: "Work with ints, floats, strings and booleans and convert between them.", subtopics: ["Assign and reassign variables", "Use ints, floats, strings and booleans", "Check types with type()", "Convert between types with int(), str(), float()"] },
+        { key: "strings-io", title: "Strings, f-strings, input & print", hours: 3, goal: "Build small interactive programs that read input and format output neatly.", subtopics: ["Index, slice and call string methods", "Format output with f-strings", "Read user input with input()", "Build a small interactive calculator"] },
+      ],
+    },
+    {
+      key: "control-flow",
+      title: "Control flow & functions",
+      summary: "Make decisions, repeat work and name it.",
+      links: [L("More control flow tools", "https://docs.python.org/3/tutorial/controlflow.html")],
+      topics: [
+        { key: "conditionals", title: "Conditionals & boolean logic", hours: 2, goal: "Write if/elif/else branches with combined conditions and no redundant checks.", subtopics: ["Write if/elif/else branches", "Combine conditions with and, or, not", "Compare values and check membership", "Simplify redundant checks"] },
+        { key: "loops", title: "for, while, range & break/continue", hours: 3, goal: "Loop over sequences and ranges and stop or skip at the right moment.", subtopics: ["Loop over lists and strings with for", "Generate numbers with range()", "Write while loops with clear exit conditions", "Use break and continue correctly", "Iterate with enumerate() and zip()"] },
+        { key: "functions", title: "Functions, parameters & return values", hours: 4, goal: "Split a program into small functions with default and keyword arguments.", subtopics: ["Define functions with def and return", "Use default and keyword arguments", "Accept *args and **kwargs", "Write docstrings for your functions", "Refactor a script into small functions"] },
+        { key: "scope", title: "Scope, None & pure functions", hours: 2, goal: "Predict which variable a name refers to and avoid hidden global state.", subtopics: ["Trace local vs global scope", "Understand None as a return value", "Avoid mutating global state", "Rewrite a function to be pure"] },
+        { key: "match", title: "Pattern matching with match/case", hours: 1, goal: "Replace long if/elif chains with readable match statements where they fit.", subtopics: ["Write a basic match/case statement", "Match on literals, tuples and classes", "Refactor an if/elif chain to match"] },
+      ],
+    },
+    {
+      key: "data-structures",
+      title: "Core data structures",
+      summary: "Lists, dicts and friends: most of everyday Python.",
+      links: [L("Data structures tutorial", "https://docs.python.org/3/tutorial/datastructures.html")],
+      topics: [
+        { key: "lists-tuples", title: "Lists, tuples, slicing & sorting", hours: 4, goal: "Store, slice, sort and unpack sequences confidently.", subtopics: ["Create, index and slice lists", "Append, insert and remove items", "Sort with sorted() and key functions", "Pack and unpack tuples", "Choose tuples for fixed records"] },
+        { key: "dicts-sets", title: "Dictionaries & sets", hours: 4, goal: "Count, group and look up data with dicts and remove duplicates with sets.", subtopics: ["Create, read and update dicts", "Iterate over keys, values and items", "Count and group data with dicts", "Use sets to remove duplicates", "Apply set union and intersection"] },
+        { key: "comprehensions", title: "Comprehensions", hours: 2, goal: "Turn simple build-a-list loops into list, dict and set comprehensions.", subtopics: ["Write list comprehensions with conditions", "Build dicts with dict comprehensions", "Build sets with set comprehensions", "Know when a plain loop is clearer"] },
+        { key: "mutability", title: "Mutability, references & copying", hours: 2, goal: "Explain why changing one list changed another and fix it with copies.", subtopics: ["Tell mutable from immutable types", "See aliasing with two names, one list", "Make shallow and deep copies", "Avoid mutable default arguments"] },
+        { key: "ds-practice", title: "Practice: small data problems", hours: 4, goal: "Solve ten beginner exercises combining loops, lists and dicts without help.", subtopics: ["Solve list filtering exercises", "Solve counting and grouping exercises", "Solve string processing exercises", "Check solutions against edge cases", "Finish ten exercises without help"] },
+      ],
+    },
+    {
+      key: "files-modules",
+      title: "Files, errors & modules",
+      summary: "Programs that survive real input and grow beyond one file.",
+      topics: [
+        { key: "files", title: "Reading & writing files with pathlib", hours: 3, goal: "Read, process and write text files safely with context managers.", subtopics: ["Build paths with pathlib.Path", "Read text files with a with-block", "Write and append to files", "Process a file line by line", "List and filter files in a folder"], links: [L("pathlib", "https://docs.python.org/3/library/pathlib.html")] },
+        { key: "exceptions", title: "Exceptions: try, except, raise", hours: 3, goal: "Handle expected errors gracefully and raise clear errors of your own.", subtopics: ["Read a traceback and spot the error", "Catch specific exceptions with try/except", "Use else and finally blocks", "Raise errors with clear messages", "Define a custom exception class"], links: [L("Errors and exceptions", "https://docs.python.org/3/tutorial/errors.html")] },
+        { key: "modules", title: "Modules, packages & imports", hours: 2, goal: "Split a project into modules and import between them without circular imports.", subtopics: ["Import from the standard library", "Split code into your own modules", "Create a package with __init__.py", "Use the if __name__ == '__main__' guard"], links: [L("Modules tutorial", "https://docs.python.org/3/tutorial/modules.html")] },
+        { key: "venv-pip", title: "Virtual environments & pip", hours: 2, goal: "Create a venv per project and pin dependencies in a requirements file.", subtopics: ["Create and activate a venv", "Install packages with pip", "Freeze dependencies to requirements.txt", "Recreate an environment from requirements"], links: [L("venv", "https://docs.python.org/3/library/venv.html")] },
+      ],
+    },
+    {
+      key: "oop",
+      title: "Object-oriented Python",
+      summary: "Bundle data and behaviour when it helps.",
+      links: [L("Classes tutorial", "https://docs.python.org/3/tutorial/classes.html")],
+      topics: [
+        { key: "classes", title: "Classes, objects & methods", hours: 4, goal: "Design a class with an initialiser, attributes and methods for a small domain.", subtopics: ["Define a class with __init__", "Add attributes and methods", "Create and use several instances", "Use class vs instance attributes", "Model a small domain with classes"] },
+        { key: "inheritance", title: "Inheritance, composition & dunder methods", hours: 4, goal: "Use __repr__, __eq__ and friends and choose composition over deep hierarchies.", subtopics: ["Subclass and override methods", "Call parent methods with super()", "Implement __repr__ and __eq__", "Prefer composition for has-a relationships", "Refactor a deep hierarchy to composition"] },
+        { key: "dataclasses", title: "Dataclasses & enums", hours: 2, goal: "Replace boilerplate classes with dataclasses and magic strings with enums.", subtopics: ["Convert a class to a dataclass", "Use defaults, frozen and field()", "Define an Enum for fixed choices", "Replace magic strings with enums"], links: [L("dataclasses", "https://docs.python.org/3/library/dataclasses.html")] },
+      ],
+    },
+    {
+      key: "idiomatic",
+      title: "Idiomatic Python & the standard library",
+      summary: "Write Python that looks like Python.",
+      links: [L("Standard library", "https://docs.python.org/3/library/index.html"), L("PEP 8", "https://peps.python.org/pep-0008/")],
+      topics: [
+        { key: "stdlib", title: "collections, itertools, datetime & random", hours: 4, goal: "Reach for Counter, defaultdict, itertools and datetime instead of reinventing them.", subtopics: ["Count items with Counter", "Group data with defaultdict", "Chain and group with itertools", "Parse and format dates with datetime", "Generate random samples with random"] },
+        { key: "iterators", title: "Iterators & generators", hours: 3, goal: "Write generators that process large data lazily.", subtopics: ["Understand the iterator protocol", "Write generator functions with yield", "Use generator expressions", "Process a large file lazily"] },
+        { key: "decorators", title: "Decorators & context managers", hours: 3, goal: "Read and write simple decorators and custom with-blocks.", subtopics: ["Write a simple timing decorator", "Use functools.wraps correctly", "Write a context manager class", "Use contextlib.contextmanager"] },
+        { key: "type-hints", title: "Type hints", hours: 2, goal: "Annotate functions and classes so editors and type checkers catch mistakes.", subtopics: ["Annotate function parameters and returns", "Use list, dict and Optional hints", "Type a dataclass", "Run mypy or Pyright on a project"], links: [L("typing", "https://docs.python.org/3/library/typing.html")] },
+      ],
+    },
+    {
+      key: "tooling",
+      title: "Testing, debugging & Git",
+      summary: "The habits that make code trustworthy.",
+      topics: [
+        { key: "pytest", title: "Testing with pytest", hours: 4, goal: "Write unit tests with fixtures and parametrisation and run them on every change.", subtopics: ["Install pytest and write first tests", "Use assert and pytest.raises", "Share setup with fixtures", "Parametrise tests over many inputs", "Run tests on every change"], links: [L("pytest docs", "https://docs.pytest.org/en/stable/")] },
+        { key: "debugging", title: "Debugging & reading tracebacks", hours: 2, goal: "Find bugs with tracebacks, breakpoints and pdb instead of random prints.", subtopics: ["Read tracebacks from bottom to top", "Set breakpoints in VS Code", "Step through code with pdb", "Inspect variables at a failure"], links: [L("pdb", "https://docs.python.org/3/library/pdb.html")] },
+        { key: "lint-format", title: "Linting & formatting with Ruff", hours: 1, goal: "Keep code consistent automatically with a linter and formatter.", subtopics: ["Install and run Ruff", "Auto-format code with ruff format", "Fix lint warnings automatically"], links: [L("Ruff docs", "https://docs.astral.sh/ruff/")] },
+        { key: "git-basics", title: "Git basics for your projects", hours: 3, goal: "Commit, branch and push your projects to GitHub.", subtopics: ["Initialise a repo and make commits", "Write a useful .gitignore", "Create and merge branches", "Push a project to GitHub", "Write a clear README"], links: [L("Pro Git book", "https://git-scm.com/book/en/v2")] },
+      ],
+    },
+    {
+      key: "practical",
+      title: "Practical Python",
+      summary: "Point your skills at real-world tasks.",
+      topics: [
+        { key: "csv-json", title: "Working with CSV & JSON data", hours: 3, goal: "Load, clean, summarise and export tabular and JSON data.", subtopics: ["Read CSV files with the csv module", "Clean and convert messy fields", "Summarise data with dicts and Counter", "Load and dump JSON files"], links: [L("csv", "https://docs.python.org/3/library/csv.html"), L("json", "https://docs.python.org/3/library/json.html")] },
+        { key: "http-apis", title: "Calling web APIs with requests", hours: 3, goal: "Fetch data from a public API, handle errors and save the results.", subtopics: ["Make GET requests with requests", "Pass query params and headers", "Handle HTTP errors and timeouts", "Save API results to JSON"], links: [L("Requests docs", "https://requests.readthedocs.io/en/latest/")] },
+        { key: "cli", title: "Command-line tools with argparse", hours: 3, goal: "Turn a script into a CLI with arguments, options and help text.", subtopics: ["Parse arguments with argparse", "Add options, flags and defaults", "Write helpful usage text", "Package the script as a command"], links: [L("argparse", "https://docs.python.org/3/library/argparse.html")] },
+        { key: "automation", title: "Automating everyday tasks", hours: 3, goal: "Write a script that renames, sorts or reports on files in a folder.", subtopics: ["Pick a repetitive task to automate", "List and rename files in bulk", "Sort files into folders by type", "Generate a summary report"] },
+      ],
+    },
+    {
+      key: "py-capstone",
+      title: "Capstone project",
+      summary: "One complete program you built yourself.",
+      topics: [
+        { key: "py-capstone-plan", title: "Plan the project: features, data model & module layout", hours: 2, goal: "A short written spec with features, a dataclass model and the modules you will create.", subtopics: ["List must-have and nice-to-have features", "Sketch the dataclass model", "Plan modules and their responsibilities"] },
+        { key: "py-capstone-build", title: "Build a CLI app (e.g. expense tracker or weather logger)", hours: 10, goal: "A Git repo with modules, a dataclass model, JSON storage, an API call, tests and a README.", subtopics: ["Set up the repo, venv and Ruff", "Implement the dataclass model and storage", "Build the CLI commands with argparse", "Integrate a web API call", "Write pytest tests for core logic", "Write a README with usage examples"] },
+      ],
+    },
+  ],
+};
+
+const frontend: LearningPath = {
+  slug: "frontend-react-nextjs",
+  title: "Frontend with React & Next.js",
+  tagline: "From HTML basics to shipped Next.js apps.",
+  description:
+    "Build a solid base in HTML, CSS and JavaScript, add TypeScript, then learn React and the Next.js App Router to build fast, accessible apps. Finish by testing with Vitest and Playwright and deploying to production.",
+  level: "Beginner → Intermediate",
+  category: "Frontend",
+  icon: "layout",
+  outcomes: [
+    "Build accessible, responsive layouts with semantic HTML, Flexbox and Grid",
+    "Write modern JavaScript and TypeScript, including async code and modules",
+    "Build React components with state, effects, forms and custom hooks",
+    "Ship Next.js App Router apps with server components, data fetching and server actions",
+    "Test with Vitest, Testing Library and Playwright, then deploy with good Core Web Vitals",
+  ],
+  tools: ["HTML", "CSS", "JavaScript", "TypeScript", "React", "Next.js", "Tailwind CSS", "Vitest", "Testing Library", "Playwright", "Vercel", "Chrome DevTools"],
+  modules: [
+    {
+      key: "html-css",
+      title: "HTML & CSS foundations",
+      summary: "The structure and styling every framework compiles down to.",
+      links: [L("MDN HTML", "https://developer.mozilla.org/en-US/docs/Web/HTML"), L("MDN CSS", "https://developer.mozilla.org/en-US/docs/Web/CSS"), L("roadmap.sh Frontend", "https://roadmap.sh/frontend")],
+      topics: [
+        { key: "html-semantics", title: "Semantic HTML, forms & document structure", hours: 4, goal: "Mark up a page with the right landmarks, headings and accessible forms.", subtopics: ["Use landmarks like header, main, nav", "Structure content with correct headings", "Build forms with labels and fieldsets", "Use native inputs and validation attributes"] },
+        { key: "css-basics", title: "Selectors, cascade, box model & units", hours: 5, goal: "Predict which rule wins and size elements without fighting the box model.", subtopics: ["Write type, class and attribute selectors", "Predict specificity and cascade order", "Apply box-sizing: border-box", "Choose between px, rem, em and %", "Debug styles in DevTools"] },
+        { key: "flex-grid", title: "Flexbox & Grid layout", hours: 6, goal: "Build common layouts (nav bars, cards, dashboards) with Flexbox and Grid.", subtopics: ["Build a nav bar with Flexbox", "Align and distribute items with Flexbox", "Lay out a card grid with Grid", "Use grid-template-areas for page layouts", "Build a dashboard layout", "Choose Flexbox or Grid per layout"], links: [L("web.dev Learn CSS", "https://web.dev/learn/css")] },
+        { key: "responsive", title: "Responsive design & media queries", hours: 3, goal: "Make a layout work from phone to desktop with a mobile-first approach.", subtopics: ["Add the viewport meta tag", "Write mobile-first media queries", "Use fluid widths and clamp()", "Test layouts at several widths"] },
+        { key: "a11y", title: "Accessibility fundamentals", hours: 3, goal: "Audit a page for keyboard, contrast and screen-reader problems and fix them.", subtopics: ["Navigate a page using only the keyboard", "Check color contrast ratios", "Add alt text and ARIA labels", "Run an axe or Lighthouse audit", "Fix the issues the audit finds"], links: [L("MDN Accessibility", "https://developer.mozilla.org/en-US/docs/Web/Accessibility")] },
+      ],
+    },
+    {
+      key: "javascript",
+      title: "Modern JavaScript",
+      summary: "The language of the browser, without the old quirks.",
+      links: [L("MDN JavaScript Guide", "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide"), L("javascript.info", "https://javascript.info/")],
+      topics: [
+        { key: "js-core", title: "Values, functions, objects & arrays", hours: 8, goal: "Write JavaScript with const/let, arrow functions, destructuring and array methods.", subtopics: ["Declare variables with const and let", "Write arrow and regular functions", "Destructure objects and arrays", "Use spread and rest syntax", "Transform data with map, filter, reduce", "Understand closures and this"] },
+        { key: "js-dom", title: "DOM & events", hours: 4, goal: "Build an interactive widget with vanilla JS and event listeners.", subtopics: ["Select and create DOM elements", "Handle events with addEventListener", "Use event delegation", "Build an interactive widget in vanilla JS"] },
+        { key: "js-async", title: "Promises, async/await & fetch", hours: 5, goal: "Load data from an API with fetch and handle loading and error states.", subtopics: ["Understand the event loop", "Chain promises with then/catch", "Rewrite promise code with async/await", "Fetch JSON from an API", "Show loading and error states"], links: [L("Using Fetch", "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch")] },
+        { key: "js-modules", title: "ES modules, npm & tooling", hours: 3, goal: "Set up a project with npm, ES modules and a dev server.", subtopics: ["Initialise a project with npm", "Use import and export modules", "Install and use packages", "Run a Vite dev server"] },
+      ],
+    },
+    {
+      key: "typescript",
+      title: "TypeScript",
+      summary: "Catch bugs before the browser does.",
+      links: [L("TypeScript Handbook", "https://www.typescriptlang.org/docs/handbook/intro.html")],
+      topics: [
+        { key: "ts-basics", title: "Types, interfaces & type inference", hours: 4, goal: "Type functions, objects and API responses without overusing any.", subtopics: ["Annotate primitives, arrays and objects", "Define interfaces and type aliases", "Rely on type inference sensibly", "Type API responses without any"] },
+        { key: "ts-narrowing", title: "Unions, narrowing & generics", hours: 4, goal: "Model states with discriminated unions and write reusable generic helpers.", subtopics: ["Write union and literal types", "Narrow types with typeof and in", "Model state with discriminated unions", "Write generic functions and types", "Use built-in utility types"] },
+        { key: "ts-config", title: "tsconfig & strict mode", hours: 1.5, goal: "Configure a strict TypeScript project and fix the errors it reveals.", subtopics: ["Read the key tsconfig options", "Enable strict mode", "Fix the errors strict mode reveals"] },
+      ],
+    },
+    {
+      key: "react",
+      title: "React",
+      summary: "Think in components and state.",
+      links: [L("react.dev Learn", "https://react.dev/learn"), L("React reference", "https://react.dev/reference/react"), L("roadmap.sh React", "https://roadmap.sh/react")],
+      topics: [
+        { key: "react-components", title: "Components, JSX & props", hours: 4, goal: "Break a UI mockup into a tree of reusable components.", subtopics: ["Write function components with JSX", "Pass data with props", "Render children and compose components", "Break a mockup into a component tree"] },
+        { key: "react-state", title: "State, events & conditional rendering", hours: 5, goal: "Add interactivity with useState and decide where each piece of state lives.", subtopics: ["Add state with useState", "Handle click and input events", "Render conditionally", "Lift state up to a shared parent", "Avoid redundant or duplicated state"] },
+        { key: "react-lists-forms", title: "Lists, keys & forms", hours: 4, goal: "Render lists correctly and build controlled forms with validation.", subtopics: ["Render lists with map", "Choose stable keys", "Build controlled inputs", "Validate a form and show errors"] },
+        { key: "react-effects", title: "Effects & refs (and when not to use them)", hours: 4, goal: "Sync with external systems using useEffect and remove unnecessary effects.", subtopics: ["Sync with an external system using useEffect", "Write cleanup functions", "Store mutable values and DOM nodes with useRef", "Remove effects you do not need"], links: [L("You might not need an effect", "https://react.dev/learn/you-might-not-need-an-effect")] },
+        { key: "react-context", title: "Context, reducers & shared state", hours: 4, goal: "Share state across a tree with context and useReducer without prop drilling.", subtopics: ["Create and provide a context", "Consume context with useContext", "Manage complex state with useReducer", "Combine context and reducer for app state"] },
+        { key: "react-hooks", title: "Custom hooks & composition", hours: 3, goal: "Extract reusable logic into custom hooks.", subtopics: ["Spot repeated logic across components", "Extract a custom hook", "Compose hooks together"] },
+        { key: "react-perf", title: "Rendering & performance basics", hours: 3, goal: "Explain when components re-render and fix slow renders with the Profiler.", subtopics: ["Explain when components re-render", "Profile renders with React DevTools", "Apply memo, useMemo and useCallback carefully"] },
+      ],
+    },
+    {
+      key: "nextjs",
+      title: "Next.js App Router",
+      summary: "Full-stack React with routing, rendering and data built in.",
+      links: [L("Next.js docs", "https://nextjs.org/docs"), L("Next.js Learn", "https://nextjs.org/learn")],
+      topics: [
+        { key: "next-routing", title: "File-based routing, layouts & navigation", hours: 4, goal: "Build nested layouts, dynamic routes, loading and error states.", subtopics: ["Create routes with the app directory", "Add nested layouts", "Build dynamic route segments", "Add loading.tsx and error.tsx", "Navigate with Link and useRouter"] },
+        { key: "next-rsc", title: "Server vs client components", hours: 4, goal: "Decide what runs on the server and keep client bundles small.", subtopics: ["Explain server vs client components", "Add 'use client' only where needed", "Pass server data to client components", "Check client bundle size"] },
+        { key: "next-data", title: "Data fetching, caching & revalidation", hours: 5, goal: "Fetch data in server components and choose static, dynamic or revalidated rendering.", subtopics: ["Fetch data in server components", "Choose static or dynamic rendering", "Revalidate by time or on demand", "Stream with Suspense boundaries", "Understand the Next.js caching layers"] },
+        { key: "next-actions", title: "Server actions & forms", hours: 4, goal: "Handle form submissions and mutations with server actions and validation.", subtopics: ["Write a server action", "Submit a form to a server action", "Validate input with Zod", "Show pending and error states", "Revalidate data after a mutation"] },
+        { key: "next-api", title: "Route handlers & middleware", hours: 3, goal: "Build JSON endpoints and protect routes with middleware.", subtopics: ["Create a GET and POST route handler", "Return JSON with proper status codes", "Write middleware to protect routes"] },
+        { key: "next-assets", title: "Metadata, images & fonts", hours: 2, goal: "Add SEO metadata and optimise images and fonts with the built-in components.", subtopics: ["Add static and dynamic metadata", "Optimise images with next/image", "Load fonts with next/font"] },
+        { key: "next-auth-db", title: "Auth & a database", hours: 5, goal: "Add sign-in and persist user data to a hosted database.", subtopics: ["Choose an auth library and provider", "Add sign-in and sign-out", "Connect to a hosted database", "Persist user data per account", "Protect pages and actions by user"] },
+      ],
+    },
+    {
+      key: "styling",
+      title: "Styling at scale",
+      summary: "Consistent UI without a pile of one-off CSS.",
+      topics: [
+        { key: "tailwind", title: "Tailwind CSS", hours: 3, goal: "Style components with utility classes and a shared theme.", subtopics: ["Set up Tailwind in Next.js", "Style components with utility classes", "Build responsive variants", "Extend the theme with custom tokens"], links: [L("Tailwind docs", "https://tailwindcss.com/docs")] },
+        { key: "design-system", title: "Component libraries & design tokens", hours: 3, goal: "Build a small set of reusable, accessible UI primitives with consistent tokens.", subtopics: ["Define design tokens for color and spacing", "Build Button, Input and Card primitives", "Make primitives keyboard accessible", "Document component variants"] },
+        { key: "dark-mode", title: "Theming & dark mode", hours: 1.5, goal: "Support light and dark themes with CSS variables.", subtopics: ["Define theme colors as CSS variables", "Respect prefers-color-scheme", "Add a persisted theme toggle"] },
+      ],
+    },
+    {
+      key: "testing",
+      title: "Testing",
+      summary: "Ship changes without clicking through every page.",
+      topics: [
+        { key: "vitest", title: "Unit tests with Vitest", hours: 3, goal: "Test utilities and hooks with fast unit tests.", subtopics: ["Set up Vitest", "Test pure utility functions", "Test custom hooks", "Mock modules and timers"], links: [L("Vitest", "https://vitest.dev/")] },
+        { key: "rtl", title: "Component tests with Testing Library", hours: 4, goal: "Test components the way users interact with them.", subtopics: ["Render components in tests", "Query elements by role and label", "Simulate typing and clicks with user-event", "Assert on visible output, not internals"], links: [L("React Testing Library", "https://testing-library.com/docs/react-testing-library/intro/")] },
+        { key: "playwright", title: "End-to-end tests with Playwright", hours: 4, goal: "Write E2E tests for key user flows and run them in CI.", subtopics: ["Install Playwright and record a test", "Test sign-in and a key user flow", "Use locators and auto-waiting", "Run Playwright in CI"], links: [L("Playwright docs", "https://playwright.dev/docs/intro")] },
+      ],
+    },
+    {
+      key: "deploy",
+      title: "Performance & deployment",
+      summary: "Fast for users, boring to release.",
+      topics: [
+        { key: "web-vitals", title: "Core Web Vitals & Lighthouse", hours: 3, goal: "Measure LCP, INP and CLS and fix the biggest regressions.", subtopics: ["Explain LCP, INP and CLS", "Run a Lighthouse audit", "Fix the largest LCP issue", "Remove layout shifts"], links: [L("web.dev Web Vitals", "https://web.dev/articles/vitals")] },
+        { key: "deploy-ci", title: "Deploying with CI & preview environments", hours: 3, goal: "Deploy on every push with preview URLs, environment variables and checks.", subtopics: ["Connect the repo to Vercel", "Set environment variables per environment", "Use preview deployments for pull requests", "Run lint, type check and tests in CI"], links: [L("Vercel docs", "https://vercel.com/docs")] },
+      ],
+    },
+    {
+      key: "fe-capstone",
+      title: "Capstone project",
+      summary: "A real app you can link on your resume.",
+      topics: [
+        { key: "fe-capstone-design", title: "Design the app: pages, data model & component tree", hours: 3, goal: "Wireframes, a route map and a typed data model ready to build from.", subtopics: ["Sketch wireframes for each page", "Write a route map", "Define the typed data model", "Plan the component tree"] },
+        { key: "fe-capstone-build", title: "Build a full Next.js app (e.g. habit tracker or recipe manager)", hours: 15, goal: "A deployed, typed, tested app with auth, a database, server actions and a strong Lighthouse score.", subtopics: ["Scaffold the app with TypeScript and Tailwind", "Build pages, layouts and components", "Add auth and database persistence", "Implement mutations with server actions", "Write unit and E2E tests", "Deploy and reach a strong Lighthouse score"] },
+      ],
+    },
+  ],
+};
+
+const aws: LearningPath = {
+  slug: "aws-solutions-architect",
+  title: "AWS Solutions Architect – Associate",
+  tagline: "Pass SAA-C03 and design AWS systems for real.",
+  description:
+    "An exam-oriented plan for the AWS Certified Solutions Architect – Associate (SAA-C03) covering secure, resilient, high-performing and cost-optimised architectures. Hands-on labs in a free-tier account plus timed practice exams.",
+  level: "Intermediate",
+  category: "DevOps & Cloud",
+  icon: "cloud",
+  outcomes: [
+    "Design secure multi-tier architectures with IAM, VPCs and encryption",
+    "Choose the right compute, storage and database services for a scenario",
+    "Build highly available and fault-tolerant systems across AZs and Regions",
+    "Optimise architectures for performance and cost",
+    "Score consistently above 80% on timed practice exams",
+  ],
+  tools: ["AWS Console", "AWS CLI", "IAM", "VPC", "EC2", "S3", "RDS", "DynamoDB", "Lambda", "CloudFront", "CloudWatch", "Well-Architected Framework"],
+  modules: [
+    {
+      key: "aws-foundations",
+      title: "Exam orientation & AWS foundations",
+      summary: "Know the exam, the global infrastructure and the design pillars.",
+      links: [L("SAA certification page", "https://aws.amazon.com/certification/certified-solutions-architect-associate/"), L("Well-Architected Framework", "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html")],
+      topics: [
+        { key: "exam-guide", title: "Exam guide, domains & study plan", hours: 1.5, goal: "Map the four SAA-C03 domains and their weights to a weekly study plan.", subtopics: ["Read the SAA-C03 exam guide", "Note the four domains and weights", "Book a target exam date", "Build a weekly study plan"] },
+        { key: "global-infra", title: "Regions, AZs, edge locations & shared responsibility", hours: 2, goal: "Explain how AWS infrastructure affects availability, latency and compliance.", subtopics: ["Explain Regions, AZs and edge locations", "Choose a Region for latency and compliance", "Design across multiple AZs", "Apply the shared responsibility model"] },
+        { key: "well-architected", title: "The Well-Architected Framework", hours: 2, goal: "Evaluate a design against the six pillars and spot obvious weaknesses.", subtopics: ["Learn the six Well-Architected pillars", "Read key best practices per pillar", "Review a sample design against the pillars"] },
+        { key: "account-setup", title: "Free-tier account, billing alarms & CLI", hours: 1.5, goal: "Set up a safe lab account with MFA, a budget alert and the AWS CLI.", subtopics: ["Create an account and enable root MFA", "Create an admin IAM user or SSO login", "Set up a budget and billing alarm", "Install and configure the AWS CLI"], links: [L("AWS Free Tier", "https://aws.amazon.com/free/")] },
+      ],
+    },
+    {
+      key: "aws-security",
+      title: "Secure architectures: identity & data protection",
+      summary: "Domain 1, the largest slice of the exam.",
+      links: [L("IAM User Guide", "https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html")],
+      topics: [
+        { key: "iam-deep", title: "IAM users, roles, policies & policy evaluation", hours: 5, goal: "Write least-privilege policies and predict whether a request is allowed.", subtopics: ["Compare IAM users, groups and roles", "Write identity-based and resource-based policies", "Walk through policy evaluation logic", "Use roles for EC2 and cross-account access", "Test policies with the IAM policy simulator"] },
+        { key: "multi-account", title: "Organizations, SCPs, Control Tower & IAM Identity Center", hours: 3, goal: "Design a multi-account setup with guardrails and central sign-in.", subtopics: ["Create an organization with OUs", "Apply SCPs as guardrails", "Explain what Control Tower sets up", "Centralise sign-in with IAM Identity Center"], links: [L("AWS Organizations docs", "https://docs.aws.amazon.com/organizations/")] },
+        { key: "encryption", title: "KMS, encryption at rest & in transit, Secrets Manager", hours: 4, goal: "Choose the right key and secret management for each data store.", subtopics: ["Compare AWS managed and customer managed keys", "Explain envelope encryption", "Encrypt S3, EBS and RDS at rest", "Enforce TLS in transit with ACM", "Store and rotate secrets in Secrets Manager"], links: [L("AWS KMS docs", "https://docs.aws.amazon.com/kms/")] },
+        { key: "threat-protection", title: "WAF, Shield, GuardDuty, Inspector & Macie", hours: 3, goal: "Pick the right service to block, detect or audit a given threat.", subtopics: ["Block web attacks with WAF rules", "Explain Shield Standard vs Advanced", "Detect threats with GuardDuty", "Scan workloads with Inspector", "Find sensitive S3 data with Macie"] },
+      ],
+    },
+    {
+      key: "aws-networking",
+      title: "Networking",
+      summary: "VPCs and connectivity appear in nearly every scenario question.",
+      links: [L("Amazon VPC docs", "https://docs.aws.amazon.com/vpc/")],
+      topics: [
+        { key: "vpc-core", title: "VPC, subnets, route tables, IGW & NAT", hours: 5, goal: "Build a VPC with public and private subnets across two AZs.", subtopics: ["Plan VPC and subnet CIDR ranges", "Create public and private subnets in two AZs", "Configure route tables and an internet gateway", "Add NAT gateways for private egress", "Launch instances and test connectivity"] },
+        { key: "vpc-security", title: "Security groups, NACLs & VPC endpoints", hours: 3, goal: "Lock down traffic and reach S3 and DynamoDB privately.", subtopics: ["Compare security groups and NACLs", "Write stateful and stateless rules", "Add gateway endpoints for S3 and DynamoDB", "Use interface endpoints with PrivateLink"] },
+        { key: "hybrid", title: "Peering, Transit Gateway, VPN & Direct Connect", hours: 4, goal: "Choose a connectivity option for multi-VPC and on-premises scenarios.", subtopics: ["Connect two VPCs with peering", "Connect many VPCs with Transit Gateway", "Set up Site-to-Site VPN concepts", "Compare Direct Connect with VPN", "Choose connectivity for exam scenarios"] },
+        { key: "edge", title: "Route 53, CloudFront & Global Accelerator", hours: 4, goal: "Pick routing policies and edge services for latency, failover and global users.", subtopics: ["Compare Route 53 routing policies", "Configure health checks and failover", "Put CloudFront in front of S3 and ALB", "Explain when to use Global Accelerator"], links: [L("Route 53 docs", "https://docs.aws.amazon.com/route53/"), L("CloudFront docs", "https://docs.aws.amazon.com/cloudfront/")] },
+      ],
+    },
+    {
+      key: "aws-compute",
+      title: "Compute & scaling",
+      summary: "From instances to containers to functions.",
+      topics: [
+        { key: "ec2", title: "EC2 instance types, AMIs, storage & placement groups", hours: 4, goal: "Choose an instance family and placement for a workload.", subtopics: ["Compare instance families and sizes", "Build and share a custom AMI", "Choose EBS-backed or instance store storage", "Pick cluster, spread or partition placement groups"], links: [L("Amazon EC2 docs", "https://docs.aws.amazon.com/ec2/")] },
+        { key: "elb-asg", title: "Elastic Load Balancing & Auto Scaling", hours: 4, goal: "Design a self-healing, auto-scaled tier behind the right load balancer type.", subtopics: ["Compare ALB, NLB and GWLB", "Configure target groups and health checks", "Create an Auto Scaling group with a launch template", "Set target tracking and scheduled scaling policies"] },
+        { key: "containers", title: "ECS, EKS, Fargate & ECR", hours: 3, goal: "Choose between ECS, EKS and Fargate for a containerised workload.", subtopics: ["Run a container on ECS with Fargate", "Compare ECS and EKS", "Choose EC2 or Fargate launch types", "Push images to ECR"] },
+        { key: "serverless", title: "Lambda, API Gateway & serverless patterns", hours: 4, goal: "Design an event-driven serverless API and know Lambda's limits.", subtopics: ["Write and deploy a Lambda function", "Front Lambda with API Gateway", "Trigger Lambda from S3 and SQS", "Know Lambda limits and concurrency", "Design an event-driven serverless API"], links: [L("AWS Lambda docs", "https://docs.aws.amazon.com/lambda/")] },
+      ],
+    },
+    {
+      key: "aws-storage",
+      title: "Storage",
+      summary: "Object, block and file storage and when to use each.",
+      links: [L("Amazon S3 docs", "https://docs.aws.amazon.com/s3/")],
+      topics: [
+        { key: "s3", title: "S3 storage classes, lifecycle, versioning & replication", hours: 5, goal: "Design a cost-effective, durable S3 strategy for a given access pattern.", subtopics: ["Compare S3 storage classes", "Write lifecycle rules to tier and expire data", "Enable versioning and MFA delete", "Set up cross-Region replication", "Design storage for a given access pattern"] },
+        { key: "s3-security", title: "S3 security: bucket policies, access points & presigned URLs", hours: 2, goal: "Grant exactly the access a scenario requires and nothing more.", subtopics: ["Write a bucket policy", "Block public access correctly", "Create access points for shared buckets", "Generate presigned URLs"] },
+        { key: "block-file", title: "EBS, instance store, EFS & FSx", hours: 3, goal: "Pick block or file storage based on performance, sharing and OS needs.", subtopics: ["Compare EBS volume types", "Know when instance store fits", "Share files with EFS", "Choose FSx for Windows or Lustre"] },
+        { key: "migration-storage", title: "Storage Gateway, DataSync, Snow Family & AWS Backup", hours: 3, goal: "Choose a migration or hybrid storage service for a data volume and timeline.", subtopics: ["Compare Storage Gateway types", "Move data online with DataSync", "Pick a Snow Family device for offline transfer", "Centralise backups with AWS Backup"] },
+      ],
+    },
+    {
+      key: "aws-databases",
+      title: "Databases & analytics",
+      summary: "Managed data stores and their trade-offs.",
+      topics: [
+        { key: "rds-aurora", title: "RDS & Aurora: Multi-AZ, read replicas, backups", hours: 5, goal: "Design a relational tier for availability, read scaling and recovery.", subtopics: ["Compare RDS engines and Aurora", "Enable Multi-AZ for high availability", "Add read replicas for read scaling", "Configure automated backups and snapshots", "Explain Aurora Global Database and Serverless"], links: [L("Amazon RDS docs", "https://docs.aws.amazon.com/rds/")] },
+        { key: "dynamodb", title: "DynamoDB: keys, capacity, DAX & global tables", hours: 4, goal: "Model a key-value workload and size it for throughput.", subtopics: ["Design partition and sort keys", "Choose on-demand or provisioned capacity", "Add GSIs and LSIs for access patterns", "Speed up reads with DAX", "Replicate with global tables"], links: [L("DynamoDB docs", "https://docs.aws.amazon.com/dynamodb/")] },
+        { key: "caching", title: "ElastiCache & caching strategies", hours: 2, goal: "Add a cache layer and choose between Redis and Memcached.", subtopics: ["Compare Redis and Memcached", "Apply lazy loading and write-through caching", "Choose ElastiCache for a scenario"] },
+        { key: "analytics", title: "Kinesis, Athena, Glue, Redshift & OpenSearch", hours: 4, goal: "Match a streaming or analytics requirement to the right service.", subtopics: ["Ingest streams with Kinesis Data Streams", "Deliver data with Firehose", "Query S3 with Athena", "Catalogue and transform data with Glue", "Choose Redshift or OpenSearch for analytics"] },
+      ],
+    },
+    {
+      key: "aws-resilience",
+      title: "Decoupling, resilience & monitoring",
+      summary: "Domain 2: architectures that keep working when parts fail.",
+      topics: [
+        { key: "decoupling", title: "SQS, SNS, EventBridge & Step Functions", hours: 4, goal: "Decouple components with queues, topics and event buses.", subtopics: ["Decouple services with SQS queues", "Fan out with SNS topics", "Route events with EventBridge rules", "Orchestrate workflows with Step Functions"] },
+        { key: "dr", title: "Disaster recovery strategies: backup, pilot light, warm standby, multi-site", hours: 3, goal: "Pick a DR strategy that meets a stated RTO and RPO at the lowest cost.", subtopics: ["Define RTO and RPO", "Compare backup and restore with pilot light", "Compare warm standby with multi-site", "Pick a DR strategy for a scenario"] },
+        { key: "monitoring", title: "CloudWatch, CloudTrail & AWS Config", hours: 3, goal: "Set up metrics, alarms, audit trails and compliance rules.", subtopics: ["Create CloudWatch metrics and alarms", "Centralise logs with CloudWatch Logs", "Audit API calls with CloudTrail", "Track compliance with AWS Config rules"], links: [L("Amazon CloudWatch docs", "https://docs.aws.amazon.com/cloudwatch/")] },
+      ],
+    },
+    {
+      key: "aws-cost",
+      title: "Cost-optimised architectures",
+      summary: "Domain 4: the cheapest design that still meets requirements.",
+      links: [L("AWS Pricing", "https://aws.amazon.com/pricing/")],
+      topics: [
+        { key: "pricing-models", title: "On-Demand, Reserved, Savings Plans & Spot", hours: 2, goal: "Choose a purchasing option for steady, spiky and interruptible workloads.", subtopics: ["Compare On-Demand, Reserved and Savings Plans", "Use Spot for interruptible workloads", "Match purchase options to workload patterns"] },
+        { key: "cost-tools", title: "Cost Explorer, Budgets, tagging & Compute Optimizer", hours: 2, goal: "Find and tag waste and set alerts before bills surprise you.", subtopics: ["Explore spend in Cost Explorer", "Set budgets and alerts", "Apply cost allocation tags", "Right-size with Compute Optimizer"] },
+        { key: "cost-design", title: "Cost-aware design: storage tiers, data transfer, serverless", hours: 2, goal: "Cut cost in a design by changing storage tiers, transfer paths or compute model.", subtopics: ["Tier storage to cheaper classes", "Reduce data transfer costs", "Swap servers for serverless where it fits"] },
+      ],
+    },
+    {
+      key: "aws-exam-prep",
+      title: "Practice exams & review",
+      summary: "Turn knowledge into a passing score.",
+      links: [L("AWS Skill Builder", "https://skillbuilder.aws/")],
+      topics: [
+        { key: "official-practice", title: "Official practice question set", hours: 2, goal: "Complete AWS's official sample questions and log every miss by domain.", subtopics: ["Complete the official sample questions", "Log every miss by domain", "Read explanations for each answer"] },
+        { key: "timed-exams", title: "Full timed practice exams (at least three)", hours: 9, goal: "Sit three 130-minute practice exams under exam conditions.", subtopics: ["Sit practice exam one under timed conditions", "Review every question after each exam", "Sit practice exams two and three", "Track scores per domain", "Aim for a consistent 80%+"] },
+        { key: "weak-areas", title: "Review weak domains & re-lab", hours: 6, goal: "Close every gap from practice exams with targeted reading and a lab.", subtopics: ["Rank domains by practice score", "Reread docs and FAQs for weak areas", "Redo a lab for each weak service", "Retest weak domains with targeted questions"] },
+        { key: "exam-strategy", title: "Exam strategy & keyword cheat sheet", hours: 1.5, goal: "Eliminate wrong answers fast using keywords like 'least operational overhead' and 'most cost-effective'.", subtopics: ["Build a keyword-to-service cheat sheet", "Practice eliminating wrong answers", "Plan time per question and flag-and-return"] },
+      ],
+    },
+  ],
+};
+
+const cka: LearningPath = {
+  slug: "kubernetes-cka",
+  title: "Kubernetes Administrator (CKA)",
+  tagline: "Run, fix and pass the hands-on CKA exam.",
+  description:
+    "Prepare for the Certified Kubernetes Administrator exam by building and breaking real clusters with kubeadm. Covers every curriculum domain with heavy emphasis on troubleshooting and kubectl speed.",
+  level: "Intermediate",
+  category: "DevOps & Cloud",
+  icon: "boxes",
+  outcomes: [
+    "Install, upgrade and back up a kubeadm cluster including etcd",
+    "Deploy and schedule workloads with resources, affinity, taints and autoscaling",
+    "Configure Services, Ingress, Gateway API, DNS and NetworkPolicies",
+    "Provision persistent storage with PVs, PVCs and StorageClasses",
+    "Troubleshoot broken apps, nodes and control plane components under time pressure",
+  ],
+  tools: ["kubectl", "kubeadm", "etcdctl", "containerd", "crictl", "Helm", "Kustomize", "kind", "CoreDNS", "vim", "killer.sh"],
+  modules: [
+    {
+      key: "cka-prereqs",
+      title: "Prerequisites & exam setup",
+      summary: "The Linux, container and kubectl fluency the exam assumes.",
+      links: [L("CKA certification", "https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/"), L("CNCF curriculum", "https://github.com/cncf/curriculum")],
+      topics: [
+        { key: "exam-format", title: "Exam format, curriculum & allowed docs", hours: 1, goal: "Know the domains, weights, environment and which docs you may open during the exam.", subtopics: ["Read the CKA curriculum and weights", "Learn the exam environment rules", "Bookmark allowed Kubernetes docs pages"] },
+        { key: "linux-containers", title: "Linux, systemd & container runtime refresher", hours: 3, goal: "Manage services with systemctl and inspect containers with crictl.", subtopics: ["Manage services with systemctl", "Read logs with journalctl", "Inspect containers with crictl", "Explain the container runtime interface"] },
+        { key: "kubectl-speed", title: "kubectl fluency: imperative commands, dry-run, explain", hours: 4, goal: "Generate YAML with --dry-run=client -o yaml and edit it quickly in vim.", subtopics: ["Create resources imperatively with kubectl", "Generate YAML with --dry-run=client -o yaml", "Look up fields with kubectl explain", "Set aliases and edit YAML fast in vim"], links: [L("kubectl quick reference", "https://kubernetes.io/docs/reference/kubectl/quick-reference/")] },
+        { key: "lab-cluster", title: "Lab setup: kind and a multi-node VM cluster", hours: 3, goal: "Run a disposable kind cluster and a kubeadm cluster on VMs for practice.", subtopics: ["Create a multi-node kind cluster", "Provision VMs for a kubeadm cluster", "Reset and rebuild clusters quickly"], links: [L("kind", "https://kind.sigs.k8s.io/")] },
+      ],
+    },
+    {
+      key: "cka-architecture",
+      title: "Cluster architecture, installation & configuration",
+      summary: "Build and maintain the cluster itself.",
+      links: [L("Kubernetes docs", "https://kubernetes.io/docs/home/")],
+      topics: [
+        { key: "components", title: "Control plane & node components", hours: 3, goal: "Explain what the API server, etcd, scheduler, controller manager and kubelet each do.", subtopics: ["Explain the API server and etcd", "Explain the scheduler and controller manager", "Explain kubelet and kube-proxy", "Find component manifests on a node"] },
+        { key: "kubeadm-install", title: "Install a cluster with kubeadm", hours: 5, goal: "Bootstrap a control plane, join workers and install a CNI plugin from memory.", subtopics: ["Prepare nodes and install kubeadm, kubelet, kubectl", "Run kubeadm init on the control plane", "Install a CNI plugin", "Join worker nodes", "Repeat the install from memory"], links: [L("kubeadm", "https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/")] },
+        { key: "upgrade", title: "Cluster upgrades", hours: 3, goal: "Upgrade control plane and worker nodes one minor version with drain and uncordon.", subtopics: ["Read the upgrade docs procedure", "Upgrade kubeadm and the control plane", "Drain, upgrade and uncordon workers", "Verify node versions after upgrade"], links: [L("Upgrading kubeadm clusters", "https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/")] },
+        { key: "etcd-backup", title: "etcd backup & restore", hours: 3, goal: "Snapshot etcd and restore the cluster from that snapshot.", subtopics: ["Find etcd certificates and endpoints", "Take a snapshot with etcdctl", "Restore etcd from the snapshot", "Verify the cluster after restore"], links: [L("Operating etcd", "https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/")] },
+        { key: "rbac", title: "RBAC, service accounts & kubeconfig", hours: 4, goal: "Grant a user or service account exactly the permissions it needs and verify with auth can-i.", subtopics: ["Create Roles and RoleBindings", "Create ClusterRoles and ClusterRoleBindings", "Bind a role to a service account", "Verify access with kubectl auth can-i", "Create a kubeconfig for a new user"], links: [L("RBAC", "https://kubernetes.io/docs/reference/access-authn-authz/rbac/")] },
+        { key: "ha-control-plane", title: "Highly available control plane concepts", hours: 2, goal: "Describe stacked vs external etcd topologies and their trade-offs.", subtopics: ["Compare stacked and external etcd", "Explain load balancing the API servers", "Discuss quorum and failure tolerance"] },
+        { key: "helm-kustomize", title: "Helm, Kustomize, CRDs & operators", hours: 4, goal: "Install components with Helm or Kustomize and work with custom resources.", subtopics: ["Install a chart with Helm", "Override chart values", "Apply overlays with Kustomize", "Create and use a CRD", "Explain the operator pattern"], links: [L("Helm docs", "https://helm.sh/docs/")] },
+      ],
+    },
+    {
+      key: "cka-workloads",
+      title: "Workloads & scheduling",
+      summary: "Run applications the way the scheduler expects.",
+      links: [L("Workloads", "https://kubernetes.io/docs/concepts/workloads/")],
+      topics: [
+        { key: "deployments", title: "Deployments, rollouts & rollbacks", hours: 3, goal: "Roll out, pause, scale and roll back a Deployment.", subtopics: ["Create a Deployment", "Scale replicas up and down", "Do a rolling update and pause it", "Roll back a bad release", "Tune maxSurge and maxUnavailable"] },
+        { key: "config-secrets", title: "ConfigMaps & Secrets", hours: 2, goal: "Inject configuration as env vars and mounted files.", subtopics: ["Create ConfigMaps and Secrets", "Inject them as environment variables", "Mount them as files"] },
+        { key: "resources", title: "Requests, limits, quotas & LimitRanges", hours: 3, goal: "Set resource requests and limits and enforce namespace quotas.", subtopics: ["Set requests and limits on containers", "Create a ResourceQuota", "Set defaults with a LimitRange", "Explain QoS classes"], links: [L("Resource management", "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/")] },
+        { key: "autoscaling", title: "HPA & metrics-server", hours: 2, goal: "Autoscale a Deployment on CPU usage.", subtopics: ["Install metrics-server", "Create an HPA on CPU", "Generate load and watch scaling"] },
+        { key: "scheduling", title: "Node selectors, affinity, taints & tolerations", hours: 4, goal: "Place or keep Pods off specific nodes on purpose.", subtopics: ["Use nodeSelector with node labels", "Write node affinity rules", "Use pod affinity and anti-affinity", "Taint nodes and add tolerations"], links: [L("Scheduling & eviction", "https://kubernetes.io/docs/concepts/scheduling-eviction/")] },
+        { key: "pod-patterns", title: "DaemonSets, static Pods, Jobs & init/sidecar containers", hours: 3, goal: "Choose the right workload type and debug static Pods on a node.", subtopics: ["Run a DaemonSet on every node", "Create and debug static Pods", "Run Jobs and CronJobs", "Add init and sidecar containers"] },
+      ],
+    },
+    {
+      key: "cka-networking",
+      title: "Services & networking",
+      summary: "How Pods find and talk to each other and the outside world.",
+      topics: [
+        { key: "pod-networking", title: "Pod networking & CNI", hours: 3, goal: "Explain the Kubernetes network model and confirm the CNI is healthy.", subtopics: ["Explain the Kubernetes network model", "Trace Pod-to-Pod traffic", "Check CNI Pods and configuration", "Find Pod CIDR settings"] },
+        { key: "services", title: "Services: ClusterIP, NodePort, LoadBalancer", hours: 3, goal: "Expose workloads and debug Services with no endpoints.", subtopics: ["Expose Pods with ClusterIP", "Expose with NodePort and LoadBalancer", "Inspect endpoints and EndpointSlices", "Fix Services with no endpoints"], links: [L("Services", "https://kubernetes.io/docs/concepts/services-networking/service/")] },
+        { key: "ingress-gateway", title: "Ingress & Gateway API", hours: 4, goal: "Route HTTP traffic by host and path with Ingress and HTTPRoute.", subtopics: ["Install an Ingress controller", "Route by host and path with Ingress", "Add TLS to an Ingress", "Create a Gateway and HTTPRoute"], links: [L("Gateway API", "https://kubernetes.io/docs/concepts/services-networking/gateway/")] },
+        { key: "network-policies", title: "NetworkPolicies", hours: 3, goal: "Write default-deny and allow rules and test them between Pods.", subtopics: ["Write a default-deny policy", "Allow traffic by pod and namespace labels", "Control egress traffic", "Test policies between Pods"], links: [L("Network policies", "https://kubernetes.io/docs/concepts/services-networking/network-policies/")] },
+        { key: "coredns", title: "CoreDNS & service discovery", hours: 2, goal: "Debug DNS resolution failures inside the cluster.", subtopics: ["Explain Service DNS names", "Inspect the CoreDNS ConfigMap", "Debug resolution from a test Pod"] },
+      ],
+    },
+    {
+      key: "cka-storage",
+      title: "Storage",
+      summary: "Data that outlives Pods.",
+      links: [L("Persistent volumes", "https://kubernetes.io/docs/concepts/storage/persistent-volumes/")],
+      topics: [
+        { key: "volumes", title: "Volumes: emptyDir, hostPath, projected", hours: 2, goal: "Share data between containers and mount config into Pods.", subtopics: ["Share data with emptyDir", "Mount host files with hostPath", "Combine sources with projected volumes"] },
+        { key: "pv-pvc", title: "PersistentVolumes, claims, access modes & reclaim policies", hours: 3, goal: "Bind a PVC to a PV and fix claims stuck in Pending.", subtopics: ["Create a PersistentVolume", "Bind it with a PersistentVolumeClaim", "Compare access modes and reclaim policies", "Fix a PVC stuck in Pending"] },
+        { key: "storageclasses", title: "StorageClasses & dynamic provisioning", hours: 2, goal: "Provision volumes dynamically and set a default StorageClass.", subtopics: ["Create a StorageClass", "Provision a volume dynamically", "Set the default StorageClass"] },
+      ],
+    },
+    {
+      key: "cka-troubleshooting",
+      title: "Troubleshooting",
+      summary: "30% of the exam: find what's broken and fix it fast.",
+      links: [L("Monitoring, logging & debugging", "https://kubernetes.io/docs/tasks/debug/")],
+      topics: [
+        { key: "debug-apps", title: "Failing Pods: CrashLoopBackOff, ImagePullBackOff, Pending", hours: 4, goal: "Diagnose a failing Pod from events, logs and describe output in minutes.", subtopics: ["Read Pod events with describe", "Read current and previous container logs", "Fix CrashLoopBackOff causes", "Fix ImagePullBackOff and Pending Pods"] },
+        { key: "debug-control-plane", title: "Broken control plane components", hours: 4, goal: "Fix a broken API server, scheduler or controller manager via static Pod manifests.", subtopics: ["Locate static Pod manifests", "Diagnose a broken API server", "Fix the scheduler or controller manager", "Read component logs with crictl"] },
+        { key: "debug-nodes", title: "NotReady nodes & kubelet issues", hours: 3, goal: "Bring a NotReady node back by checking kubelet, runtime and certificates.", subtopics: ["Check node conditions", "Inspect kubelet status and logs", "Check the container runtime", "Fix kubelet configuration and certificates"] },
+        { key: "debug-network", title: "Service & network troubleshooting", hours: 3, goal: "Trace a failed request from Service to endpoints to Pod to DNS.", subtopics: ["Verify Service selectors and endpoints", "Test connectivity from a debug Pod", "Check kube-proxy and DNS", "Trace a request end to end"] },
+        { key: "monitoring", title: "Logs, metrics & resource usage", hours: 2, goal: "Use kubectl logs, top and events to find resource-starved workloads.", subtopics: ["Read logs across containers", "Check usage with kubectl top", "Sort and filter cluster events"] },
+      ],
+    },
+    {
+      key: "cka-exam-prep",
+      title: "Mock exams",
+      summary: "Practise under real exam conditions until it feels routine.",
+      links: [L("killer.sh", "https://killer.sh/")],
+      topics: [
+        { key: "drills", title: "Timed task drills by domain", hours: 6, goal: "Complete common tasks (RBAC, etcd, NetworkPolicy, upgrade) in under 6 minutes each.", subtopics: ["Drill RBAC tasks", "Drill etcd backup and restore", "Drill NetworkPolicy tasks", "Drill a cluster upgrade", "Get each task under six minutes"] },
+        { key: "simulator", title: "Exam simulator sessions", hours: 6, goal: "Finish two full simulator sessions and review every solution.", subtopics: ["Complete the first simulator session", "Review every solution in detail", "Redo missed tasks from scratch", "Complete the second simulator session", "Note recurring weak spots"] },
+        { key: "final-review", title: "Final review: bookmarks, aliases & time strategy", hours: 2, goal: "Walk into the exam with a setup routine and a skip-and-return strategy.", subtopics: ["Finalise docs bookmarks", "Practise a terminal setup routine", "Plan skip-and-return time strategy"] },
+      ],
+    },
+  ],
+};
+
+const sql: LearningPath = {
+  slug: "sql-postgresql",
+  title: "SQL & PostgreSQL",
+  tagline: "Query, design and tune real databases.",
+  description:
+    "Learn SQL from first SELECT to window functions, then design schemas, make queries fast with indexes and EXPLAIN, and understand transactions and concurrency. Finishes with the PostgreSQL admin basics every backend developer needs.",
+  level: "Beginner → Intermediate",
+  category: "Backend",
+  icon: "database",
+  outcomes: [
+    "Answer real business questions with joins, aggregates, CTEs and window functions",
+    "Design normalised schemas with the right types and constraints",
+    "Read EXPLAIN plans and fix slow queries with the right indexes",
+    "Explain transactions, isolation levels and locking, and avoid common concurrency bugs",
+    "Manage roles, backups, vacuum and monitoring on a PostgreSQL server",
+  ],
+  tools: ["PostgreSQL", "psql", "pgAdmin", "DBeaver", "EXPLAIN", "pg_dump", "pg_stat_statements", "PgBouncer", "Docker"],
+  modules: [
+    {
+      key: "sql-basics",
+      title: "SQL basics",
+      summary: "Get data out of a single table.",
+      links: [L("SQLBolt", "https://sqlbolt.com/"), L("PostgreSQL tutorial", "https://www.postgresql.org/docs/current/tutorial.html"), L("roadmap.sh SQL", "https://roadmap.sh/sql")],
+      topics: [
+        { key: "setup", title: "Installing PostgreSQL & using psql", hours: 2, goal: "Run Postgres locally or in Docker and navigate it with psql meta-commands.", subtopics: ["Run Postgres in Docker or locally", "Connect with psql", "Use \\l, \\dt and \\d meta-commands"] },
+        { key: "select", title: "SELECT, WHERE, ORDER BY & LIMIT", hours: 3, goal: "Filter, sort and page through rows with precise conditions.", subtopics: ["Select columns and aliases", "Filter with WHERE, AND, OR, IN", "Sort with ORDER BY", "Page with LIMIT and OFFSET"] },
+        { key: "nulls-functions", title: "NULLs, expressions & built-in functions", hours: 3, goal: "Handle NULLs correctly and transform strings, numbers and dates in queries.", subtopics: ["Handle NULL with IS NULL and COALESCE", "Write CASE expressions", "Use string and number functions", "Work with dates and intervals"] },
+        { key: "dml", title: "INSERT, UPDATE, DELETE & RETURNING", hours: 2, goal: "Modify data safely and return the affected rows.", subtopics: ["Insert single and multiple rows", "Update rows safely with WHERE", "Delete rows inside a transaction", "Return affected rows with RETURNING"] },
+      ],
+    },
+    {
+      key: "sql-joins",
+      title: "Joins & aggregation",
+      summary: "Combine tables and summarise data.",
+      links: [L("PostgreSQL Exercises", "https://pgexercises.com/")],
+      topics: [
+        { key: "joins", title: "Inner, outer, self & cross joins", hours: 4, goal: "Pick the right join and explain why rows appear or go missing.", subtopics: ["Write inner joins", "Use left and full outer joins", "Join a table to itself", "Explain missing and duplicated rows"] },
+        { key: "group-by", title: "GROUP BY, HAVING & aggregates", hours: 3, goal: "Summarise data by group and filter on aggregate results.", subtopics: ["Use COUNT, SUM, AVG, MIN, MAX", "Group rows with GROUP BY", "Filter groups with HAVING", "Avoid common grouping mistakes"] },
+        { key: "set-ops", title: "UNION, INTERSECT, EXCEPT & DISTINCT", hours: 1.5, goal: "Combine and compare result sets.", subtopics: ["Combine results with UNION and UNION ALL", "Compare sets with INTERSECT and EXCEPT", "Deduplicate with DISTINCT"] },
+        { key: "join-practice", title: "Practice: reporting queries", hours: 4, goal: "Write twenty reporting queries against a sample schema without looking up syntax.", subtopics: ["Load a sample schema", "Write sales and revenue reports", "Write top-N and per-group queries", "Finish twenty queries without lookups"] },
+      ],
+    },
+    {
+      key: "sql-advanced",
+      title: "Advanced queries",
+      summary: "The features that separate SQL users from SQL experts.",
+      topics: [
+        { key: "subqueries-ctes", title: "Subqueries, CTEs & recursive CTEs", hours: 4, goal: "Break complex queries into readable CTEs and walk hierarchies recursively.", subtopics: ["Write scalar and correlated subqueries", "Use EXISTS and IN subqueries", "Refactor queries into CTEs", "Walk a hierarchy with a recursive CTE"], links: [L("WITH queries", "https://www.postgresql.org/docs/current/queries-with.html")] },
+        { key: "window-functions", title: "Window functions", hours: 5, goal: "Compute rankings, running totals and period-over-period changes.", subtopics: ["Use OVER and PARTITION BY", "Rank rows with ROW_NUMBER and RANK", "Compute running totals", "Compare periods with LAG and LEAD", "Use frame clauses for moving averages"], links: [L("Window functions tutorial", "https://www.postgresql.org/docs/current/tutorial-window.html")] },
+        { key: "json", title: "JSONB & arrays", hours: 3, goal: "Store, query and index semi-structured JSONB data.", subtopics: ["Store documents in JSONB", "Query with -> and ->> operators", "Filter with @> containment", "Index JSONB with GIN", "Work with array columns"], links: [L("JSON functions", "https://www.postgresql.org/docs/current/functions-json.html")] },
+        { key: "upsert-views", title: "Upserts, views & materialised views", hours: 2, goal: "Use INSERT ... ON CONFLICT and views to simplify application code.", subtopics: ["Upsert with INSERT ... ON CONFLICT", "Create views for common queries", "Create and refresh materialised views"] },
+      ],
+    },
+    {
+      key: "schema-design",
+      title: "Schema design",
+      summary: "Good schemas make every query easier.",
+      topics: [
+        { key: "modelling", title: "Entities, relationships & ER diagrams", hours: 3, goal: "Turn requirements into tables with one-to-many and many-to-many relationships.", subtopics: ["Identify entities and attributes", "Model one-to-many relationships", "Model many-to-many with join tables", "Draw an ER diagram"] },
+        { key: "normalisation", title: "Normalisation & when to denormalise", hours: 3, goal: "Normalise to 3NF and justify any deliberate denormalisation.", subtopics: ["Apply 1NF, 2NF and 3NF", "Spot update anomalies", "Justify a deliberate denormalisation"] },
+        { key: "types-constraints", title: "Data types, keys & constraints", hours: 3, goal: "Enforce data integrity with primary keys, foreign keys, CHECK and UNIQUE.", subtopics: ["Choose appropriate data types", "Pick natural or surrogate keys", "Add foreign keys with ON DELETE rules", "Enforce rules with CHECK and UNIQUE"], links: [L("Constraints", "https://www.postgresql.org/docs/current/ddl-constraints.html"), L("Data types", "https://www.postgresql.org/docs/current/datatype.html")] },
+        { key: "migrations", title: "Schema migrations", hours: 2, goal: "Evolve a schema safely with versioned migrations and zero-downtime patterns.", subtopics: ["Set up a migration tool", "Write up and down migrations", "Add columns without downtime", "Backfill data in batches"] },
+      ],
+    },
+    {
+      key: "performance",
+      title: "Indexes & performance",
+      summary: "Why queries are slow and how to make them fast.",
+      links: [L("Use The Index, Luke", "https://use-the-index-luke.com/"), L("PostgreSQL indexes", "https://www.postgresql.org/docs/current/indexes.html")],
+      topics: [
+        { key: "btree", title: "How B-tree indexes work", hours: 3, goal: "Predict whether an index can be used for a given WHERE and ORDER BY.", subtopics: ["Explain B-tree structure", "Know when an index can be used", "Match indexes to ORDER BY", "See index-only scans"] },
+        { key: "explain", title: "Reading EXPLAIN & EXPLAIN ANALYZE", hours: 4, goal: "Spot sequential scans, bad estimates and expensive joins in a plan.", subtopics: ["Run EXPLAIN and EXPLAIN ANALYZE", "Read scan and join node types", "Compare estimated and actual rows", "Find the most expensive plan node"], links: [L("Using EXPLAIN", "https://www.postgresql.org/docs/current/using-explain.html")] },
+        { key: "index-types", title: "Composite, partial, expression, GIN & BRIN indexes", hours: 3, goal: "Choose an index type and column order for a real query workload.", subtopics: ["Order columns in composite indexes", "Create partial and expression indexes", "Use GIN for JSONB and full text", "Use BRIN for large time series"] },
+        { key: "query-tuning", title: "Query tuning & avoiding N+1", hours: 3, goal: "Rewrite slow queries and batch application queries to cut round trips.", subtopics: ["Rewrite a slow query and compare plans", "Detect N+1 query patterns", "Batch queries to cut round trips", "Measure before and after"] },
+      ],
+    },
+    {
+      key: "transactions",
+      title: "Transactions & concurrency",
+      summary: "Correct results when many users write at once.",
+      links: [L("Concurrency control", "https://www.postgresql.org/docs/current/mvcc.html")],
+      topics: [
+        { key: "acid", title: "ACID & transaction basics", hours: 2, goal: "Group statements into transactions and use savepoints and rollbacks.", subtopics: ["Use BEGIN, COMMIT and ROLLBACK", "Explain each ACID property", "Use savepoints for partial rollback"] },
+        { key: "isolation", title: "MVCC & isolation levels", hours: 3, goal: "Explain read committed, repeatable read and serializable and the anomalies each prevents.", subtopics: ["Explain how MVCC works", "Compare read committed and repeatable read", "Use serializable and handle retries", "Reproduce an anomaly in two sessions"], links: [L("Transaction isolation", "https://www.postgresql.org/docs/current/transaction-iso.html")] },
+        { key: "locking", title: "Locks, SELECT FOR UPDATE & deadlocks", hours: 3, goal: "Prevent lost updates and diagnose lock waits and deadlocks.", subtopics: ["Inspect locks in pg_locks", "Prevent lost updates with SELECT FOR UPDATE", "Reproduce and read a deadlock", "Keep transactions short"], links: [L("Explicit locking", "https://www.postgresql.org/docs/current/explicit-locking.html")] },
+      ],
+    },
+    {
+      key: "admin",
+      title: "PostgreSQL admin basics",
+      summary: "Keep a database healthy, secure and recoverable.",
+      links: [L("roadmap.sh PostgreSQL DBA", "https://roadmap.sh/postgresql-dba")],
+      topics: [
+        { key: "roles", title: "Roles, privileges & row-level security", hours: 2, goal: "Create least-privilege roles for apps and humans.", subtopics: ["Create login and group roles", "Grant least-privilege permissions", "Enable row-level security policies"], links: [L("Database roles", "https://www.postgresql.org/docs/current/user-manag.html")] },
+        { key: "backup", title: "Backup & restore: pg_dump, PITR", hours: 3, goal: "Take logical backups, restore them, and explain point-in-time recovery.", subtopics: ["Back up with pg_dump", "Restore with pg_restore", "Explain WAL archiving and PITR", "Script a scheduled backup"], links: [L("Backup and restore", "https://www.postgresql.org/docs/current/backup.html")] },
+        { key: "vacuum", title: "VACUUM, autovacuum & bloat", hours: 2, goal: "Explain why vacuum exists and check autovacuum is keeping up.", subtopics: ["Explain dead tuples and MVCC bloat", "Run VACUUM and ANALYZE", "Check autovacuum activity"], links: [L("Routine vacuuming", "https://www.postgresql.org/docs/current/routine-vacuuming.html")] },
+        { key: "monitoring", title: "Monitoring with pg_stat views & pg_stat_statements", hours: 2, goal: "Find the slowest and most frequent queries on a running server.", subtopics: ["Query pg_stat_activity", "Enable pg_stat_statements", "Find slowest and most frequent queries"], links: [L("pg_stat_statements", "https://www.postgresql.org/docs/current/pgstatstatements.html")] },
+        { key: "pooling-config", title: "Connection pooling & key config settings", hours: 2, goal: "Size connections with PgBouncer and tune memory settings sensibly.", subtopics: ["Explain why connections are expensive", "Set up PgBouncer", "Tune shared_buffers and work_mem"], links: [L("PgBouncer", "https://www.pgbouncer.org/")] },
+      ],
+    },
+    {
+      key: "sql-capstone",
+      title: "Capstone project",
+      summary: "Design, load, query and tune a real database.",
+      topics: [
+        { key: "sql-capstone-model", title: "Model the domain & write the ER diagram", hours: 2, goal: "An ER diagram and DDL for a realistic app schema reviewed against 3NF.", subtopics: ["Gather requirements for the app", "Draw the ER diagram", "Write DDL and review against 3NF"] },
+        { key: "sql-capstone-build", title: "Build a database for an app (e.g. e-commerce or library)", hours: 8, goal: "A repo with schema migrations, seed data, analytics queries, indexes justified by EXPLAIN and a backup script.", subtopics: ["Write versioned schema migrations", "Create realistic seed data", "Write analytics queries with CTEs and windows", "Add indexes justified by EXPLAIN", "Write a backup and restore script", "Document the schema in a README"] },
+      ],
+    },
+  ],
+};
+
+const ai: LearningPath = {
+  slug: "ai-engineering-python",
+  title: "AI Engineering with Python",
+  tagline: "Build, evaluate and ship LLM-powered apps.",
+  description:
+    "Learn to build reliable applications on top of large language models: API calls, prompting, embeddings, RAG, tool use and agents, all measured with evals and deployed as real services. Vendor-neutral, using each provider's official SDK docs.",
+  level: "Intermediate",
+  category: "Data & AI",
+  icon: "brain",
+  outcomes: [
+    "Call LLM APIs with streaming, structured output, retries and cost control",
+    "Write and version prompts that behave predictably",
+    "Build retrieval-augmented generation over your own documents",
+    "Give models tools and build safe, bounded agent loops",
+    "Measure quality with evals and deploy an LLM service to production",
+  ],
+  tools: ["Python", "LLM provider SDKs", "Pydantic", "FastAPI", "asyncio", "Embeddings", "pgvector", "sentence-transformers", "MCP", "Docker", "pytest"],
+  modules: [
+    {
+      key: "ai-foundations",
+      title: "Foundations",
+      summary: "Enough theory and Python to build with confidence.",
+      links: [L("roadmap.sh AI Engineer", "https://roadmap.sh/ai-engineer"), L("Hugging Face Learn", "https://huggingface.co/learn")],
+      topics: [
+        { key: "how-llms-work", title: "How LLMs work: tokens, context windows & sampling", hours: 4, goal: "Explain tokens, context limits, temperature and why models hallucinate.", subtopics: ["Explain tokens and tokenisation", "Understand context window limits", "Experiment with temperature and top-p", "Explain why models hallucinate"], links: [L("The Illustrated Transformer", "https://jalammar.github.io/illustrated-transformer/")] },
+        { key: "model-landscape", title: "The model landscape: hosted vs open-weight", hours: 2, goal: "Compare models on quality, latency, cost, context size and licensing for a use case.", subtopics: ["Compare hosted and open-weight models", "Compare quality, latency and cost", "Check context size and licensing"] },
+        { key: "python-for-ai", title: "Python for AI apps: async, typing & Pydantic", hours: 4, goal: "Write typed async Python and validate data with Pydantic models.", subtopics: ["Write async functions with asyncio", "Add type hints throughout", "Validate data with Pydantic models", "Run concurrent API calls with gather"], links: [L("asyncio", "https://docs.python.org/3/library/asyncio.html"), L("Pydantic docs", "https://docs.pydantic.dev/latest/")] },
+      ],
+    },
+    {
+      key: "llm-apis",
+      title: "Working with LLM APIs",
+      summary: "Production-quality calls to any model provider.",
+      topics: [
+        { key: "first-calls", title: "Chat APIs & official SDKs", hours: 3, goal: "Send multi-turn chat requests with system prompts using a provider's official Python SDK.", subtopics: ["Install a provider SDK and set API keys", "Send a single-turn request", "Add a system prompt", "Build a multi-turn conversation"] },
+        { key: "streaming", title: "Streaming responses", hours: 2, goal: "Stream tokens to a terminal or web client and handle partial output.", subtopics: ["Stream tokens to the terminal", "Stream to a web client", "Handle partial and interrupted output"] },
+        { key: "structured-output", title: "Structured output & JSON schemas", hours: 3, goal: "Get validated, typed objects back from a model instead of free text.", subtopics: ["Define an output JSON schema", "Request structured output from the model", "Parse responses into Pydantic models", "Handle validation failures"] },
+        { key: "reliability", title: "Errors, retries, rate limits & timeouts", hours: 2, goal: "Wrap model calls with backoff, timeouts and graceful fallbacks.", subtopics: ["Add timeouts to model calls", "Retry with exponential backoff", "Handle rate limit errors", "Add a fallback model"] },
+        { key: "cost-latency", title: "Token counting, cost & latency", hours: 2, goal: "Estimate per-request cost and cut it with shorter prompts, caching and smaller models.", subtopics: ["Count tokens before sending", "Estimate cost per request", "Measure latency per call", "Cut cost with caching and smaller models"] },
+      ],
+    },
+    {
+      key: "prompting",
+      title: "Prompt engineering",
+      summary: "Clear instructions beat clever tricks.",
+      links: [L("Prompt Engineering Guide", "https://www.promptingguide.ai/")],
+      topics: [
+        { key: "prompt-basics", title: "Clear instructions, roles & context", hours: 3, goal: "Write prompts with explicit task, context, constraints and output format.", subtopics: ["State the task explicitly", "Provide relevant context", "Set constraints and a role", "Specify the output format"] },
+        { key: "few-shot", title: "Few-shot examples & step-by-step reasoning", hours: 2, goal: "Improve accuracy on a task with well-chosen examples and reasoning steps.", subtopics: ["Pick representative few-shot examples", "Ask for step-by-step reasoning", "Compare accuracy with and without examples"] },
+        { key: "prompts-as-code", title: "Prompt templates & versioning", hours: 2, goal: "Keep prompts in version control with templates, variables and changelogs.", subtopics: ["Move prompts into templates", "Fill variables safely", "Version prompts in Git with a changelog"] },
+      ],
+    },
+    {
+      key: "embeddings",
+      title: "Embeddings & retrieval",
+      summary: "Find the right information before the model answers.",
+      topics: [
+        { key: "embeddings-basics", title: "Embeddings & semantic similarity", hours: 3, goal: "Embed text and rank documents by cosine similarity.", subtopics: ["Generate embeddings via an API", "Compute cosine similarity", "Rank documents for a query", "Visualise similar texts"], links: [L("Sentence Transformers", "https://www.sbert.net/")] },
+        { key: "vector-stores", title: "Vector databases & pgvector", hours: 3, goal: "Store and query embeddings with an approximate nearest-neighbour index.", subtopics: ["Install pgvector", "Store embeddings with metadata", "Query nearest neighbours", "Add an HNSW or IVFFlat index"], links: [L("pgvector", "https://github.com/pgvector/pgvector")] },
+        { key: "chunking", title: "Document loading & chunking strategies", hours: 3, goal: "Parse PDFs and web pages and chunk them so retrieval returns useful passages.", subtopics: ["Parse PDFs and HTML into text", "Chunk by size with overlap", "Chunk by structure and headings", "Compare retrieval across chunk sizes"] },
+        { key: "hybrid-rerank", title: "Hybrid search & reranking", hours: 3, goal: "Combine keyword and vector search and rerank results for better precision.", subtopics: ["Add keyword search with BM25 or tsvector", "Fuse keyword and vector results", "Rerank with a cross-encoder", "Measure precision before and after"] },
+      ],
+    },
+    {
+      key: "rag",
+      title: "Retrieval-augmented generation",
+      summary: "Answers grounded in your own data.",
+      topics: [
+        { key: "rag-pipeline", title: "Build a RAG pipeline end to end", hours: 5, goal: "Answer questions over a document set with retrieved context injected into the prompt.", subtopics: ["Ingest and index a document set", "Retrieve top-k chunks for a query", "Inject context into the prompt", "Generate grounded answers", "Test with real questions"] },
+        { key: "citations", title: "Citations & grounding", hours: 2, goal: "Return answers with source citations and refuse when context is missing.", subtopics: ["Return source citations with answers", "Instruct the model to stay in context", "Refuse when context is missing"] },
+        { key: "rag-advanced", title: "Query rewriting, metadata filters & conversation memory", hours: 3, goal: "Handle follow-up questions and filter retrieval by user, date or type.", subtopics: ["Rewrite follow-up questions as standalone", "Filter retrieval by metadata", "Store and summarise conversation history"] },
+      ],
+    },
+    {
+      key: "agents",
+      title: "Tool use & agents",
+      summary: "Let models take actions, within limits.",
+      topics: [
+        { key: "tool-calling", title: "Function / tool calling", hours: 3, goal: "Define tools with JSON schemas and execute model-requested calls safely.", subtopics: ["Define tools with JSON schemas", "Handle tool call responses", "Execute calls and return results", "Validate tool arguments safely"] },
+        { key: "agent-loop", title: "The agent loop: plan, act, observe", hours: 4, goal: "Build a bounded agent loop with step limits, state and stop conditions.", subtopics: ["Implement a plan-act-observe loop", "Track state between steps", "Add step limits and stop conditions", "Log each step for debugging"] },
+        { key: "mcp", title: "Model Context Protocol (MCP)", hours: 2, goal: "Expose your own tools through an MCP server and connect a client to it.", subtopics: ["Learn MCP concepts: servers, tools, resources", "Build a small MCP server", "Connect a client to your server"], links: [L("Model Context Protocol", "https://modelcontextprotocol.io/")] },
+        { key: "ai-security", title: "Safety: prompt injection, data leakage & guardrails", hours: 3, goal: "Threat-model an LLM app and add input, output and permission guardrails.", subtopics: ["Threat-model your LLM app", "Test prompt injection attacks", "Add input and output guardrails", "Limit tool permissions and data access"], links: [L("OWASP Top 10 for LLM Apps", "https://owasp.org/www-project-top-10-for-large-language-model-applications/")] },
+      ],
+    },
+    {
+      key: "evals",
+      title: "Evaluation & observability",
+      summary: "If you can't measure it, you can't improve it.",
+      topics: [
+        { key: "eval-datasets", title: "Building eval datasets", hours: 3, goal: "Create a labelled test set from real and synthetic examples covering edge cases.", subtopics: ["Collect real user examples", "Generate synthetic edge cases", "Label expected outputs", "Version the dataset"] },
+        { key: "eval-methods", title: "Code checks, LLM-as-judge & human review", hours: 3, goal: "Score outputs automatically and calibrate an LLM judge against human labels.", subtopics: ["Write deterministic code checks", "Build an LLM-as-judge rubric", "Calibrate the judge against human labels", "Review disagreements by hand"] },
+        { key: "rag-evals", title: "Evaluating retrieval & RAG quality", hours: 2, goal: "Measure retrieval recall and answer faithfulness separately.", subtopics: ["Measure retrieval recall and precision", "Measure answer faithfulness", "Diagnose retrieval vs generation failures"] },
+        { key: "evals-ci", title: "Regression evals in CI", hours: 2, goal: "Block prompt or model changes that lower eval scores.", subtopics: ["Run evals in a CI job", "Set score thresholds", "Fail builds on regressions"] },
+        { key: "tracing", title: "Tracing, logging & feedback", hours: 2, goal: "Trace every model call with inputs, outputs, latency and cost and collect user feedback.", subtopics: ["Trace every model call", "Log inputs, outputs, latency and cost", "Collect user feedback", "Review traces to find failures"] },
+      ],
+    },
+    {
+      key: "ai-deploy",
+      title: "Deployment",
+      summary: "From notebook to a service people rely on.",
+      topics: [
+        { key: "llm-service", title: "Serving an LLM app with FastAPI", hours: 4, goal: "Expose a streaming chat or RAG endpoint with auth and input validation.", subtopics: ["Create a FastAPI app", "Add a streaming chat endpoint", "Validate input with Pydantic", "Add API key or token auth"], links: [L("FastAPI docs", "https://fastapi.tiangolo.com/")] },
+        { key: "prod-concerns", title: "Caching, rate limiting & cost budgets", hours: 2, goal: "Protect your service and budget with caches, per-user limits and spend alerts.", subtopics: ["Cache repeated responses", "Rate limit per user", "Set spend budgets and alerts"] },
+        { key: "open-models", title: "Running open-weight models locally", hours: 3, goal: "Run an open model locally and swap it in behind the same interface.", subtopics: ["Install Ollama or llama.cpp", "Run an open-weight model locally", "Swap it in behind the same interface", "Compare quality and speed"], links: [L("Ollama", "https://ollama.com/")] },
+        { key: "containerise", title: "Containerise & deploy", hours: 3, goal: "Ship the service in Docker to a cloud host with secrets managed properly.", subtopics: ["Write a Dockerfile for the service", "Manage secrets with environment variables", "Deploy to a cloud host", "Add health checks and logs"] },
+      ],
+    },
+    {
+      key: "ai-capstone",
+      title: "Capstone project",
+      summary: "An AI app with evidence that it works.",
+      topics: [
+        { key: "ai-capstone-scope", title: "Scope the app & write the eval set first", hours: 3, goal: "A problem statement, success criteria and a 30-example eval set before writing app code.", subtopics: ["Write the problem statement", "Define success criteria", "Build a 30-example eval set", "Plan the architecture"] },
+        { key: "ai-capstone-build", title: "Build a RAG assistant with tools (e.g. docs Q&A or support bot)", hours: 14, goal: "A deployed app with citations, at least one tool, an eval suite in CI and a README showing scores.", subtopics: ["Ingest and index the documents", "Build retrieval with citations", "Add at least one tool", "Run the eval suite in CI", "Deploy the app", "Document scores in the README"] },
+      ],
+    },
+  ],
+};
+
+const systemDesign: LearningPath = {
+  slug: "system-design",
+  title: "System Design Deep Dive",
+  tagline: "Design systems that scale, and explain why.",
+  description:
+    "Build the mental toolkit for designing large systems: fundamentals, building blocks, data storage and reliability patterns. Then apply it to ten classic case studies and timed mock interviews.",
+  level: "Intermediate → Advanced",
+  category: "Career",
+  icon: "network",
+  outcomes: [
+    "Run a system design interview from requirements and estimates to trade-offs",
+    "Choose load balancers, caches, queues and CDNs and justify each one",
+    "Pick storage, replication and partitioning strategies for a workload",
+    "Design for failure with redundancy, idempotency and observability",
+    "Present ten classic designs clearly in 45 minutes",
+  ],
+  tools: ["System Design Primer", "Excalidraw", "Back-of-envelope estimates", "CAP / PACELC", "Consistent hashing", "Redis", "Kafka", "PostgreSQL", "Cassandra"],
+  modules: [
+    {
+      key: "sd-fundamentals",
+      title: "Fundamentals",
+      summary: "The vocabulary and method behind every design.",
+      links: [L("System Design Primer", "https://github.com/donnemartin/system-design-primer"), L("roadmap.sh System Design", "https://roadmap.sh/system-design")],
+      topics: [
+        { key: "framework", title: "The interview framework: requirements → API → design → deep dive", hours: 2, goal: "Structure any design question into clear phases with time boxes.", subtopics: ["Clarify functional and non-functional requirements", "Define the API", "Draw the high-level design", "Deep dive into bottlenecks and time-box each phase"] },
+        { key: "estimation", title: "Back-of-envelope estimation", hours: 3, goal: "Estimate QPS, storage and bandwidth from user numbers in under five minutes.", subtopics: ["Memorise powers of two and latency numbers", "Estimate QPS from daily users", "Estimate storage and bandwidth", "Practise five quick estimates"] },
+        { key: "perf-concepts", title: "Latency, throughput, availability & SLAs", hours: 2, goal: "Translate 'four nines' into allowed downtime and reason about latency percentiles.", subtopics: ["Convert nines into allowed downtime", "Explain p50, p95 and p99 latency", "Distinguish SLAs, SLOs and SLIs"] },
+        { key: "networking", title: "Networking & APIs: HTTP, REST, gRPC, WebSockets", hours: 3, goal: "Choose an API style and protocol for a given client and traffic pattern.", subtopics: ["Compare REST, gRPC and GraphQL", "Know when to use WebSockets or SSE", "Design a REST API with pagination", "Choose a protocol for a scenario"] },
+        { key: "scaling", title: "Vertical vs horizontal scaling & statelessness", hours: 2, goal: "Make a service horizontally scalable by moving state out of it.", subtopics: ["Compare vertical and horizontal scaling", "Move session state out of servers", "Design a stateless service tier"] },
+      ],
+    },
+    {
+      key: "building-blocks",
+      title: "Building blocks",
+      summary: "The components almost every design is assembled from.",
+      topics: [
+        { key: "load-balancing", title: "Load balancers & reverse proxies", hours: 2, goal: "Choose L4 vs L7 load balancing and an algorithm for a workload.", subtopics: ["Compare L4 and L7 load balancing", "Choose round robin, least connections or hashing", "Explain health checks and reverse proxies"] },
+        { key: "caching", title: "Caching strategies & CDNs", hours: 3, goal: "Pick cache-aside, write-through or write-back and handle invalidation and stampedes.", subtopics: ["Compare cache-aside, write-through and write-back", "Choose TTLs and invalidation", "Prevent cache stampedes", "Use a CDN for static content"] },
+        { key: "queues", title: "Message queues, pub/sub & event streams", hours: 3, goal: "Decide between a queue and a log like Kafka and explain delivery guarantees.", subtopics: ["Compare queues and pub/sub", "Explain Kafka partitions and consumer groups", "Explain at-least-once and exactly-once delivery", "Choose a queue or log for a scenario"] },
+        { key: "gateway-ratelimit", title: "API gateways & rate limiting", hours: 2, goal: "Explain token bucket and sliding window limits and where to enforce them.", subtopics: ["Explain token bucket and sliding window", "Decide where to enforce limits", "List API gateway responsibilities"] },
+        { key: "blob-search", title: "Object storage & search indexes", hours: 2, goal: "Know when to put data in blob storage or a search engine instead of a database.", subtopics: ["Store large blobs in object storage", "Use an inverted index for search", "Keep a search index in sync with the database"] },
+      ],
+    },
+    {
+      key: "data",
+      title: "Data storage at scale",
+      summary: "Where most of the hard trade-offs live.",
+      links: [L("Designing Data-Intensive Applications", "https://dataintensive.net/")],
+      topics: [
+        { key: "sql-nosql", title: "SQL vs NoSQL: relational, key-value, document, wide-column, graph", hours: 3, goal: "Choose a data model and database family for an access pattern.", subtopics: ["Compare relational and key-value stores", "Compare document and wide-column stores", "Know when a graph database fits", "Match a database to an access pattern"] },
+        { key: "replication", title: "Replication: leader-follower, multi-leader, leaderless", hours: 3, goal: "Explain replication lag and choose a replication model.", subtopics: ["Explain leader-follower replication", "Explain replication lag effects", "Compare multi-leader and leaderless models", "Choose a replication model"] },
+        { key: "partitioning", title: "Partitioning, sharding & consistent hashing", hours: 3, goal: "Pick a shard key, avoid hot spots and rebalance with consistent hashing.", subtopics: ["Compare range and hash partitioning", "Pick a good shard key", "Avoid hot spots", "Rebalance with consistent hashing"] },
+        { key: "consistency", title: "CAP, PACELC & consistency models", hours: 3, goal: "Explain strong vs eventual consistency and quorum reads and writes.", subtopics: ["Explain CAP and PACELC", "Compare strong and eventual consistency", "Calculate quorum reads and writes"] },
+        { key: "indexes-storage", title: "Indexes & storage engines: B-trees vs LSM trees", hours: 2, goal: "Explain why some databases favour writes and others favour reads.", subtopics: ["Explain how B-trees store data", "Explain LSM trees and compaction", "Compare read and write amplification"] },
+      ],
+    },
+    {
+      key: "reliability",
+      title: "Reliability & distributed systems",
+      summary: "Systems that keep working when things fail.",
+      links: [L("Google SRE books", "https://sre.google/books/"), L("Amazon Builders' Library", "https://aws.amazon.com/builders-library/")],
+      topics: [
+        { key: "redundancy", title: "Redundancy, failover & multi-region", hours: 2, goal: "Eliminate single points of failure and design active-passive or active-active setups.", subtopics: ["Find single points of failure", "Design active-passive failover", "Design active-active multi-region"] },
+        { key: "retries", title: "Timeouts, retries, backoff & idempotency", hours: 2, goal: "Make operations safe to retry and avoid retry storms.", subtopics: ["Set sensible timeouts", "Retry with exponential backoff and jitter", "Make APIs idempotent with keys", "Avoid retry storms"] },
+        { key: "resilience-patterns", title: "Circuit breakers, bulkheads & backpressure", hours: 2, goal: "Contain failures so one slow dependency doesn't take down the system.", subtopics: ["Explain the circuit breaker pattern", "Isolate resources with bulkheads", "Apply backpressure and load shedding"] },
+        { key: "distributed-tx", title: "Distributed transactions, sagas & outbox", hours: 3, goal: "Keep data consistent across services without two-phase commit everywhere.", subtopics: ["Explain why 2PC is costly", "Design a saga with compensations", "Use the transactional outbox pattern", "Handle duplicate events idempotently"], links: [L("microservices.io patterns", "https://microservices.io/patterns/")] },
+        { key: "consensus", title: "Consensus, leader election & distributed locks", hours: 3, goal: "Explain what Raft solves and when you need a coordinator like etcd or ZooKeeper.", subtopics: ["Explain what consensus solves", "Walk through Raft leader election", "Know when to use etcd or ZooKeeper", "Use distributed locks with fencing tokens"] },
+        { key: "observability", title: "Observability, SLOs & error budgets", hours: 2, goal: "Define SLIs and SLOs and design metrics, logs and traces for a system.", subtopics: ["Define SLIs and SLOs", "Use error budgets for release decisions", "Design metrics, logs and traces"] },
+      ],
+    },
+    {
+      key: "case-studies-core",
+      title: "Case studies I: classic services",
+      summary: "The questions interviewers ask most often.",
+      topics: [
+        { key: "url-shortener", title: "URL shortener", hours: 3, goal: "Design ID generation, redirects, caching and analytics for billions of links.", subtopics: ["Clarify requirements and estimate scale", "Design the API", "Generate short IDs without collisions", "Design storage, redirects and caching", "Add click analytics and discuss trade-offs"] },
+        { key: "rate-limiter", title: "Distributed rate limiter", hours: 3, goal: "Design a rate limiter shared across many API servers with low latency.", subtopics: ["Gather requirements and limit rules", "Choose a limiting algorithm", "Store counters in a shared Redis", "Handle race conditions and failures", "Discuss latency and accuracy trade-offs"] },
+        { key: "key-value-store", title: "Distributed key-value store", hours: 4, goal: "Design partitioning, replication, quorums and failure handling for a KV store.", subtopics: ["Define requirements and API", "Partition with consistent hashing", "Replicate with tunable quorums", "Handle failures with hinted handoff", "Resolve conflicts and discuss trade-offs"] },
+        { key: "notification-system", title: "Notification system", hours: 3, goal: "Design fan-out to push, email and SMS with retries, preferences and deduplication.", subtopics: ["Clarify channels and requirements", "Estimate notification volume", "Design the API and data model", "Fan out through queues to providers", "Add retries, preferences and deduplication"] },
+        { key: "typeahead", title: "Search autocomplete", hours: 3, goal: "Design a low-latency typeahead with tries, ranking and periodic rebuilds.", subtopics: ["Define requirements and latency goals", "Estimate query volume", "Design a trie with top-k suggestions", "Rank by popularity", "Rebuild and cache the index periodically"] },
+      ],
+    },
+    {
+      key: "case-studies-scale",
+      title: "Case studies II: large-scale products",
+      summary: "Products with hard scale, real-time or media constraints.",
+      topics: [
+        { key: "news-feed", title: "News feed", hours: 4, goal: "Choose between fan-out on write and read and handle celebrity accounts.", subtopics: ["Clarify requirements and estimate scale", "Design the post and feed APIs", "Model posts, follows and feeds", "Compare fan-out on write and read", "Handle celebrity accounts with a hybrid", "Cache and rank the feed"] },
+        { key: "chat", title: "Chat system", hours: 4, goal: "Design real-time delivery, presence, ordering and message storage.", subtopics: ["Clarify one-to-one and group requirements", "Estimate message volume", "Design WebSocket connection handling", "Model and store messages", "Track presence and message ordering", "Discuss delivery guarantees and trade-offs"] },
+        { key: "video-streaming", title: "Video streaming platform", hours: 4, goal: "Design upload, transcoding, CDN delivery and adaptive bitrate streaming.", subtopics: ["Clarify upload and playback requirements", "Estimate storage and bandwidth", "Design the upload and transcoding pipeline", "Deliver through a CDN", "Explain adaptive bitrate streaming", "Discuss cost trade-offs"] },
+        { key: "ride-sharing", title: "Ride-sharing service", hours: 4, goal: "Design location tracking, geospatial matching and trip state.", subtopics: ["Clarify rider and driver requirements", "Estimate location update volume", "Design the API and trip data model", "Index locations with geohash or quadtree", "Match riders to drivers", "Model trip state transitions"] },
+        { key: "web-crawler", title: "Web crawler", hours: 3, goal: "Design a polite, distributed crawler with deduplication and a URL frontier.", subtopics: ["Clarify scope and politeness rules", "Estimate pages and bandwidth", "Design the URL frontier", "Respect robots.txt and rate limits", "Deduplicate URLs and content"] },
+      ],
+    },
+    {
+      key: "sd-practice",
+      title: "Mock interviews",
+      summary: "Practise out loud until the structure is automatic.",
+      topics: [
+        { key: "self-mocks", title: "Timed solo designs with written trade-offs", hours: 6, goal: "Complete four 45-minute designs alone and write up the trade-offs you chose.", subtopics: ["Pick four design prompts", "Time-box each design to 45 minutes", "Cover requirements, API and data model", "Write up the trade-offs you chose", "Compare against reference solutions"] },
+        { key: "peer-mocks", title: "Peer mock interviews", hours: 6, goal: "Do at least three mocks with feedback and fix the gaps they expose.", subtopics: ["Find peers or a mock platform", "Do three mock interviews", "Collect structured feedback", "Fix the gaps exposed", "Retry a failed prompt"] },
+      ],
+    },
+  ],
+};
+
+export const morePaths: LearningPath[] = [python, frontend, aws, cka, sql, ai, systemDesign];
