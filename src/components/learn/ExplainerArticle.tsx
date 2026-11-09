@@ -62,14 +62,17 @@ export function ExplainerArticle({ post, modified }: { post: BlogPost; modified:
     { id: "in-short", label: "In short" },
     ...(extra?.plain?.length ? [{ id: "simply", label: "Explained simply" }] : []),
     { id: "diagrams", label: visuals.length > 1 ? "Diagrams" : "Diagram" },
+    ...(extra?.deepDive?.length ? [{ id: "in-depth", label: "In depth" }] : []),
     ...(steps.length ? [{ id: "steps", label: "Learning steps" }] : []),
     { id: "key-points", label: "Key points" },
     { id: "terms", label: "Key terms" },
     ...(ex.example || extra?.examples?.length ? [{ id: "examples", label: "Examples" }] : []),
+    ...(extra?.cheatSheet?.length ? [{ id: "reference", label: "Quick reference" }] : []),
     ...(ex.pitfalls?.length ? [{ id: "mistakes", label: "Common mistakes" }] : []),
     ...(extra?.quiz?.length ? [{ id: "quiz", label: "Quiz" }] : []),
     ...(extra?.practice?.length ? [{ id: "practice", label: "Practice" }] : []),
     { id: "check", label: "Check yourself" },
+    ...(extra?.faq?.length ? [{ id: "faq", label: "FAQ" }] : []),
     ...(links.length ? [{ id: "deeper", label: "Go deeper" }] : []),
   ];
 
@@ -101,6 +104,9 @@ export function ExplainerArticle({ post, modified }: { post: BlogPost; modified:
             teaches: t.goal,
             isPartOf: { "@type": "Course", "@id": abs(`/learn/paths/${slug}/#course`), name: path.title, url: abs(`/learn/paths/${slug}/`) },
           },
+          ...(extra?.faq?.length
+            ? [{ "@type": "FAQPage", mainEntity: extra.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }]
+            : []),
           breadcrumbLd([
             { name: "Blog", path: "/blog/" },
             { name: path.title, path: seriesHref(slug) },
@@ -174,6 +180,31 @@ export function ExplainerArticle({ post, modified }: { post: BlogPost; modified:
             ))}
           </section>
 
+          {extra?.deepDive?.length ? (
+            <section id="in-depth" className="mt-12 scroll-mt-24" aria-labelledby="deep-h">
+              <h2 id="deep-h" className="text-2xl font-bold">In depth</h2>
+              <div className="mt-4 space-y-8">
+                {extra.deepDive.map((d, i) => (
+                  <div key={i}>
+                    <h3 className="text-lg font-bold">{d.heading}</h3>
+                    <div className="mt-2 space-y-3 text-[16px] leading-[1.75] text-soft">
+                      {d.body.split(/\n\n+/).map((para, k) => (
+                        <p key={k}>{para}</p>
+                      ))}
+                    </div>
+                    {d.bullets?.length ? (
+                      <ul className="mt-3 space-y-1.5 text-[15.5px] leading-relaxed text-soft">
+                        {d.bullets.map((b) => (
+                          <li key={b} className="flex gap-2.5"><span className="mt-[11px] h-1.5 w-1.5 shrink-0 rounded-full bg-blue" aria-hidden />{b}</li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </div>
+                ))}
+              </div>
+            </section>
+          ) : null}
+
           {steps.length > 0 && (
             <section id="steps" className="mt-10 scroll-mt-24" aria-labelledby="steps-h">
               <h2 id="steps-h" className="text-2xl font-bold">Learn it in {steps.length} short steps</h2>
@@ -225,6 +256,17 @@ export function ExplainerArticle({ post, modified }: { post: BlogPost; modified:
             </section>
           )}
 
+          {extra?.cheatSheet?.length ? (
+            <section id="reference" className="surface mt-10 scroll-mt-24 rounded-3xl p-6" aria-labelledby="ref-h">
+              <h2 id="ref-h" className="text-lg font-bold">Quick reference</h2>
+              <ul className="mt-3 divide-y divide-fg/[.07]">
+                {extra.cheatSheet.map((c) => (
+                  <li key={c} className="py-2 font-mono text-[13.5px] leading-relaxed text-soft">{c}</li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
+
           {ex.pitfalls && ex.pitfalls.length > 0 && (
             <section id="mistakes" className="mt-10 scroll-mt-24 rounded-3xl border border-warn/30 bg-warn/[.06] p-6" aria-labelledby="pit-h">
               <h2 id="pit-h" className="flex items-center gap-2 text-lg font-bold"><AlertTriangle size={18} className="text-warn" aria-hidden /> Common mistakes</h2>
@@ -261,6 +303,20 @@ export function ExplainerArticle({ post, modified }: { post: BlogPost; modified:
               <LearnedButton pathSlug={slug} topicKey={key} />
             </div>
           </section>
+
+          {extra?.faq?.length ? (
+            <section id="faq" className="mt-10 scroll-mt-24" aria-labelledby="faq-h">
+              <h2 id="faq-h" className="text-2xl font-bold">Frequently asked questions</h2>
+              <dl className="mt-4 divide-y divide-fg/[.08] rounded-2xl border border-fg/10 bg-card">
+                {extra.faq.map((f) => (
+                  <div key={f.q} className="px-5 py-4">
+                    <dt className="font-semibold">{f.q}</dt>
+                    <dd className="mt-1.5 text-[15px] leading-relaxed text-soft">{f.a}</dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+          ) : null}
 
           {links.length > 0 && (
             <section id="deeper" className="mt-10 scroll-mt-24" aria-labelledby="deeper-h">
