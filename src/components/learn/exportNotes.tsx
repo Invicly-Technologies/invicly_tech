@@ -163,7 +163,7 @@ export function ExportMenu({ planId, planTitle, items, single = false }: { planI
   const pdfHref = `/learn-export/${planId}/${one ? `?item=${one.id}&` : "?"}print=1`;
 
   return (
-    <div ref={ref} className="relative" data-tour={single ? undefined : "plan-export"}>
+    <div ref={ref} className={cn("relative", !single && "w-full sm:w-auto")} data-tour={single ? undefined : "plan-export"}>
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}

@@ -12,7 +12,7 @@ import {
   Network,
   RotateCcw,
   Search,
-  Sparkles,
+  PenLine,
 } from "lucide-react";
 import { createPlan, type FormState } from "@/app/learn/actions";
 import { PathIcon } from "@/components/learn/bits";
@@ -175,7 +175,7 @@ export function NewPlanForm({ options, categories, initial, today }: { options: 
 
           <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             <button type="button" onClick={scratch} className="group flex min-h-[132px] flex-col justify-between rounded-2xl border border-dashed border-fg/25 p-5 text-left transition-colors hover:border-blue hover:bg-blue/[.04]">
-              <span className="grid h-10 w-10 place-items-center rounded-xl bg-blue/10 text-blue-light"><Sparkles size={19} aria-hidden /></span>
+              <span className="grid h-10 w-10 place-items-center rounded-xl bg-blue/10 text-blue-light"><PenLine size={19} aria-hidden /></span>
               <span>
                 <span className="block font-bold">Start from scratch</span>
                 <span className="block text-sm text-quiet">Build your own plan as a mind map or outline.</span>
@@ -389,7 +389,7 @@ export function NewPlanForm({ options, categories, initial, today }: { options: 
           <aside className="lg:sticky lg:top-24 lg:self-start">
             <div className="surface rounded-3xl p-5">
               <div className="flex items-center gap-3">
-                {path ? <PathIcon icon={path.icon} className="h-10 w-10 rounded-xl" size={18} /> : <span className="grid h-10 w-10 place-items-center rounded-xl bg-blue/10 text-blue-light"><Sparkles size={18} aria-hidden /></span>}
+                {path ? <PathIcon icon={path.icon} className="h-10 w-10 rounded-xl" size={18} /> : <span className="grid h-10 w-10 place-items-center rounded-xl bg-blue/10 text-blue-light"><PenLine size={18} aria-hidden /></span>}
                 <div className="min-w-0">
                   <div className="truncate font-bold">{title || "Untitled plan"}</div>
                   <div className="text-xs text-quiet">{path ? `Based on ${path.title}` : "Custom plan"}</div>

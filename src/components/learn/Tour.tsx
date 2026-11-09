@@ -1,7 +1,7 @@
 "use client";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useLayoutEffect, useMemo, useState } from "react";
-import { ArrowLeft, ArrowRight, Sparkles, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, CircleHelp, X } from "lucide-react";
 import { completeTour } from "@/app/learn/actions";
 import { useLearnSession } from "@/components/learn/session";
 import { cn } from "@/lib/cn";
@@ -147,7 +147,7 @@ function TourRunner({ tour, onClose }: { tour: TourDef; onClose: () => void }) {
       <div className="absolute rounded-2xl border border-fg/12 bg-card p-5 shadow-2xl transition-[top,left] duration-300" style={cardStyle}>
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-2">
-            <span className="grid h-7 w-7 place-items-center rounded-lg bg-blue/15 text-blue-light"><Sparkles size={15} aria-hidden /></span>
+            <span className="grid h-7 w-7 place-items-center rounded-lg bg-blue/15 text-blue-light"><CircleHelp size={15} aria-hidden /></span>
             <span className="text-xs font-semibold text-quiet">{i + 1} of {steps.length}</span>
           </div>
           <button type="button" onClick={onClose} aria-label="Skip tour" className="grid h-8 w-8 place-items-center rounded-lg text-quiet hover:bg-fg/10 hover:text-fg"><X size={16} aria-hidden /></button>

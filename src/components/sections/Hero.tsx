@@ -30,7 +30,6 @@ export function Hero() {
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div className="aurora aurora-a left-[-10%] top-[-10%] h-[480px] w-[480px] bg-blue/25" />
         <div className="aurora aurora-b right-[-5%] top-[20%] h-[520px] w-[520px] bg-blue-deep/35" />
-        <Starfield className="absolute inset-0 h-full w-full" />
       </div>
 
       <div className="wrap relative flex flex-wrap items-center gap-8">

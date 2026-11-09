@@ -22,7 +22,7 @@ export function Button({ href, children, variant = "primary", size = "md", class
   const ref = useRef<HTMLAnchorElement>(null);
   const x = useSpring(useMotionValue(0), { stiffness: 220, damping: 16 });
   const y = useSpring(useMotionValue(0), { stiffness: 220, damping: 16 });
-  const magnetic = variant === "primary" && fine && !reduced;
+  const magnetic = false && variant === "primary" && fine && !reduced; // no "magnetic" drift
 
   const onMove = (e: React.PointerEvent) => {
     if (!magnetic || !ref.current) return;

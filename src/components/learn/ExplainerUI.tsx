@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
-import { Check, CheckCircle2, ChevronLeft, ChevronRight, Circle, Link2, Pause, Play, RotateCcw, Shuffle, Sparkles, ThumbsUp, Undo2 } from "lucide-react";
+import { Check, CheckCircle2, ChevronLeft, ChevronRight, Circle, Eye, Lightbulb, Link2, Pause, Play, RotateCcw, Shuffle, ThumbsUp, Undo2 } from "lucide-react";
 import type { Visual } from "@/data/learn/explainers/types";
 import { VisualBlock, stepCount, stepText } from "@/components/learn/visuals";
 import { cn } from "@/lib/cn";
@@ -212,7 +212,7 @@ export function SelfCheck({ check, storageKey }: { check: { q: string; a: string
       </div>
       {answered > 0 && (
         <p role="status" className="mt-4 flex items-center gap-2 text-sm text-soft">
-          <Sparkles size={16} className="text-blue-light" aria-hidden />
+          <ThumbsUp size={16} className="text-blue-light" aria-hidden />
           {got === check.length ? "All correct. You can mark this topic as learned." : `${got} of ${check.length} right so far${answered < check.length ? `, ${check.length - answered} to go` : ". Review the diagrams and try again."}`}
         </p>
       )}
@@ -442,6 +442,146 @@ export function ContinueLearning({ pathSlug, topics }: { pathSlug: string; topic
       ) : (
         <p className="mt-3 text-sm font-bold text-ok">Every topic learned. Brilliant work!</p>
       )}
+    </div>
+  );
+}
+
+/* ---------------- Multiple-choice quiz ---------------- */
+
+export function Quiz({ items, storageKey }: { items: { q: string; options: string[]; answer: number; why: string }[]; storageKey: string }) {
+  const [picked, setPicked] = useState<Record<number, number>>({});
+  useEffect(() => setPicked(store.get<Record<number, number>>(storageKey, {})), [storageKey]);
+  const pick = (qi: number, oi: number) =>
+    setPicked((p) => {
+      if (p[qi] !== undefined) return p;
+      const next = { ...p, [qi]: oi };
+      store.set(storageKey, next);
+      return next;
+    });
+  const answered = Object.keys(picked).length;
+  const correct = items.filter((q, i) => picked[i] === q.answer).length;
+  return (
+    <div className="space-y-4">
+      {items.map((q, qi) => {
+        const chosen = picked[qi];
+        const done = chosen !== undefined;
+        return (
+          <fieldset key={qi} className="surface rounded-2xl p-4 md:p-5">
+            <legend className="sr-only">Question {qi + 1}</legend>
+            <p className="flex gap-3 font-semibold">
+              <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-blue/15 text-xs font-bold text-blue-light">{qi + 1}</span>
+              {q.q}
+            </p>
+            <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
+              {q.options.map((o, oi) => {
+                const isRight = oi === q.answer;
+                const isPicked = oi === chosen;
+                return (
+                  <button
+                    key={oi}
+                    type="button"
+                    disabled={done}
+                    onClick={() => pick(qi, oi)}
+                    aria-pressed={isPicked}
+                    className={cn(
+                      "flex min-h-11 items-start gap-2.5 rounded-xl border px-3 py-2.5 text-left text-[14.5px] leading-snug transition-colors",
+                      !done && "border-fg/12 hover:border-blue/60 hover:bg-blue/[.05]",
+                      done && isRight && "border-ok bg-ok/10",
+                      done && isPicked && !isRight && "border-danger bg-danger/10",
+                      done && !isRight && !isPicked && "border-fg/10 opacity-60",
+                    )}
+                  >
+                    <span className="mt-px font-mono text-xs font-bold text-quiet">{String.fromCharCode(65 + oi)}</span>
+                    <span className="flex-1">{o}</span>
+                    {done && isRight && <Check size={16} className="shrink-0 text-ok" aria-label="Correct answer" />}
+                  </button>
+                );
+              })}
+            </div>
+            {done && (
+              <p role="status" className={cn("mt-3 text-sm leading-relaxed", chosen === q.answer ? "text-ok" : "text-danger")}>
+                <b>{chosen === q.answer ? "Correct." : "Not quite."}</b> <span className="text-soft">{q.why}</span>
+              </p>
+            )}
+          </fieldset>
+        );
+      })}
+      <div className="flex flex-wrap items-center justify-between gap-3 text-sm">
+        <span className="text-soft">{answered === items.length ? `Score: ${correct}/${items.length}` : `${answered}/${items.length} answered`}</span>
+        {answered > 0 && (
+          <button type="button" onClick={() => { setPicked({}); store.set(storageKey, {}); }} className="inline-flex min-h-9 items-center gap-1.5 rounded-full px-3 font-bold text-muted hover:bg-fg/10 hover:text-fg">
+            <RotateCcw size={14} aria-hidden /> Try again
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ---------------- Practice exercises ---------------- */
+
+const LEVEL_CLS = { easy: "bg-ok/15 text-ok", medium: "bg-warn/15 text-warn", hard: "bg-danger/15 text-danger" } as const;
+
+export function Practice({ items, storageKey }: { items: { level: "easy" | "medium" | "hard"; task: string; hint: string; solution: string }[]; storageKey: string }) {
+  const [shown, setShown] = useState<Record<string, boolean>>({});
+  const [done, setDone] = useState<number[]>([]);
+  useEffect(() => setDone(store.get<number[]>(storageKey, [])), [storageKey]);
+  const toggle = (k: string) => setShown((s) => ({ ...s, [k]: !s[k] }));
+  const toggleDone = (i: number) =>
+    setDone((d) => {
+      const next = d.includes(i) ? d.filter((x) => x !== i) : [...d, i];
+      store.set(storageKey, next);
+      return next;
+    });
+  return (
+    <ol className="space-y-4">
+      {items.map((p, i) => (
+        <li key={i} className={cn("surface rounded-2xl p-4 md:p-5", done.includes(i) && "!border-ok/40")}>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="font-display text-sm font-bold">Exercise {i + 1}</span>
+            <span className={cn("rounded-md px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide", LEVEL_CLS[p.level])}>{p.level}</span>
+            <button type="button" onClick={() => toggleDone(i)} aria-pressed={done.includes(i)} className={cn("ml-auto inline-flex min-h-9 items-center gap-1.5 rounded-full border px-3 text-[13px] font-bold", done.includes(i) ? "border-ok bg-ok text-white" : "border-fg/15 text-muted hover:text-fg")}>
+              {done.includes(i) ? <CheckCircle2 size={14} aria-hidden /> : <Circle size={14} aria-hidden />} {done.includes(i) ? "Done" : "Mark done"}
+            </button>
+          </div>
+          <p className="mt-2 whitespace-pre-line text-[15px] leading-relaxed">{p.task}</p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <button type="button" onClick={() => toggle(`h${i}`)} aria-expanded={!!shown[`h${i}`]} className="inline-flex min-h-9 items-center gap-1.5 rounded-full border border-fg/15 px-3 text-[13px] font-bold text-muted hover:text-fg">
+              <Lightbulb size={14} aria-hidden /> {shown[`h${i}`] ? "Hide hint" : "Hint"}
+            </button>
+            <button type="button" onClick={() => toggle(`s${i}`)} aria-expanded={!!shown[`s${i}`]} className="inline-flex min-h-9 items-center gap-1.5 rounded-full border border-fg/15 px-3 text-[13px] font-bold text-muted hover:text-fg">
+              <Eye size={14} aria-hidden /> {shown[`s${i}`] ? "Hide solution" : "Show solution"}
+            </button>
+          </div>
+          {shown[`h${i}`] && <p className="mt-3 rounded-xl bg-warn/[.07] px-3 py-2 text-sm text-soft"><b className="text-fg">Hint:</b> {p.hint}</p>}
+          {shown[`s${i}`] && (
+            <pre className="force-dark mt-3 overflow-x-auto whitespace-pre-wrap rounded-xl bg-[#0a0f1c] p-4 font-mono text-[13px] leading-relaxed text-[#dce6fa]"><code>{p.solution}</code></pre>
+          )}
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+/* ---------------- Share ---------------- */
+
+export function ShareButtons({ title, path }: { title: string; path: string }) {
+  const url = `https://www.invicly.com${path}`;
+  const enc = encodeURIComponent;
+  const links = [
+    { label: "X", href: `https://twitter.com/intent/tweet?text=${enc(title)}&url=${enc(url)}` },
+    { label: "LinkedIn", href: `https://www.linkedin.com/sharing/share-offsite/?url=${enc(url)}` },
+    { label: "WhatsApp", href: `https://wa.me/?text=${enc(`${title} ${url}`)}` },
+  ];
+  return (
+    <div className="flex flex-wrap items-center gap-2">
+      <span className="text-xs font-semibold text-quiet">Share</span>
+      {links.map((l) => (
+        <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-9 items-center rounded-full border border-fg/15 px-3 text-[13px] font-bold text-muted hover:border-blue/50 hover:text-fg">
+          {l.label}
+        </a>
+      ))}
+      <CopyLink />
     </div>
   );
 }

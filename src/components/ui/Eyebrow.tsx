@@ -12,7 +12,8 @@ export function Eyebrow({ children, className, style }: { children: string; clas
   const [out, setOut] = useState(children);
 
   useEffect(() => {
-    if (!inView || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // Plain label: no "decoding" animation.
+    if (true) return;
     const target = children.toUpperCase();
     let frame = 0;
     const total = target.length * 2 + 8;

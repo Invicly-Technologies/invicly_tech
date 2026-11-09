@@ -2,22 +2,26 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { CircleHelp, LayoutDashboard, LogOut, Map, Menu, Plus, X } from "lucide-react";
+import { CircleHelp, Newspaper, LayoutDashboard, LogOut, Map, Menu, Plus, X } from "lucide-react";
 import { LogoMark } from "@/components/ui/Logo";
 import { logout } from "@/app/learn/actions";
 import { ThemeToggle } from "@/components/learn/ThemeToggle";
-import { useLearnSession } from "@/components/learn/session";
+import { clearSessionCache, useLearnSession } from "@/components/learn/session";
 import { cn } from "@/lib/cn";
 
 export function LearnHeader() {
   const { user, loaded } = useLearnSession();
-  const afterLogout = () => setTimeout(() => window.dispatchEvent(new Event("il-session-refresh")), 900);
+  const afterLogout = () => {
+    clearSessionCache();
+    setTimeout(() => window.dispatchEvent(new Event("il-session-refresh")), 900);
+  };
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   useEffect(() => setOpen(false), [pathname]);
 
   const links = [
     { href: "/learn/", label: "Paths", icon: Map, exact: true },
+    { href: "/blog/", label: "Blog", icon: Newspaper, exact: false },
     ...(user
       ? [
           { href: "/learn/dashboard/", label: "Dashboard", icon: LayoutDashboard, exact: false },

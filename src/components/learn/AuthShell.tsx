@@ -6,7 +6,7 @@ export function AuthShell({ title, sub, children }: { title: string; sub: string
       <div className="hidden lg:block">
         <span className="eyebrow">Invicly Learn</span>
         <h2 className="mt-4 text-[40px] font-extrabold leading-[1.08] tracking-[-1.5px]">
-          Your plan, your pace, <span className="text-shimmer">your progress.</span>
+          Pick up <span className="text-shimmer">where you left off.</span>
         </h2>
         <ul className="mt-8 space-y-5 text-muted">
           {[

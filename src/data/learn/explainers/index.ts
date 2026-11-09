@@ -48,9 +48,6 @@ export function getExplainer(pathSlug: string, topicKey: string): Explainer | un
   return registry[pathSlug]?.[topicKey];
 }
 
-export function visualHref(pathSlug: string, topicKey: string) {
-  return getExplainer(pathSlug, topicKey) ? `/learn/paths/${pathSlug}/learn/${topicSlug(topicKey)}/` : undefined;
-}
 
 export function explainerKeys(pathSlug: string) {
   return Object.keys(registry[pathSlug] ?? {});

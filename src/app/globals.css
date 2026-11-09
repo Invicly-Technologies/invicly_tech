@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 @theme {
+  --radius-2xl: 0.875rem;
+  --radius-3xl: 1.125rem;
   --color-ink: #000000;
   --color-deep: #03060c;
   --color-card: #080e1c;
@@ -31,7 +33,8 @@ body {
   color: var(--color-text);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  /* clip, not hidden: overflow hidden turns body into a scroll container and breaks position: sticky */
+  overflow-x: clip;
 }
 h1, h2, h3, h4 { font-family: var(--font-display); }
 ::selection { background: rgba(10, 132, 255, 0.45); color: #fff; }
@@ -43,7 +46,7 @@ html.lenis, html.lenis body { height: auto; }
 .wrap { max-width: 1240px; margin: 0 auto; padding-left: 20px; padding-right: 20px; }
 @media (min-width: 768px) { .wrap { padding-left: 40px; padding-right: 40px; } }
 
-.eyebrow { font-family: var(--font-mono); font-size: 13px; color: var(--color-blue-light); letter-spacing: 2px; text-transform: uppercase; }
+.eyebrow { font-family: var(--font-sans); font-size: 14px; font-weight: 700; color: var(--color-blue-light); letter-spacing: 0; }
 .border-line { border-color: rgba(255, 255, 255, 0.08); }
 .surface { border: 1px solid color-mix(in oklab, var(--color-fg) 10%, transparent); background: var(--color-card); }
 .nl { color: var(--color-muted); transition: color 0.2s; }
@@ -55,7 +58,7 @@ html.lenis, html.lenis body { height: auto; }
 
 /* Buttons */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 28px; border-radius: 999px; font-weight: 700; font-size: 16px; transition: transform .25s, box-shadow .25s, background .25s, border-color .25s; will-change: transform; }
-.btn:hover { transform: translateY(-3px); box-shadow: 0 14px 34px -10px rgba(10,132,255,.8); }
+.btn:hover { transform: translateY(-1px); }
 .btn-primary { background: var(--color-blue); color: #fff; }
 .btn-primary:hover { background: #2a94ff; }
 .btn-ghost { border: 1px solid color-mix(in oklab, var(--color-fg) 25%, transparent); color: var(--color-fg); }
@@ -64,10 +67,10 @@ html.lenis, html.lenis body { height: auto; }
 
 /* Card tilt highlight */
 .card3d { position: relative; transform-style: preserve-3d; transition: border-color .3s, box-shadow .3s; }
-.card3d:hover { border-color: rgba(10,132,255,.7); box-shadow: 0 30px 70px -24px rgba(10,132,255,.55); }
+.card3d:hover { border-color: color-mix(in oklab, var(--color-blue) 55%, transparent); }
 .card3d::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .3s;
   background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(90,176,255,.14), transparent 45%); }
-.card3d:hover::after { opacity: 1; }
+
 .arr { display: inline-block; transition: transform .25s; }
 .group:hover .arr { transform: translate(4px, -4px); }
 
@@ -139,22 +142,21 @@ select.fld { appearance: none; background-image: url("data:image/svg+xml,%3Csvg 
 .btn-primary { position: relative; overflow: hidden; isolation: isolate; }
 .btn-primary::before { content: ""; position: absolute; inset: 0; width: 45%; z-index: -1; transform: translateX(-120%) skewX(-20deg);
   background: linear-gradient(90deg, transparent, rgba(255,255,255,.45), transparent); }
-.btn-primary:hover::before { animation: shine .8s ease; }
+
 
 /* Rotating conic border on hover */
 .card3d::before { content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1px; pointer-events: none; opacity: 0; transition: opacity .35s;
   background: conic-gradient(from var(--angle), transparent 0 55%, #5AB0FF 70%, #0A84FF 80%, transparent 92%);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
   animation: border-spin 3.2s linear infinite; }
-.card3d:hover::before { opacity: 1; }
+
 .group:hover .icon-wiggle { animation: wiggle .7s ease; }
 
 /* Animated gradient text */
-.text-shimmer { background: linear-gradient(100deg, #0A84FF 0%, #5AB0FF 30%, #9CCBFF 45%, #0A84FF 60%, #1650A0 85%, #0A84FF 100%);
-  background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gradient-pan 6s ease-in-out infinite; }
+.text-shimmer { color: var(--color-blue); }
 
 /* Hero aurora */
-.aurora { position: absolute; border-radius: 9999px; filter: blur(90px); pointer-events: none; }
+.aurora { display: none; }
 .aurora-a { animation: aurora-a 14s ease-in-out infinite; }
 .aurora-b { animation: aurora-b 18s ease-in-out infinite; }
 
@@ -217,7 +219,7 @@ html[data-theme="light"] {
 [data-theme="light"] .btn:hover { box-shadow: 0 12px 28px -14px rgba(10, 132, 255, 0.6); }
 [data-theme="light"] .chp { color: #0a5bb8; border-color: rgba(10, 132, 255, 0.3); background: rgba(10, 132, 255, 0.07); }
 [data-theme="light"] .lbl { color: #24304a; }
-[data-theme="light"] .card3d:hover { box-shadow: 0 24px 50px -28px rgba(10, 132, 255, 0.45); }
+
 [data-theme="light"] .card3d::after { background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(10, 132, 255, 0.06), transparent 45%); }
 [data-theme="light"] .eyebrow { color: #0a6fd8; }
 [data-theme="light"] .aurora { opacity: 0.35; }

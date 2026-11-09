@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { products } from "@/data/products";
 import { site } from "@/data/site";
 import { paths } from "@/data/learn/paths";
-import { explainerKeys, topicSlug } from "@/data/learn/explainers";
+import { posts, postHref, seriesHref } from "@/data/learn/blog";
 
 export const dynamic = "force-static";
 
@@ -23,6 +23,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry("/contact/", 0.6),
     ...products.map((p) => entry(`/products/${p.slug}/`, 0.7)),
     ...paths.map((p) => entry(`/learn/paths/${p.slug}/`, 0.8, "weekly")),
-    ...paths.flatMap((p) => explainerKeys(p.slug).map((k) => entry(`/learn/paths/${p.slug}/learn/${topicSlug(k)}/`, 0.6))),
+    entry("/blog/", 0.9, "weekly"),
+    ...paths.map((p) => entry(seriesHref(p.slug), 0.7, "weekly")),
+    ...posts.map((p) => entry(postHref(p.slug), 0.7)),
   ];
 }

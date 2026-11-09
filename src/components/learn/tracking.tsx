@@ -453,8 +453,11 @@ export function RecentLogs({ logs, today }: { logs: { id: string; log_date: ISOD
 
 export function PlanControls({
   plan,
+  extra,
 }: {
   plan: { id: string; title: string; status: string; week: number[] };
+  /** Extra toolbar items (e.g. Export) laid out with the others. */
+  extra?: React.ReactNode;
 }) {
   const [pending, start] = useTransition();
   const [flash, toast] = useFlash();
@@ -462,7 +465,8 @@ export function PlanControls({
   const run = (fn: () => Promise<FormState>) => start(async () => flash(await fn()));
   return (
     <>
-      <div className="flex flex-wrap gap-2">
+      {/* One toolbar: 2-column grid on phones, a single wrapping row from sm up. */}
+      <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap [&>*]:min-w-0 [&_.btn]:w-full sm:[&_.btn]:w-auto" data-tour="plan-actions" role="toolbar" aria-label="Plan actions">
         <button type="button" disabled={pending} onClick={() => run(() => rebalancePlan(plan.id))} className="btn btn-ghost btn-sm !min-h-10 !px-4" title="Reschedule every unfinished topic starting today">
           <RefreshCcw size={15} className={cn(pending && "animate-spin")} aria-hidden /> Rebalance from today
         </button>
@@ -475,6 +479,7 @@ export function PlanControls({
         <button type="button" onClick={() => setSettings(true)} className="btn btn-ghost btn-sm !min-h-10 !px-4">
           <Settings2 size={15} aria-hidden /> Settings
         </button>
+        {extra}
       </div>
       {settings && <SettingsDialog plan={plan} onClose={() => setSettings(false)} />}
       {toast}

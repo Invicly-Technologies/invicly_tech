@@ -9,7 +9,7 @@ import { estimateEnd, weekHoursFrom } from "@/lib/learn/schedule";
 import { pathToTree } from "@/lib/learn/tree";
 import { PathViews } from "@/components/learn/PathViews";
 import { JsonLd, abs, breadcrumbLd, organizationRef } from "@/lib/seo";
-import { visualHref } from "@/data/learn/explainers";
+import { visualHref } from "@/data/learn/blog";
 import { ContinueLearning, LearnedTick } from "@/components/learn/ExplainerUI";
 
 export const dynamicParams = false;

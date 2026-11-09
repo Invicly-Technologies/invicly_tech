@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, Info, LayoutDashboard, Library, ListChecks, Network, NotebookPen } from "lucide-react";
 import { PlanResources } from "@/components/learn/PlanResources";
 import { ExportMenu } from "@/components/learn/exportNotes";
-import { visualHref } from "@/data/learn/explainers";
+import { visualHref } from "@/data/learn/blog";
 import { PlanMindMap } from "@/components/learn/PlanMindMap";
 import { PlanNotebook } from "@/components/learn/PlanNotebook";
 import { requireUser } from "@/lib/learn/auth";
@@ -70,7 +70,7 @@ export default async function PlanPage({ params, searchParams }: { params: Promi
         <ArrowLeft size={16} aria-hidden /> Dashboard
       </Link>
 
-      <div className="mt-3 flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+      <div className="mt-3 flex flex-col gap-5">
         <div className="flex min-w-0 items-start gap-4">
           {path && <PathIcon icon={path.icon} className="hidden h-14 w-14 sm:grid" size={26} />}
           <div className="min-w-0">
@@ -91,10 +91,7 @@ export default async function PlanPage({ params, searchParams }: { params: Promi
             </p>
           </div>
         </div>
-        <div className="flex flex-wrap items-start gap-2" data-tour="plan-actions">
-          <PlanControls plan={{ id: plan.id, title: plan.title, status: plan.status, week }} />
-          <ExportMenu planId={plan.id} planTitle={plan.title} items={schedule} />
-        </div>
+        <PlanControls plan={{ id: plan.id, title: plan.title, status: plan.status, week }} extra={<ExportMenu planId={plan.id} planTitle={plan.title} items={schedule} />} />
       </div>
 
       {s.status === "behind" && (
