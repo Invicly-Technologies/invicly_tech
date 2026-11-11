@@ -37,7 +37,7 @@ export function BlueprintField({ className, quiet = false }: { className?: strin
     const palette = () => {
       const light = document.documentElement.getAttribute("data-theme") === "light";
       // `quiet` is the site-wide background: dimmer at rest so long text stays easy to read.
-      const k = quiet ? 0.25 : 1;
+      const k = quiet ? 0.4 : 1;
       return light ? { dot: "10,99,201", base: 0.3 * k, trace: "10,99,201" } : { dot: "90,176,255", base: 0.34 * k, trace: "120,190,255" };
     };
     let pal = palette();
