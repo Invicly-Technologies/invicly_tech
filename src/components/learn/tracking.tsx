@@ -42,7 +42,8 @@ import { DAY_LABELS, fmtDate, relDay, weekStart, type ISODate } from "@/lib/lear
 import { fmtHours } from "@/lib/learn/analytics";
 import type { Resource } from "@/data/learn/types";
 import { cn } from "@/lib/cn";
-import { NotionEditor, hasNoteText } from "@/components/learn/NotionEditor";
+import { NotionEditor } from "@/components/learn/LazyNotionEditor";
+import { hasNoteText } from "@/components/learn/noteText";
 import { useFlash } from "@/components/learn/useFlash";
 import { noteCache } from "@/components/learn/noteCache";
 import { TimerButton } from "@/components/learn/timer";
@@ -72,8 +73,8 @@ export function TopicCheck({ id, done, title }: { id: string; done: boolean; tit
           })
         }
         className={cn(
-          "hit grid h-6 w-6 shrink-0 place-items-center rounded-lg border-2 transition-all hover:scale-110",
-          optimistic ? "border-blue bg-blue text-white" : "border-fg/30 hover:border-blue-light",
+          "hit grid h-6 w-6 shrink-0 place-items-center rounded-lg border-2 transition-[background-color,border-color,scale] hover:scale-110",
+          optimistic ? "border-blue bg-blue-fill text-white" : "border-fg/30 hover:border-blue-light",
         )}
       >
         {optimistic && <Check size={14} strokeWidth={3.5} aria-hidden />}

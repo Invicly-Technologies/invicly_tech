@@ -143,10 +143,10 @@ export function NewPlanForm({ options, categories, initial, today }: { options: 
               aria-current={i === step ? "step" : undefined}
               className={cn(
                 "flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm font-bold transition-colors",
-                i === step ? "border-blue bg-blue text-white" : i < step ? "border-blue/40 text-fg hover:bg-blue/10" : "border-fg/10 text-quiet",
+                i === step ? "border-blue bg-blue-fill text-white" : i < step ? "border-blue/40 text-fg hover:bg-blue/10" : "border-fg/10 text-quiet",
               )}
             >
-              <span className={cn("grid h-5 w-5 place-items-center rounded-full text-[11px]", i === step ? "bg-white/25" : i < step ? "bg-blue text-white" : "bg-fg/10")}>
+              <span className={cn("grid h-5 w-5 place-items-center rounded-full text-[11px]", i === step ? "bg-white/25" : i < step ? "bg-blue-fill text-white" : "bg-fg/10")}>
                 {i < step ? <Check size={12} strokeWidth={3} aria-hidden /> : i + 1}
               </span>
               {s}

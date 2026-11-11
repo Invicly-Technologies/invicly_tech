@@ -511,7 +511,7 @@ export function MindMap({ tree, rootTitle, rootMeta, mode = "view", statuses, to
                   key="root"
                   {...common}
                   className={cn(
-                    "absolute w-max max-w-[260px] cursor-pointer select-none rounded-2xl bg-blue px-5 py-3 text-white shadow-[0_12px_40px_-12px_rgba(10,132,255,.7)]",
+                    "absolute w-max max-w-[260px] cursor-pointer select-none rounded-2xl bg-blue-fill px-5 py-3 text-white shadow-[0_12px_40px_-12px_rgba(10,132,255,.7)]",
                     isSel && "ring-4 ring-blue/40",
                   )}
                 >
@@ -577,7 +577,7 @@ export function MindMap({ tree, rootTitle, rootMeta, mode = "view", statuses, to
                 )}
               >
                 {st === "done" ? (
-                  <span className="mt-0.5 grid h-4 w-4 shrink-0 place-items-center rounded-full bg-blue text-white"><Check size={11} strokeWidth={3.5} aria-hidden /></span>
+                  <span className="mt-0.5 grid h-4 w-4 shrink-0 place-items-center rounded-full bg-blue-fill text-white"><Check size={11} strokeWidth={3.5} aria-hidden /></span>
                 ) : (
                   <span className="mt-[5px] h-2 w-2 shrink-0 rounded-full" style={{ background: b.color }} aria-hidden />
                 )}

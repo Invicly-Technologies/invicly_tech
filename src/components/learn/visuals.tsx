@@ -221,7 +221,7 @@ function Compare({ columns, active }: { columns: { title: string; points: string
 function Tree({ root, nodes, active }: { root: string; nodes: { label: string; children?: string[] }[]; active?: number }) {
   return (
     <div className="flex flex-col items-center">
-      <div className="rounded-2xl bg-blue px-5 py-2.5 text-center font-bold text-white shadow-[0_10px_30px_-12px_rgba(10,132,255,.8)]" style={rise(0)}>{root}</div>
+      <div className="rounded-2xl bg-blue-fill px-5 py-2.5 text-center font-bold text-white shadow-[0_10px_30px_-12px_rgba(10,132,255,.8)]" style={rise(0)}>{root}</div>
       <span className="h-5 w-px bg-fg/20" aria-hidden />
       <div className="relative w-full">
         <span className="absolute left-[8%] right-[8%] top-0 hidden h-px bg-fg/20 md:block" aria-hidden />

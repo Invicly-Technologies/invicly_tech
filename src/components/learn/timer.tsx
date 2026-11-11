@@ -116,7 +116,7 @@ function TimerBar() {
       <button type="button" onClick={() => ctx.stop(true)} disabled={ctx.pending} aria-label="Discard timer" title="Discard (don't log)" className="grid h-9 w-9 shrink-0 place-items-center rounded-xl text-quiet hover:bg-fg/10 hover:text-danger">
         <X size={16} aria-hidden />
       </button>
-      <button type="button" onClick={() => ctx.stop(false)} disabled={ctx.pending} className="inline-flex h-9 shrink-0 items-center gap-1.5 rounded-xl bg-blue px-3 text-sm font-bold text-white disabled:opacity-60">
+      <button type="button" onClick={() => ctx.stop(false)} disabled={ctx.pending} className="inline-flex h-9 shrink-0 items-center gap-1.5 rounded-xl bg-blue-fill px-3 text-sm font-bold text-white disabled:opacity-60">
         {ctx.pending ? <Loader2 size={14} className="animate-spin" aria-hidden /> : <Square size={13} fill="currentColor" aria-hidden />} Stop
       </button>
     </div>

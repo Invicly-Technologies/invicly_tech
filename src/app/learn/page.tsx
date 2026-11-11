@@ -50,7 +50,7 @@ export default function LearnHome() {
           <div className="hero-in">
             <span className="eyebrow">Invicly Learn · free &amp; open to all</span>
             <h1 className="mt-5 text-[42px] font-extrabold leading-[1.04] tracking-[-2px] md:text-[64px]">
-              Study plans youPlan it. Track it. <span className="text-shimmer">Finish it.</span>apos;ll <span className="text-shimmer">actually finish.</span>
+              Study plans you&apos;ll <span className="text-shimmer">actually finish.</span>
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">
               {paths.length} structured learning paths, from DevOps and Java to React, AI engineering and interview prep. Turn any path into a day-by-day plan that fits your

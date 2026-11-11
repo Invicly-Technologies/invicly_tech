@@ -1,5 +1,5 @@
 "use client";
-import { NotionEditor } from "@/components/learn/NotionEditor";
+import { NotionEditor } from "@/components/learn/LazyNotionEditor";
 import { savePlanNotes } from "@/app/learn/actions";
 
 export function PlanNotebook({ planId, initial, title }: { planId: string; initial: string; title: string }) {

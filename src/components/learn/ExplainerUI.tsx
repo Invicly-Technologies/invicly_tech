@@ -59,7 +59,7 @@ export function StepVisual({ v }: { v: Visual }) {
             if (active !== undefined && active >= n - 1) setActive(undefined);
             setPlaying(true);
           }}
-          className="inline-flex h-9 items-center gap-1.5 rounded-lg bg-blue px-3 text-[13px] font-bold text-white"
+          className="inline-flex h-9 items-center gap-1.5 rounded-lg bg-blue-fill px-3 text-[13px] font-bold text-white"
           aria-label={playing ? "Pause" : "Play steps"}
         >
           {playing ? <Pause size={14} aria-hidden /> : <Play size={14} fill="currentColor" aria-hidden />}
@@ -79,7 +79,7 @@ export function StepVisual({ v }: { v: Visual }) {
   const caption =
     active !== undefined ? (
       <div className="flex items-start gap-3 border-t border-fg/[.07] bg-blue/[.05] px-5 py-3" aria-live="polite">
-        <span className="mt-0.5 shrink-0 rounded-md bg-blue px-2 py-0.5 text-[11px] font-bold text-white">
+        <span className="mt-0.5 shrink-0 rounded-md bg-blue-fill px-2 py-0.5 text-[11px] font-bold text-white">
           {active + 1}/{n}
         </span>
         <p className="text-[15px] leading-snug">{stepText(v, active)}</p>
@@ -127,15 +127,14 @@ export function Flashcards({ terms, storageKey }: { terms: { term: string; meani
                 type="button"
                 onClick={() => setFlipped((f) => { const n = new Set(f); if (n.has(i)) n.delete(i); else n.add(i); return n; })}
                 aria-pressed={isFlipped}
-                aria-label={isFlipped ? `${t.term}: ${t.meaning}` : `Show meaning of ${t.term}`}
                 className="relative block h-32 w-full text-left [transform-style:preserve-3d] transition-transform duration-500"
                 style={{ transform: isFlipped ? "rotateY(180deg)" : "none" }}
               >
-                <span className={cn("absolute inset-0 flex flex-col justify-between rounded-2xl border p-4 [backface-visibility:hidden]", isKnown ? "border-ok/40 bg-ok/[.06]" : "border-fg/10 bg-card")}>
+                <span aria-hidden={isFlipped} className={cn("absolute inset-0 flex flex-col justify-between rounded-2xl border p-4 [backface-visibility:hidden]", isKnown ? "border-ok/40 bg-ok/[.06]" : "border-fg/10 bg-card")}>
                   <span className="font-mono text-[15px] font-bold text-blue-light">{t.term}</span>
                   <span className="text-xs text-quiet">Tap to see the meaning</span>
                 </span>
-                <span className="absolute inset-0 flex items-center rounded-2xl border border-blue/40 bg-blue/[.08] p-4 text-[15px] leading-snug [backface-visibility:hidden] [transform:rotateY(180deg)]">
+                <span aria-hidden={!isFlipped} className="absolute inset-0 flex items-center rounded-2xl border border-blue/40 bg-blue/[.08] p-4 text-[15px] leading-snug [backface-visibility:hidden] [transform:rotateY(180deg)]">
                   {t.meaning}
                 </span>
               </button>

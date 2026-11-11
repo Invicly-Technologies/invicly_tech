@@ -34,10 +34,10 @@ export function BlogBrowser({ posts, categories }: { posts: PostCard[]; categori
         </div>
         <div className="relative lg:w-80">
           <Search size={16} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-quiet" aria-hidden />
-          <input type="search" value={q} onChange={(e) => { setQ(e.target.value); setLimit(PAGE); }} placeholder="Filter articles" aria-label="Search articles" className="fld !min-h-11 !pl-10" />
+          <input type="search" value={q} onChange={(e) => { setQ(e.target.value); setLimit(PAGE); }} placeholder="Filter articles…" aria-label="Search articles" className="fld !min-h-11 !pl-10" />
         </div>
       </div>
-      <p className="mt-4 text-sm text-quiet">{list.length} article{list.length === 1 ? "" : "s"}</p>
+      <p className="mt-4 text-sm text-quiet" aria-live="polite">{list.length} article{list.length === 1 ? "" : "s"}</p>
       <ul className="mt-3 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
         {list.slice(0, limit).map((p) => (
           <li key={p.slug}>

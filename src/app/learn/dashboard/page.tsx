@@ -34,12 +34,14 @@ export default async function Dashboard() {
   const user = await requireUser("/learn/dashboard/");
   const today = todayIn(user.tz);
   const from = addDays(weekStart(today), -25 * 7);
-  const [plans, due, activity, logs, totals] = await Promise.all([
+  // One parallel batch: "upcoming" is only shown when nothing is due, but fetching it up front avoids a second round trip.
+  const [plans, due, activity, logs, totals, upcomingAll] = await Promise.all([
     getPlanSummaries(user.id, today),
     getDueItems(user.id, today),
     getActivity(user.id, from),
     getRecentLogs(user.id),
     getTotals(user.id),
+    getUpcomingItems(user.id),
   ]);
   const activeDays = activity.filter((a) => a.minutes > 0 || a.completed > 0).map((a) => a.date);
   const current = streak(new Set(activeDays), today);
@@ -47,7 +49,7 @@ export default async function Dashboard() {
   const weekMin = activity.filter((a) => a.date >= weekStart(today)).reduce((s, a) => s + a.minutes, 0);
   const active = plans.filter((p) => p.status === "active");
   const overdueCount = due.filter((d) => d.scheduled_end < today).length;
-  const upcoming = due.length === 0 && active.length > 0 ? await getUpcomingItems(user.id) : [];
+  const upcoming = due.length === 0 && active.length > 0 ? upcomingAll : [];
 
   return (
     <div className="wrap py-8 md:py-12">

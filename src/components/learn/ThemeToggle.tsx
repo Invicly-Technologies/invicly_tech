@@ -52,8 +52,8 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
       )}
     >
       {/* Shows the mode you will switch to: sun in dark mode, moon in light mode. */}
-      <Sun size={18} aria-hidden className={cn("absolute transition-all duration-500", theme === "dark" ? "rotate-0 scale-100 opacity-100" : "-rotate-90 scale-50 opacity-0")} />
-      <Moon size={18} aria-hidden className={cn("absolute transition-all duration-500", theme === "light" ? "rotate-0 scale-100 opacity-100" : "rotate-90 scale-50 opacity-0")} />
+      <Sun size={18} aria-hidden className={cn("absolute transition-[rotate,scale,opacity] duration-500", theme === "dark" ? "rotate-0 scale-100 opacity-100" : "-rotate-90 scale-50 opacity-0")} />
+      <Moon size={18} aria-hidden className={cn("absolute transition-[rotate,scale,opacity] duration-500", theme === "light" ? "rotate-0 scale-100 opacity-100" : "rotate-90 scale-50 opacity-0")} />
     </button>
   );
 }

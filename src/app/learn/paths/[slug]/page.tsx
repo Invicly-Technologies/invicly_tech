@@ -134,7 +134,7 @@ export default async function PathPage({ params }: { params: Promise<{ slug: str
                               {visualHref(path.slug, `${m.key}/${t.key}`) ? (
                                 <Link href={visualHref(path.slug, `${m.key}/${t.key}`)!} className="group/t font-semibold hover:text-blue-light">
                                   {t.title}
-                                  <span className="ml-2 inline-flex items-center gap-1 whitespace-nowrap rounded-full bg-blue/10 px-2 py-0.5 align-middle text-[11px] font-bold text-blue-light group-hover/t:bg-blue group-hover/t:text-white">
+                                  <span className="ml-2 inline-flex items-center gap-1 whitespace-nowrap rounded-full bg-blue/10 px-2 py-0.5 align-middle text-[11px] font-bold text-blue-light group-hover/t:bg-blue-fill group-hover/t:text-white">
                                     Learn visually →
                                   </span>
                                 </Link>

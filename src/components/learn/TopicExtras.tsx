@@ -148,7 +148,7 @@ export function SubtopicList({
                 onClick={() => run({ t: "toggle", id: s.id, done: !isDone }, () => toggleSubtopic(s.id, !isDone))}
                 className={cn(
                   "hit grid h-[18px] w-[18px] shrink-0 place-items-center rounded-[5px] border-[1.5px] transition-colors",
-                  isDone ? "border-blue bg-blue text-white" : "border-fg/30 hover:border-blue-light",
+                  isDone ? "border-blue bg-blue-fill text-white" : "border-fg/30 hover:border-blue-light",
                 )}
               >
                 {isDone && <Check size={12} strokeWidth={3.5} aria-hidden />}
@@ -284,7 +284,7 @@ function EstimateChip({ minutes, tracked, onSave }: { minutes: number | null; tr
                   onSave(m);
                   setOpen(false);
                 }}
-                className={cn("h-8 rounded-lg text-xs font-bold", m === minutes ? "bg-blue text-white" : "bg-fg/[.05] hover:bg-fg/10")}
+                className={cn("h-8 rounded-lg text-xs font-bold", m === minutes ? "bg-blue-fill text-white" : "bg-fg/[.05] hover:bg-fg/10")}
               >
                 {fmtHours(m / 60)}
               </button>
@@ -410,7 +410,7 @@ export function ReferenceList({ itemId, recommended, mine }: { itemId: string; r
             <span className="text-xs text-quiet">{normalized ? `${hostOf(normalized)} · detected ${KIND_LABEL[detected ?? "other"]}` : url ? "That doesn't look like a web address yet" : "Docs, videos, articles, courses or repos"}</span>
             <div className="flex gap-1.5">
               <button type="button" onClick={() => setOpen(false)} className="min-h-9 rounded-full px-3 text-[13px] font-bold text-muted hover:text-fg">Cancel</button>
-              <button type="submit" disabled={!normalized} className="min-h-9 rounded-full bg-blue px-4 text-[13px] font-bold text-white disabled:opacity-40">Add link</button>
+              <button type="submit" disabled={!normalized} className="min-h-9 rounded-full bg-blue-fill px-4 text-[13px] font-bold text-white disabled:opacity-40">Add link</button>
             </div>
           </div>
         </form>

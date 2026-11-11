@@ -226,7 +226,7 @@ export function NotionEditor({
               aria-label={l}
               aria-pressed={on}
               title={l}
-              className={cn("grid h-8 w-8 place-items-center rounded-lg transition-colors", on ? "bg-blue text-white" : "text-muted hover:bg-fg/10 hover:text-fg")}
+              className={cn("grid h-8 w-8 place-items-center rounded-lg transition-colors", on ? "bg-blue-fill text-white" : "text-muted hover:bg-fg/10 hover:text-fg")}
             >
               <I size={15} aria-hidden />
             </button>
@@ -271,6 +271,4 @@ export function NotionEditor({
 }
 
 /** True when stored notes contain any visible text. */
-export function hasNoteText(html: string | null | undefined) {
-  return !!html && html.replace(/<[^>]+>/g, "").trim().length > 0;
-}
+export { hasNoteText } from "@/components/learn/noteText";

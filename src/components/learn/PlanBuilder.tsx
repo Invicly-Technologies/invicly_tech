@@ -123,7 +123,7 @@ export function WeekHoursEditor({ week, onChange, compact = false }: { week: Wee
               onClick={() => setDay(d, on ? 0 : 1)}
               aria-pressed={on}
               aria-label={`${DAY_LABELS[d]}: ${on ? "study day" : "rest day"}`}
-              className={cn("w-full rounded-lg py-1 text-xs font-bold", on ? "bg-blue text-white" : "text-quiet hover:text-fg")}
+              className={cn("w-full rounded-lg py-1 text-xs font-bold", on ? "bg-blue-fill text-white" : "text-quiet hover:text-fg")}
             >
               {DAY_LABELS[d]}
             </button>

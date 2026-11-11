@@ -146,7 +146,7 @@ export function ExplainerArticle({ post, modified }: { post: BlogPost; modified:
             <div className="mt-5 flex flex-wrap items-center gap-2">
               <LearnedButton pathSlug={slug} topicKey={key} />
               <CopyLink />
-              <span className="text-xs text-quiet">Topic {idx + 1} of {flat.length} · use ← → to move between topics</span>
+              <span className="text-xs text-quiet">Topic {idx + 1} of {flat.length}<span className="hidden md:inline"> · use ← → to move between topics</span></span>
             </div>
             <div className="mt-4"><MobileJump items={toc} /></div>
           </header>
@@ -213,7 +213,7 @@ export function ExplainerArticle({ post, modified }: { post: BlogPost; modified:
               <ol className="relative mt-5 space-y-3 border-l-2 border-fg/10 pl-6">
                 {steps.map((s, i) => (
                   <li key={s} className="relative">
-                    <span className="absolute -left-[37px] grid h-6 w-6 place-items-center rounded-full bg-blue text-[11px] font-bold text-white">{i + 1}</span>
+                    <span className="absolute -left-[37px] grid h-6 w-6 place-items-center rounded-full bg-blue-fill text-[11px] font-bold text-white">{i + 1}</span>
                     <div className="flex items-baseline justify-between gap-3 rounded-xl border border-fg/[.08] bg-card px-4 py-2.5">
                       <span className="font-semibold">{s}</span>
                       <span className="shrink-0 text-xs text-quiet">~{fmtHours(perStep / 60)}</span>

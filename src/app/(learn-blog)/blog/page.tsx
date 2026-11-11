@@ -36,6 +36,7 @@ export default function BlogIndex() {
           {posts.length} short guides across {paths.length} subjects. Every article has a diagram you can step through, key-term flashcards and questions to check yourself.
         </p>
         <BlogSearch size="lg" className="mt-7 max-w-2xl" />
+        <p className="mt-2.5 text-sm text-quiet">Try docker, subnetting or react hooks.</p>
       </header>
 
       <section className="mt-10" aria-labelledby="series-h">

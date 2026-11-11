@@ -132,7 +132,7 @@ function TourRunner({ tour, onClose }: { tour: TourDef; onClose: () => void }) {
     <div className="fixed inset-0 z-[95]" role="dialog" aria-modal="true" aria-labelledby="tour-title">
       {rect ? (
         <div
-          className="pointer-events-none absolute rounded-2xl ring-2 ring-blue transition-all duration-300"
+          className="pointer-events-none absolute rounded-2xl ring-2 ring-blue transition-[top,left,width,height] duration-300"
           style={{
             top: rect.top - pad,
             left: rect.left - pad,
@@ -157,7 +157,7 @@ function TourRunner({ tour, onClose }: { tour: TourDef; onClose: () => void }) {
         <div className="mt-4 flex items-center justify-between">
           <div className="flex gap-1" aria-hidden>
             {steps.map((_, k) => (
-              <span key={k} className={cn("h-1.5 rounded-full transition-all", k === i ? "w-5 bg-blue" : "w-1.5 bg-fg/20")} />
+              <span key={k} className={cn("h-1.5 rounded-full transition-[width,background-color]", k === i ? "w-5 bg-blue" : "w-1.5 bg-fg/20")} />
             ))}
           </div>
           <div className="flex gap-2">
@@ -166,7 +166,7 @@ function TourRunner({ tour, onClose }: { tour: TourDef; onClose: () => void }) {
                 <ArrowLeft size={15} aria-hidden /> Back
               </button>
             )}
-            <button type="button" autoFocus onClick={() => (last ? onClose() : setI(i + 1))} className="inline-flex min-h-9 items-center gap-1 rounded-full bg-blue px-4 text-sm font-bold text-white">
+            <button type="button" autoFocus onClick={() => (last ? onClose() : setI(i + 1))} className="inline-flex min-h-9 items-center gap-1 rounded-full bg-blue-fill px-4 text-sm font-bold text-white">
               {last ? "Got it" : "Next"} {!last && <ArrowRight size={15} aria-hidden />}
             </button>
           </div>

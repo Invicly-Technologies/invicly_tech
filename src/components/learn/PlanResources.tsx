@@ -56,7 +56,7 @@ export function PlanResources({ items, today, planTitle, planId }: { items: Sche
             <option key={i.id} value={i.id}>{i.title}</option>
           ))}
         </select>
-        <button type="submit" disabled={!normalized || pending} className="inline-flex min-h-11 shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-xl bg-blue px-4 text-sm font-bold text-white disabled:opacity-40">
+        <button type="submit" disabled={!normalized || pending} className="inline-flex min-h-11 shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-xl bg-blue-fill px-4 text-sm font-bold text-white disabled:opacity-40">
           <Plus size={16} aria-hidden /> Add {normalized ? KIND_LABEL[detectKind(normalized)].toLowerCase() : "link"}
         </button>
       </form>

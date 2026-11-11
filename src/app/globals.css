@@ -14,6 +14,8 @@
   --color-blue: #0a84ff;
   --color-blue-light: #5ab0ff;
   --color-blue-deep: #1650a0;
+  /* Same hue, deep enough for white text (4.8:1). Use behind white text only; --color-blue stays for accents. */
+  --color-blue-fill: #006fe0;
   /* Theme-aware tokens (Invicly Learn swaps these in light mode) */
   --color-fg: #ffffff;
   --color-ground: #000000;
@@ -36,7 +38,8 @@ body {
   /* clip, not hidden: overflow hidden turns body into a scroll container and breaks position: sticky */
   overflow-x: clip;
 }
-h1, h2, h3, h4 { font-family: var(--font-display); }
+h1, h2, h3, h4 { font-family: var(--font-display); text-wrap: balance; }
+a, button, input, label, select, textarea, summary, [role="button"] { touch-action: manipulation; }
 ::selection { background: rgba(10, 132, 255, 0.45); color: #fff; }
 :focus-visible { outline: 2px solid var(--color-blue-light); outline-offset: 3px; border-radius: 6px; }
 
@@ -59,8 +62,8 @@ html.lenis, html.lenis body { height: auto; }
 /* Buttons */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 28px; border-radius: 999px; font-weight: 700; font-size: 16px; transition: transform .25s, box-shadow .25s, background .25s, border-color .25s; will-change: transform; }
 .btn:hover { transform: translateY(-1px); }
-.btn-primary { background: var(--color-blue); color: #fff; }
-.btn-primary:hover { background: #2a94ff; }
+.btn-primary { background: var(--color-blue-fill); color: #fff; }
+.btn-primary:hover { background: #005fcc; }
 .btn-ghost { border: 1px solid color-mix(in oklab, var(--color-fg) 25%, transparent); color: var(--color-fg); }
 .btn-ghost:hover { border-color: rgba(90,176,255,.7); }
 .btn-sm { min-height: 44px; padding: 0 22px; font-size: 14px; }

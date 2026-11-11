@@ -81,7 +81,7 @@ export function BlogSearch({ size = "sm", className, autoFocus }: { size?: "sm" 
 
   const lg = size === "lg";
   return (
-    <div ref={box} className={cn("relative", className)} role="search">
+    <div ref={box} className={cn("relative", className)} role="search" aria-label={lg ? "Search all articles" : "Blog search"}>
       <Search size={lg ? 20 : 16} className={cn("pointer-events-none absolute top-1/2 -translate-y-1/2 text-quiet", lg ? "left-5" : "left-3.5")} aria-hidden />
       <input
         ref={input}
@@ -113,7 +113,7 @@ export function BlogSearch({ size = "sm", className, autoFocus }: { size?: "sm" 
             input.current?.blur();
           }
         }}
-        placeholder={lg ? "Search 600+ articles: try docker, subnetting, react hooks…" : "Search the blog"}
+        placeholder={lg ? "Search 600+ articles…" : "Search the blog…"}
         aria-label="Search blog articles"
         role="combobox"
         aria-expanded={open && results.length > 0}
@@ -133,6 +133,9 @@ export function BlogSearch({ size = "sm", className, autoFocus }: { size?: "sm" 
         <kbd className="pointer-events-none absolute right-3 top-1/2 hidden -translate-y-1/2 rounded border border-fg/15 px-1.5 text-[11px] text-quiet xl:block">/</kbd>
       ) : null}
 
+      <span className="sr-only" aria-live="polite">
+        {open && q.trim() && rows ? `${results.length === 8 ? "8 or more" : results.length} matching article${results.length === 1 ? "" : "s"}` : ""}
+      </span>
       {open && q.trim() && (
         <div className="absolute left-0 right-0 top-full z-50 mt-2 overflow-hidden rounded-2xl border border-fg/10 bg-ground shadow-2xl shadow-black/30">
           {!rows ? (
