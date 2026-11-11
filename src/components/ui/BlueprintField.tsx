@@ -41,6 +41,8 @@ export function BlueprintField({ className, quiet = false }: { className?: strin
       return light ? { dot: "10,99,201", base: 0.3 * k, trace: "10,99,201" } : { dot: "90,176,255", base: 0.34 * k, trace: "120,190,255" };
     };
     let pal = palette();
+    // How strongly the pointer and rings light the grid; the site-wide background keeps it soft.
+    const glow = quiet ? 0.45 : 1;
 
     const resize = () => {
       const r = host.getBoundingClientRect();
@@ -102,7 +104,7 @@ export function BlueprintField({ className, quiet = false }: { className?: strin
           if (i + 1 < cols) {
             const b = lit[k + 1];
             if (b > 0.12) {
-              ctx.strokeStyle = `rgba(${pal.trace},${Math.min(a, b) * 0.55})`;
+              ctx.strokeStyle = `rgba(${pal.trace},${Math.min(a, b) * 0.55 * glow})`;
               ctx.beginPath();
               ctx.moveTo(px[k], py[k]);
               ctx.lineTo(px[k + 1], py[k + 1]);
@@ -112,7 +114,7 @@ export function BlueprintField({ className, quiet = false }: { className?: strin
           if (j + 1 < rows) {
             const b = lit[k + cols];
             if (b > 0.12) {
-              ctx.strokeStyle = `rgba(${pal.trace},${Math.min(a, b) * 0.55})`;
+              ctx.strokeStyle = `rgba(${pal.trace},${Math.min(a, b) * 0.55 * glow})`;
               ctx.beginPath();
               ctx.moveTo(px[k], py[k]);
               ctx.lineTo(px[k + cols], py[k + cols]);
@@ -125,8 +127,8 @@ export function BlueprintField({ className, quiet = false }: { className?: strin
       // 3. dots
       for (let k = 0; k < cols * rows; k++) {
         const v = lit[k];
-        ctx.fillStyle = `rgba(${pal.dot},${pal.base + v * 0.8})`;
-        const r = (quiet ? 0.85 : 1.05) + v * 1.5;
+        ctx.fillStyle = `rgba(${pal.dot},${pal.base + v * 0.8 * glow})`;
+        const r = (quiet ? 0.85 : 1.05) + v * (quiet ? 0.9 : 1.5);
         ctx.fillRect(px[k] - r, py[k] - r, r * 2, r * 2);
       }
     };
