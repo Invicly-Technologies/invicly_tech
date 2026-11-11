@@ -157,8 +157,8 @@ select.fld { appearance: none; background-image: url("data:image/svg+xml,%3Csvg 
 
 .group:hover .icon-wiggle { animation: wiggle .7s ease; }
 
-/* Headlines stay one colour; the class is kept so existing markup needs no change. */
-.text-shimmer { color: inherit; }
+/* The key phrase of a page headline, in brand blue. */
+.text-shimmer { color: var(--color-blue); }
 
 /* The brand name in the home hero: the original moving blue gradient. */
 .brand-shimmer { background: linear-gradient(100deg, #0A84FF 0%, #5AB0FF 30%, #9CCBFF 45%, #0A84FF 60%, #1650A0 85%, #0A84FF 100%);

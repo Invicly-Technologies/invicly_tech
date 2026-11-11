@@ -32,7 +32,7 @@ export default function BlogIndex() {
         }}
       />
       <header className="max-w-3xl">
-        <h1 className="text-[38px] font-extrabold leading-[1.08] tracking-[-1.5px] md:text-[54px]">Learn one topic at a time, with pictures.</h1>
+        <h1 className="text-[38px] font-extrabold leading-[1.08] tracking-[-1.5px] md:text-[54px]">Learn one topic at a time, <span className="text-shimmer">with pictures.</span></h1>
         <p className="mt-4 text-lg leading-relaxed text-muted">
           {posts.length} short guides across {paths.length} subjects. Every article has a diagram you can step through, key-term flashcards and questions to check yourself.
         </p>

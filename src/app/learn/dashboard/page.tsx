@@ -57,7 +57,7 @@ export default async function Dashboard() {
         <div>
           <p className="text-sm text-quiet">{fmtLong(today)}</p>
           <h1 className="mt-1 text-[30px] font-extrabold tracking-[-1px] md:text-[40px]">
-            {greeting(user.tz)}, {user.name.split(" ")[0]}
+            {greeting(user.tz)}, <span className="text-shimmer">{user.name.split(" ")[0]}</span>
           </h1>
         </div>
         <Link href="/learn/plans/new/" className="btn btn-primary btn-sm" data-tour="new-plan">
