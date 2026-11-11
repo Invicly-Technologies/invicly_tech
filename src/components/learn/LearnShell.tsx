@@ -32,7 +32,6 @@ export function LearnShell({ children }: { children: React.ReactNode }) {
           <div className="flex flex-wrap gap-x-5 gap-y-2">
             <Link href="/learn/" className="hover:text-fg">Paths</Link>
             <Link href="/blog/" className="hover:text-fg">Blog</Link>
-            <Link href="/blog/rss.xml" className="hover:text-fg">RSS</Link>
             <Link href="/contact/" className="hover:text-fg">Suggest a path</Link>
             <Link href="/" className="hover:text-fg">invicly.com</Link>
           </div>
