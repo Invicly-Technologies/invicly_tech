@@ -4,10 +4,10 @@ import { BlueprintField } from "@/components/ui/BlueprintField";
 
 /**
  * The blueprint field is the site's one bold effect, so it only appears where it sets the scene:
- * the home page, the product showcase, the Learn landing page and the blog index (plus the 404 page).
- * Pages people read or work in (articles, services, about, contact, sign-in, dashboard, plans) stay calm.
+ * the company pages (home, products, services, about, contact), the Learn landing page and the blog index
+ * (plus the 404 page). Pages people read or work in (articles, roadmaps, sign-in, dashboard, plans) stay calm.
  */
-const SHOWCASE = new Set(["/", "/products", "/learn", "/blog"]);
+const SHOWCASE = new Set(["/", "/products", "/services", "/about", "/contact", "/learn", "/blog"]);
 
 export function SiteBackground({ always = false }: { always?: boolean }) {
   const path = (usePathname() ?? "/").replace(/\/+$/, "") || "/";

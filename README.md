@@ -78,7 +78,7 @@ The 21 remaining topics are in the Ethical Hacking path (web testing, exploitati
 - **Fonts**: Poppins (display), Manrope (body), JetBrains Mono (code).
 - **Theme**: site-wide light/dark toggle, dark by default (`ThemeToggle.tsx`, `src/lib/learn/theme.ts`).
 - **Background**: a mouse-reactive blueprint dot grid (`src/components/ui/BlueprintField.tsx`).
-  - It appears only on showcase pages: home, products, Learn landing, blog index and 404 (list in `src/components/layout/SiteBackground.tsx`).
+  - It appears on the company pages (home, products, services, about, contact), the Learn landing page, the blog index and 404 (list in `src/components/layout/SiteBackground.tsx`).
   - It animates only while the pointer moves or a ring is passing, pauses off-screen, and is still for touch and reduced-motion users.
   - Hovering buttons and link-cards sends a small ring through it. Pages can trigger one with `window.dispatchEvent(new CustomEvent("field:pulse", { detail: { x, y } }))`.
 - **Motion**: one entrance moment per page (hero headlines via `SplitReveal` with `onMount`). Sections and headings further down render in place. Everything respects `prefers-reduced-motion`.
