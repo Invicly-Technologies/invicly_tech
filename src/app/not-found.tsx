@@ -5,12 +5,14 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { SplitReveal } from "@/components/ui/SplitReveal";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { SiteBackground } from "@/components/layout/SiteBackground";
 
 export const metadata: Metadata = { title: "Page not found", robots: { index: false } };
 
 export default function NotFound() {
   return (
     <>
+      <SiteBackground always />
     <Header />
     <main id="main">
     <section className="wrap flex min-h-[80vh] flex-col items-center justify-center pb-20 pt-32 text-center">
