@@ -29,7 +29,8 @@ export function BlueprintField({ className, quiet = false }: { className?: strin
     let raf = 0, visible = true, energy = 0, lastMove = performance.now(), lastIdleRing = performance.now() - 7700;
     const target = { x: -1e4, y: -1e4 };
     const cur = { x: -1e4, y: -1e4 };
-    type Ring = { x: number; y: number; t0: number; speed: number; strength: number };
+    // max: how far the ring travels before it has fully faded (hover pulses stay small, clicks travel further).
+    type Ring = { x: number; y: number; t0: number; speed: number; strength: number; max: number };
     const rings: Ring[] = [];
     let lit = new Float32Array(0);
 
@@ -62,7 +63,7 @@ export function BlueprintField({ className, quiet = false }: { className?: strin
       ctx.clearRect(0, 0, w, h);
       cur.x += (target.x - cur.x) * 0.18;
       cur.y += (target.y - cur.y) * 0.18;
-      for (let i = rings.length - 1; i >= 0; i--) if ((now - rings[i].t0) * rings[i].speed > 900) rings.splice(i, 1); // fully faded by 900px
+      for (let i = rings.length - 1; i >= 0; i--) if ((now - rings[i].t0) * rings[i].speed > rings[i].max) rings.splice(i, 1);
 
       // 1. how lit each dot is (pointer + rings), and where it sits after leaning toward the pointer
       const px = new Float32Array(cols * rows);
@@ -83,7 +84,7 @@ export function BlueprintField({ className, quiet = false }: { className?: strin
           for (const rg of rings) {
             const radius = (now - rg.t0) * rg.speed;
             const band = Math.abs(Math.hypot(x - rg.x, y - rg.y) - radius);
-            if (band < 36) v = Math.max(v, (1 - band / 36) * rg.strength * Math.max(0, 1 - radius / 900));
+            if (band < 36) v = Math.max(v, (1 - band / 36) * rg.strength * Math.max(0, 1 - radius / rg.max));
           }
           lit[k] = v;
           px[k] = nx;
@@ -137,7 +138,7 @@ export function BlueprintField({ className, quiet = false }: { className?: strin
       energy += ((resting ? 0 : 1) - energy) * (resting ? 0.04 : 0.15);
       if (resting && now - lastIdleRing > 9000 && rings.length === 0) {
         lastIdleRing = now;
-        rings.push({ x: w * (0.15 + Math.random() * 0.7), y: h * (0.2 + Math.random() * 0.6), t0: now, speed: 0.22, strength: 0.45 });
+        rings.push({ x: w * (0.15 + Math.random() * 0.7), y: h * (0.2 + Math.random() * 0.6), t0: now, speed: 0.22, strength: 0.45, max: 900 });
       }
       draw(now);
       // keep running while anything is visibly moving; the idle ring timer restarts us via a timeout
@@ -165,8 +166,34 @@ export function BlueprintField({ className, quiet = false }: { className?: strin
       const r = canvas.getBoundingClientRect();
       const x = e.clientX - r.left, y = e.clientY - r.top;
       if (x < 0 || y < 0 || x > r.width || y > r.height) return;
-      rings.push({ x, y, t0: performance.now(), speed: 0.55, strength: 0.9 });
+      rings.push({ x, y, t0: performance.now(), speed: 0.55, strength: 0.9, max: 900 });
       kick();
+    };
+    // Rings started from page coordinates (viewport), capped so a busy page never stacks up dozens.
+    const pulseAt = (cx: number, cy: number, strength: number, max: number) => {
+      const r = canvas.getBoundingClientRect();
+      const x = cx - r.left, y = cy - r.top;
+      if (x < -max || y < -max || x > r.width + max || y > r.height + max) return;
+      if (rings.length >= 4) rings.shift();
+      rings.push({ x, y, t0: performance.now(), speed: 0.32, strength, max });
+      kick();
+    };
+    // Hovering a button, link-card or other control sends a small ring out from it, so the background answers the UI.
+    let lastTarget: Element | null = null;
+    const onOver = (e: PointerEvent) => {
+      if (e.pointerType !== "mouse") return;
+      const el = (e.target as Element | null)?.closest?.("a.surface, a.btn, button.btn, .btn, .card3d, [data-pulse]");
+      if (!el || el === lastTarget) return;
+      lastTarget = el;
+      const b = el.getBoundingClientRect();
+      pulseAt(b.left + b.width / 2, b.top + b.height / 2, 0.55, Math.max(160, Math.min(360, Math.max(b.width, b.height) * 1.1)));
+    };
+    const onOut = (e: PointerEvent) => {
+      if (lastTarget && !lastTarget.contains(e.relatedTarget as Node | null)) lastTarget = null;
+    };
+    const onPulse = (e: Event) => {
+      const d = (e as CustomEvent<{ x: number; y: number; strength?: number }>).detail;
+      if (d) pulseAt(d.x, d.y, d.strength ?? 0.8, 520);
     };
     const onLeave = () => {
       lastMove = 0;
@@ -190,6 +217,9 @@ export function BlueprintField({ className, quiet = false }: { className?: strin
       io.observe(canvas);
       window.addEventListener("pointermove", onMove, { passive: true });
       window.addEventListener("pointerdown", onDown, { passive: true });
+      document.addEventListener("pointerover", onOver, { passive: true });
+      document.addEventListener("pointerout", onOut, { passive: true });
+      window.addEventListener("field:pulse", onPulse);
       document.documentElement.addEventListener("pointerleave", onLeave);
       document.addEventListener("visibilitychange", kick);
       idleTimer = window.setTimeout(kick, 1300);
@@ -202,6 +232,9 @@ export function BlueprintField({ className, quiet = false }: { className?: strin
       mo.disconnect();
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerdown", onDown);
+      document.removeEventListener("pointerover", onOver);
+      document.removeEventListener("pointerout", onOut);
+      window.removeEventListener("field:pulse", onPulse);
       document.documentElement.removeEventListener("pointerleave", onLeave);
       document.removeEventListener("visibilitychange", kick);
     };

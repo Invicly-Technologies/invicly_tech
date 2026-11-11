@@ -3,7 +3,8 @@ import { ArrowRight, CalendarRange, Flame, LineChart, MailCheck, Network, Notebo
 import { paths, pathHours, pathTopicCount, PATH_CATEGORIES } from "@/data/learn/paths";
 import { PathBrowser } from "@/components/learn/PathBrowser";
 import { HeroCta, SignupBand } from "@/components/learn/LandingCta";
-import { PathIcon, ProgressRing, Bar } from "@/components/learn/bits";
+import { PathIcon } from "@/components/learn/bits";
+import { PlanDemo } from "@/components/learn/PlanDemo";
 import type { Metadata } from "next";
 import { JsonLd, abs, organizationRef } from "@/lib/seo";
 
@@ -62,44 +63,7 @@ export default function LearnHome() {
             <p className="mt-4 text-sm text-quiet">Browsing every path is open. An account is only needed to save a plan and track progress.</p>
           </div>
 
-          <div className="hero-in surface relative rounded-3xl p-6 [animation-delay:.15s]" aria-hidden>
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="text-xs font-semibold text-quiet">Full DevOps with Python</div>
-                <div className="mt-1 font-display text-lg font-bold">Week 6 of 18</div>
-              </div>
-              <span className="rounded-full border border-blue/40 bg-blue/10 px-2.5 py-1 text-xs font-bold text-blue-light">On track</span>
-            </div>
-            <div className="mt-6 flex items-center gap-6">
-              <ProgressRing pct={34} size={104} label="done" />
-              <div className="flex-1 space-y-3 text-sm">
-                {[
-                  ["Linux & networking", 100],
-                  ["Python for automation", 72],
-                  ["Containers with Docker", 20],
-                ].map(([t, p]) => (
-                  <div key={t as string}>
-                    <div className="mb-1 flex justify-between text-[13px]">
-                      <span className="text-muted">{t}</span>
-                      <span className="text-quiet">{p}%</span>
-                    </div>
-                    <Bar pct={p as number} />
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="mt-6 rounded-2xl border border-fg/10 bg-panel p-4">
-              <div className="text-xs font-semibold text-quiet">Today</div>
-              {["Dockerfiles & multi-stage builds", "Docker Compose for local stacks"].map((t, i) => (
-                <div key={t} className="mt-3 flex items-center gap-3 text-sm">
-                  <span className={`grid h-5 w-5 place-items-center rounded-md border ${i === 0 ? "border-blue bg-blue" : "border-fg/25"}`}>
-                    {i === 0 && <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3"><path d="M5 12l5 5L20 7" /></svg>}
-                  </span>
-                  <span className={i === 0 ? "text-quiet line-through" : ""}>{t}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+          <PlanDemo />
         </div>
       </section>
 

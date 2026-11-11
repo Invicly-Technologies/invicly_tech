@@ -157,6 +157,11 @@ select.fld { appearance: none; background-image: url("data:image/svg+xml,%3Csvg 
 /* Headlines stay one colour; the class is kept so existing markup needs no change. */
 .text-shimmer { color: inherit; }
 
+/* The brand name in the home hero: the original moving blue gradient. */
+.brand-shimmer { background: linear-gradient(100deg, #0A84FF 0%, #5AB0FF 30%, #9CCBFF 45%, #0A84FF 60%, #1650A0 85%, #0A84FF 100%);
+  background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: gradient-pan 6s ease-in-out infinite; }
+html[data-theme="light"] .brand-shimmer { background-image: linear-gradient(100deg, #0A6FE0 0%, #2E8BFF 30%, #5AB0FF 45%, #0A6FE0 60%, #0B4F9E 85%, #0A6FE0 100%); }
+
 /* Hero aurora */
 .aurora { display: none; }
 .aurora-a { animation: aurora-a 14s ease-in-out infinite; }
@@ -169,7 +174,7 @@ select.fld { appearance: none; background-image: url("data:image/svg+xml,%3Csvg 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
   .marquee-track { animation: none !important; }
-  .card3d::before, .text-shimmer, .aurora { animation: none !important; }
+  .card3d::before, .text-shimmer, .brand-shimmer, .aurora { animation: none !important; }
 }
 
 @keyframes rise { from { opacity: 0; transform: translateY(34px); } to { opacity: 1; transform: translateY(0); } }
@@ -335,3 +340,11 @@ html.is-scrolling::-webkit-scrollbar-thumb { background: color-mix(in oklab, var
   html { scrollbar-color: transparent transparent; transition: scrollbar-color .3s; }
   html.is-scrolling { scrollbar-color: color-mix(in oklab, var(--color-fg) 28%, transparent) transparent; }
 }
+
+/* ---------- Interaction feedback ----------
+   Link-cards brighten their border on hover; buttons press in slightly. (Hovering either also sends a small
+   ring through the background field, see BlueprintField.) */
+a.surface { transition: border-color .2s ease, background-color .2s ease; }
+a.surface:hover { border-color: color-mix(in oklab, var(--color-blue) 55%, transparent); }
+.btn { transition: scale .12s ease, background-color .2s ease, border-color .2s ease; }
+.btn:active { scale: .97; }
