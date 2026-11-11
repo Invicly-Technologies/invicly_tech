@@ -35,7 +35,6 @@ export default async function PathPage({ params }: { params: Promise<{ slug: str
   const path = getPath((await params).slug);
   if (!path) notFound();
   const total = pathHours(path);
-  const maxModule = Math.max(...path.modules.map((m) => m.topics.reduce((s, t) => s + t.hours, 0)));
   // Rough pace examples, starting on a Monday.
   const weekdays = [1, 2, 3, 4, 5];
   const paces = [1, 2, 3].map((h) => ({ h, weeks: Math.ceil((estimateEndDays(total, h, weekdays) + 1) / 7) }));
@@ -118,9 +117,6 @@ export default async function PathPage({ params }: { params: Promise<{ slug: str
                           <b>{fmtHours(hours)}</b>
                           <span className="block text-xs text-quiet">{m.topics.length} topics</span>
                         </span>
-                      </div>
-                      <div className="h-1.5 rounded-full bg-fg/[.06]" aria-hidden>
-                        <div className="h-full rounded-full bg-blue/80" style={{ width: `${(hours / maxModule) * 100}%` }} />
                       </div>
                       <span className="text-xs font-semibold text-blue-light group-open:hidden">Show topics</span>
                     </summary>
