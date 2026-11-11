@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "content:index": "python3 scripts/gen-extra-parts.py",
+    "content:check": "tsx scripts/validate-extra.ts src/data/learn/extra/*.ts src/data/learn/extra/parts/*/*.ts"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.3",
@@ -18,6 +20,7 @@
     "@types/three": "^0.186.0",
     "postcss": "^8.5.31",
     "tailwindcss": "^4.3.3",
+    "tsx": "^4.19.2",
     "typescript": "^5.9.3"
   },
   "dependencies": {

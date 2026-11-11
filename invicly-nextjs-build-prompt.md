@@ -1,3 +1,5 @@
+> **Historical:** this is the original build brief from the first version of the site. The site has changed a lot since; see `README.md` for how it works today.
+
 # Build prompt: Invicly Tech company website (Next.js, static)
 
 Paste everything below into your coding assistant (Claude Code, Cursor, etc.). Put the logo files in `public/brand/` first.
