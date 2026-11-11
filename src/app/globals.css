@@ -71,6 +71,7 @@ html.lenis, html.lenis body { height: auto; }
 /* Card tilt highlight */
 .card3d { position: relative; transform-style: preserve-3d; transition: border-color .3s, box-shadow .3s; }
 .card3d:hover { border-color: color-mix(in oklab, var(--color-blue) 55%, transparent); }
+.card3d::after { display: none; } /* no pointer-following glow */
 .card3d::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .3s;
   background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(90,176,255,.14), transparent 45%); }
 
@@ -141,22 +142,19 @@ select.fld { appearance: none; background-image: url("data:image/svg+xml,%3Csvg 
 
 @keyframes logo-sway { 0%,100% { transform: rotateY(-32deg) rotateX(8deg) translateY(0); } 50% { transform: rotateY(32deg) rotateX(-6deg) translateY(-12px); } }
 
-/* Shine sweep across primary buttons */
-.btn-primary { position: relative; overflow: hidden; isolation: isolate; }
-.btn-primary::before { content: ""; position: absolute; inset: 0; width: 45%; z-index: -1; transform: translateX(-120%) skewX(-20deg);
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.45), transparent); }
 
 
-/* Rotating conic border on hover */
-.card3d::before { content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1px; pointer-events: none; opacity: 0; transition: opacity .35s;
+
+/* Hover is a plain border colour change (no spinning border). */
+.card3d::before { display: none; content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1px; pointer-events: none; opacity: 0; transition: opacity .35s;
   background: conic-gradient(from var(--angle), transparent 0 55%, #5AB0FF 70%, #0A84FF 80%, transparent 92%);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
   animation: border-spin 3.2s linear infinite; }
 
 .group:hover .icon-wiggle { animation: wiggle .7s ease; }
 
-/* Animated gradient text */
-.text-shimmer { color: var(--color-blue); }
+/* Headlines stay one colour; the class is kept so existing markup needs no change. */
+.text-shimmer { color: inherit; }
 
 /* Hero aurora */
 .aurora { display: none; }

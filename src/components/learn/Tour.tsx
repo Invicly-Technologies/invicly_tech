@@ -1,7 +1,7 @@
 "use client";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useLayoutEffect, useMemo, useState } from "react";
-import { ArrowLeft, ArrowRight, CircleHelp, X } from "lucide-react";
+import { ArrowLeft, CircleHelp, X } from "lucide-react";
 import { completeTour } from "@/app/learn/actions";
 import { useLearnSession } from "@/components/learn/session";
 import { cn } from "@/lib/cn";
@@ -167,7 +167,7 @@ function TourRunner({ tour, onClose }: { tour: TourDef; onClose: () => void }) {
               </button>
             )}
             <button type="button" autoFocus onClick={() => (last ? onClose() : setI(i + 1))} className="inline-flex min-h-9 items-center gap-1 rounded-full bg-blue-fill px-4 text-sm font-bold text-white">
-              {last ? "Got it" : "Next"} {!last && <ArrowRight size={15} aria-hidden />}
+              {last ? "Got it" : "Next"}
             </button>
           </div>
         </div>

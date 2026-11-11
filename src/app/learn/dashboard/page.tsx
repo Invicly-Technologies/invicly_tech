@@ -198,7 +198,7 @@ function DueRow({ d, today, upcoming = false }: { d: DueItem; today: string; upc
       </div>
       {d.next_sub_id && (
         <div className="mt-2 flex items-center gap-2 rounded-xl bg-fg/[.04] py-1.5 pl-3 pr-1.5 text-sm sm:ml-9">
-          <span className="text-[11px] font-bold uppercase tracking-wide text-blue-light">Next</span>
+          <span className="text-[11px] font-bold text-blue-light">Next</span>
           <span className="min-w-0 flex-1 truncate text-soft">{d.next_sub_title}</span>
           {d.next_sub_minutes && <span className="shrink-0 text-xs text-quiet">{fmtHours(d.next_sub_minutes / 60)}</span>}
           <TimerButton planId={d.plan_id} planTitle={d.plan_title} itemId={d.id} itemTitle={d.title} subtopicId={d.next_sub_id} subtopicTitle={d.next_sub_title} />

@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/Button";
 import { FlowWindow } from "@/components/ui/AppMocks";
 import { Reveal } from "@/components/ui/Reveal";
 import { TiltOnScroll } from "@/components/ui/TiltOnScroll";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { SplitReveal } from "@/components/ui/SplitReveal";
 
 export function Showcase() {
@@ -10,7 +9,6 @@ export function Showcase() {
     <section className="wrap py-24">
       <div className="flex flex-wrap items-center gap-12">
         <Reveal className="min-w-0 flex-[1_1_380px]">
-          <Eyebrow>Made in house</Eyebrow>
           <h2 className="mt-3 text-[34px] font-bold leading-[1.1] tracking-[-1.5px] md:text-[44px]"><SplitReveal text="We use what we build." /></h2>
           <p className="mt-5 text-[17px] leading-relaxed text-muted">
             Flow, Spendly, Kivo and Unreel started as tools we wanted ourselves. That is the standard we bring to client work: software that holds up in daily use.

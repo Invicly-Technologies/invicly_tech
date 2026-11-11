@@ -274,7 +274,7 @@ function EstimateChip({ minutes, tracked, onSave }: { minutes: number | null; tr
       </button>
       {open && (
         <span role="dialog" aria-label="Estimate" className="absolute right-0 top-8 z-20 block w-52 rounded-xl border border-fg/12 bg-card p-2 shadow-2xl">
-          <span className="mb-1.5 block px-1 text-[11px] font-bold uppercase tracking-wide text-quiet">Estimate</span>
+          <span className="mb-1.5 block px-1 text-[11px] font-bold text-quiet">Estimate</span>
           <span className="grid grid-cols-4 gap-1">
             {PRESETS.map((m) => (
               <button
@@ -434,7 +434,7 @@ function LinkItem({ label, url, kind, badge, pending, onDelete }: { label: strin
         <span className="block truncate text-sm font-semibold group-hover:text-blue-light">{label}</span>
         <span className="block truncate text-xs text-quiet">
           {KIND_LABEL[(kind as LinkKind) in KIND_LABEL ? (kind as LinkKind) : "other"]} · {hostOf(url)}
-          {badge && <span className="ml-1.5 rounded bg-fg/[.07] px-1.5 py-px text-[11px] font-bold uppercase tracking-wide">{badge}</span>}
+          {badge && <span className="ml-1.5 rounded bg-fg/[.07] px-1.5 py-px text-[11px] font-bold">{badge}</span>}
         </span>
       </a>
       <ExternalLink size={14} className="shrink-0 text-quiet" aria-hidden />

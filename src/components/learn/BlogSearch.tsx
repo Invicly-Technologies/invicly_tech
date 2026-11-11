@@ -161,7 +161,7 @@ export function BlogSearch({ size = "sm", className, autoFocus }: { size?: "sm" 
           )}
           {rows && (
             <button type="button" onClick={() => go(`/blog/?q=${encodeURIComponent(q.trim())}#all`)} className="block w-full border-t border-fg/10 px-4 py-2.5 text-left text-sm font-semibold text-muted hover:bg-fg/5 hover:text-fg">
-              See all results for “{q.trim()}” →
+              See all results for “{q.trim()}”
             </button>
           )}
         </div>

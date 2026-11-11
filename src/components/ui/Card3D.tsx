@@ -9,12 +9,13 @@ const MotionLink = motion.create(Link);
 
 type Props = { children: ReactNode; className?: string; href?: string; max?: number };
 
-/** A card that tilts toward the pointer (max 6deg) with a moving highlight. */
+/** A linked or static card surface. (It used to tilt toward the pointer; that is switched off.) */
 export function Card3D({ children, className, href, max = 6 }: Props) {
   const ref = useRef<HTMLElement>(null);
   const fine = useFinePointer();
   const reduced = useReducedMotion();
-  const active = fine && !reduced;
+  // Cards stay flat: pointer tilt and lift read as template motion. Hover is a border colour change (globals.css).
+  const active = false && fine && !reduced;
   const px = useMotionValue(0.5);
   const py = useMotionValue(0.5);
   const rx = useSpring(useTransform(py, [0, 1], [max, -max]), { stiffness: 200, damping: 20 });

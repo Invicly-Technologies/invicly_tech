@@ -22,7 +22,7 @@ export function ProductsGrid() {
               </div>
               <h3 className="mt-2.5 text-[26px] font-bold">{p.name}</h3>
               <p className="flex-1 text-[15px] leading-relaxed text-muted">{p.cardText}</p>
-              <div className="font-mono text-xs text-quiet">{p.platformLabel}</div>
+              <div className="text-sm text-quiet">{p.platformLabel}</div>
               {p.googlePlaySoon ? (
                 <GooglePlayBadge playStoreUrl={p.playStoreUrl} className="self-start !px-2.5 !py-1.5 !text-xs" />
               ) : (

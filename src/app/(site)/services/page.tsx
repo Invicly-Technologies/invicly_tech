@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/Button";
 import { Card3D } from "@/components/ui/Card3D";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { SplitReveal } from "@/components/ui/SplitReveal";
 import { JsonLd, abs, organizationRef, siteOg } from "@/lib/seo";
 
@@ -75,7 +74,6 @@ export default function ServicesPage() {
       <section className="wrap pb-16 pt-32 md:pt-40">
         <div className="flex flex-wrap items-center gap-10">
           <Reveal className="min-w-0 flex-[1_1_560px]">
-            <Eyebrow>Services</Eyebrow>
             <h1 className="mt-4 text-[42px] font-extrabold leading-[1.05] tracking-[-2px] md:text-[64px]">
               <SplitReveal text="Build it. Run it." onMount delay={0.1} />
               <br />
@@ -102,10 +100,7 @@ export default function ServicesPage() {
           {services.map((s, i) => (
             <StaggerItem key={s.slug} className="flex">
               <Card3D className="flex w-full flex-col gap-3.5 rounded-3xl p-7 md:p-9">
-                <div id={s.slug} className="scroll-mt-32 font-mono text-sm text-blue">
-                  {String(i + 1).padStart(2, "0")}
-                </div>
-                <h2 className="text-[26px] font-bold md:text-[28px]">{s.title}</h2>
+                <h2 id={s.slug} className="scroll-mt-32 text-[26px] font-bold md:text-[28px]">{s.title}</h2>
                 <p className="leading-relaxed text-muted">{s.summary}</p>
                 <ul className="mt-1.5 list-disc pl-5 text-[15px] leading-[1.9] text-soft marker:text-blue">
                   {s.points.map((pt) => (
@@ -127,7 +122,6 @@ export default function ServicesPage() {
 
       <section className="border-t border-line bg-deep py-20">
         <div className="wrap">
-          <Eyebrow>Working with us</Eyebrow>
           <h2 className="mt-3 text-[34px] font-bold tracking-[-1.5px] md:text-[44px]"><SplitReveal text="Pick how you want to work." /></h2>
           <p className="mt-4 max-w-[560px] text-muted">No fixed price list. You get a quote after a short call.</p>
           <Stagger className="mt-11 grid gap-5 md:grid-cols-3">

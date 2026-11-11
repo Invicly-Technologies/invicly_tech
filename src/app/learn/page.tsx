@@ -48,7 +48,6 @@ export default function LearnHome() {
         <div className="aurora aurora-b right-[-10%] top-[10%] h-[360px] w-[360px] bg-blue-deep/40" aria-hidden />
         <div className="wrap relative grid grid-cols-1 items-center gap-12 py-16 md:py-24 lg:grid-cols-[1.15fr_1fr]">
           <div className="hero-in">
-            <span className="eyebrow">Invicly Learn · free &amp; open to all</span>
             <h1 className="mt-5 text-[42px] font-extrabold leading-[1.04] tracking-[-2px] md:text-[64px]">
               Study plans you&apos;ll <span className="text-shimmer">actually finish.</span>
             </h1>
@@ -107,9 +106,8 @@ export default function LearnHome() {
       </section>
 
       <section id="paths" className="wrap scroll-mt-20 py-16 md:py-20">
-        <span className="eyebrow">Learning paths</span>
         <h2 className="mt-3 text-[32px] font-bold tracking-[-1.2px] md:text-[42px]">Pick where you want to go</h2>
-        <p className="mt-2 text-sm text-quiet">{paths.length} paths · {paths.reduce((s, p) => s + pathTopicCount(p), 0)} topics · {Math.round(paths.reduce((s, p) => s + pathHours(p), 0))} hours of guided study</p>
+        <p className="mt-2 text-sm text-quiet">{paths.length} paths, {paths.reduce((s, p) => s + pathTopicCount(p), 0)} topics and {Math.round(paths.reduce((s, p) => s + pathHours(p), 0))} hours of guided study</p>
         <p className="mt-3 max-w-2xl text-muted">Each path is broken into modules and topics with time estimates and links to the official docs. Open one to see the roadmap as a list or a mind map.</p>
         <div className="mt-8">
           <PathBrowser
@@ -132,7 +130,6 @@ export default function LearnHome() {
 
       <section className="border-y border-fg/10 bg-deep py-16 md:py-20">
         <div className="wrap">
-          <span className="eyebrow">How it works</span>
           <ol className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
             {[
               ["Choose a path", "Start from a default path, drop the modules you already know, or write your own."],
@@ -150,7 +147,6 @@ export default function LearnHome() {
       </section>
 
       <section className="wrap py-16 md:py-20">
-        <span className="eyebrow">Features</span>
         <h2 className="mt-3 text-[32px] font-bold tracking-[-1.2px] md:text-[42px]">Built for actually finishing</h2>
         <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((f) => (

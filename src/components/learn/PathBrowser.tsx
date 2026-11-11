@@ -68,7 +68,7 @@ export function PathBrowser({ paths, categories }: { paths: PathCard[]; categori
               {p.tools.length > 5 && <span className="chp">+{p.tools.length - 5}</span>}
             </div>
             <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-bold text-blue-light group-hover:text-fg">
-              View roadmap <span className="arr">→</span>
+              View roadmap
             </span>
           </Link>
         ))}

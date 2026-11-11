@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, CheckCircle2, Clock, ExternalLink } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Clock, ExternalLink } from "lucide-react";
 import { getPath, paths, pathHours, pathTopicCount } from "@/data/learn/paths";
 import { PathIcon } from "@/components/learn/bits";
 import { fmtHours } from "@/lib/learn/analytics";
@@ -95,7 +95,7 @@ export default async function PathPage({ params }: { params: Promise<{ slug: str
           <PathViews
             tree={pathToTree(path)}
             title={path.title}
-            meta={`${path.modules.length} modules · ${total}h`}
+            meta={`${path.modules.length} modules, ${total}h`}
             hrefs={Object.fromEntries(path.modules.flatMap((m) => m.topics.map((t) => [`t-${m.key}-${t.key}`, visualHref(path.slug, `${m.key}/${t.key}`) ?? ""])))}
           >
           <p className="text-sm text-quiet">Bar length shows each module&apos;s share of study time.</p>
@@ -135,7 +135,7 @@ export default async function PathPage({ params }: { params: Promise<{ slug: str
                                 <Link href={visualHref(path.slug, `${m.key}/${t.key}`)!} className="group/t font-semibold hover:text-blue-light">
                                   {t.title}
                                   <span className="ml-2 inline-flex items-center gap-1 whitespace-nowrap rounded-full bg-blue/10 px-2 py-0.5 align-middle text-[11px] font-bold text-blue-light group-hover/t:bg-blue-fill group-hover/t:text-white">
-                                    Learn visually →
+                                    Learn visually
                                   </span>
                                 </Link>
                               ) : (
@@ -217,7 +217,7 @@ export default async function PathPage({ params }: { params: Promise<{ slug: str
               ))}
             </ul>
             <Link href={`/learn/plans/new/?path=${path.slug}`} className="btn btn-primary mt-6 w-full">
-              Customize &amp; start <ArrowRight size={18} aria-hidden />
+              Customize &amp; start
             </Link>
             <p className="mt-3 text-center text-xs text-quiet">Next you can edit topics, set hours per weekday and preview the timeline.</p>
             <h2 className="mt-6 text-sm font-bold">Tools you will use</h2>

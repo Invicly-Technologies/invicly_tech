@@ -100,7 +100,7 @@ export function PlanResources({ items, today, planTitle, planId }: { items: Sche
                       <div className="flex min-w-0 items-center gap-1.5 text-xs text-quiet">
                         <span className="shrink-0">{hostOf(l.url)}</span>·
                         <button type="button" onClick={() => setOpenId(l.itemId)} className="-my-1.5 truncate py-1.5 hover:text-fg hover:underline">{l.topic}</button>
-                        {!l.mine && <span className="shrink-0 rounded bg-fg/[.07] px-1.5 text-[11px] font-bold uppercase">Rec</span>}
+                        {!l.mine && <span className="shrink-0 rounded bg-fg/[.07] px-1.5 text-[11px] font-bold">Rec</span>}
                       </div>
                     </div>
                   </li>

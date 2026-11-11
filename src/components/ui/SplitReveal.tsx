@@ -18,6 +18,8 @@ type Props = {
 
 export function SplitReveal({ text, className, mode = "words", delay = 0, onMount, pieceClassName }: Props) {
   const reduced = useReducedMotion();
+  // Only page-load headlines animate. Headings further down render as plain text (no scroll-triggered reveals).
+  if (!onMount) return <span className={cn("inline", className, pieceClassName)}>{text}</span>;
   const words = text.split(" ");
   const trigger = onMount ? { animate: "show" } : { whileInView: "show", viewport: { once: true, margin: "-40px" } };
   let i = 0;

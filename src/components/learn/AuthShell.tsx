@@ -6,7 +6,6 @@ export function AuthShell({ title, sub, children }: { title: string; sub: string
     <div className="wrap grid grid-cols-1 items-center gap-12 py-12 md:py-20 lg:grid-cols-2">
       <DbWarmup />
       <div className="hidden lg:block">
-        <span className="eyebrow">Invicly Learn</span>
         <h2 className="mt-4 text-[40px] font-extrabold leading-[1.08] tracking-[-1.5px]">
           Pick up <span className="text-shimmer">where you left off.</span>
         </h2>

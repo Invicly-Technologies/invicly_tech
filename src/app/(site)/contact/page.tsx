@@ -4,7 +4,6 @@ import { Clock, Mail } from "lucide-react";
 import { site } from "@/data/site";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { SplitReveal } from "@/components/ui/SplitReveal";
 
 export const metadata: Metadata = {
@@ -26,7 +25,6 @@ export default function ContactPage() {
       <section className="wrap pb-20 pt-32 md:pt-40">
         <div className="flex flex-wrap items-start gap-12 md:gap-16">
           <Reveal className="min-w-0 flex-[1_1_420px]">
-            <Eyebrow>Contact</Eyebrow>
             <h1 className="mt-4 text-[42px] font-extrabold leading-[1.05] tracking-[-2px] md:text-[60px]">
               <SplitReveal text="Tell us what you" onMount delay={0.1} />
               <br />
@@ -66,7 +64,6 @@ export default function ContactPage() {
 
       <section className="border-t border-line bg-deep pb-24 pt-20">
         <div className="wrap">
-          <Eyebrow>What happens next</Eyebrow>
           <Stagger className="mt-9 grid gap-10 md:grid-cols-3">
             {steps.map((s, i) => (
               <StaggerItem key={s.title}>

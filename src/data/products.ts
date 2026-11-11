@@ -40,7 +40,7 @@ export const products: Product[] = [
     listText:
       "A light task and project manager. Type a task the way you think and Flow picks out the date, priority and project. Daily goals keep streaks, and team workspaces add boards and sprints.",
     platforms: ["Web", "Windows", "Linux", "Android"],
-    platformLabel: "WEB · WINDOWS · LINUX · ANDROID",
+    platformLabel: "Web, Windows, Linux and Android",
     pills: ["Web", "Windows", "Linux", "Android"],
     url: "https://flow.invicly.com/",
     linkLabel: "Open Flow",
@@ -92,7 +92,7 @@ export const products: Product[] = [
     listText:
       "Add expenses by typing them, track card dues, loans and EMIs, and get a reminder before anything is due. It only records. It never asks for bank logins or moves money.",
     platforms: ["Android", "Web"],
-    platformLabel: "ANDROID · WEB",
+    platformLabel: "Android and web",
     pills: ["Android", "Web", "English · Hindi · Hinglish"],
     url: "https://spendly.invicly.com/",
     linkLabel: "Open Spendly",
@@ -132,7 +132,7 @@ export const products: Product[] = [
   {
     slug: "kivo",
     name: "Kivo",
-    category: "Time tracking · Self-hosted",
+    category: "Self-hosted time tracking",
     tagline: "Your time data stays on your servers.",
     heroLines: ["Your time data stays", "on your servers."],
     heroText: "Self-hosted time tracking for teams. Track, review, bill and report in one place, on infrastructure you control.",
@@ -140,7 +140,7 @@ export const products: Product[] = [
     listText:
       "Track, review, bill and report in one place. Run Kivo with Docker on your own infrastructure. Kivo Control manages your license and installations and never sees your time entries.",
     platforms: ["Self-hosted (Docker)"],
-    platformLabel: "SELF-HOSTED · DOCKER",
+    platformLabel: "Self-hosted with Docker",
     pills: ["Docker", "Unlimited users", "Free key available"],
     url: "https://kivo-control.invicly.com/",
     linkLabel: "Open Kivo",
@@ -188,7 +188,7 @@ export const products: Product[] = [
     listText:
       "Unreel counts the Instagram Reels and YouTube Shorts you scroll. Meet Sprout, a small plant that wilts as the count climbs. Set a daily limit and Unreel stops the feed for you. No accounts, no servers, works offline.",
     platforms: ["Android"],
-    platformLabel: "ANDROID",
+    platformLabel: "Android",
     pills: ["Android", "Offline", "Early preview"],
     url: "https://unreel.invicly.com/",
     linkLabel: "Open Unreel",

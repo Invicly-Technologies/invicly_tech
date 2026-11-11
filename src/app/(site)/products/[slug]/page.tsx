@@ -9,7 +9,6 @@ import { CtaBand } from "@/components/ui/CtaBand";
 import { GooglePlayBadge } from "@/components/ui/GooglePlayBadge";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { TiltOnScroll } from "@/components/ui/TiltOnScroll";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { SplitReveal } from "@/components/ui/SplitReveal";
 import { JsonLd, abs, breadcrumbLd, organizationRef, siteOg } from "@/lib/seo";
 
@@ -69,10 +68,7 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
         </nav>
         <div className="mt-9 flex flex-wrap items-center gap-14">
           <Reveal className="min-w-0 flex-[1_1_440px]">
-            <div className="font-mono text-xs tracking-[2px]" style={{ color: p.accent }}>
-              {p.category.toUpperCase()}
-            </div>
-            <h1 className="mt-3.5 text-[44px] font-extrabold leading-[1.02] tracking-[-2px] md:text-[60px] xl:text-[68px] md:tracking-[-2.5px]">
+            <h1 className="text-[44px] font-extrabold leading-[1.02] tracking-[-2px] md:text-[60px] xl:text-[68px] md:tracking-[-2.5px]">
               <SplitReveal text={p.heroLines[0]} onMount delay={0.1} />
               <br />
               <SplitReveal text={p.heroLines[1]} onMount delay={0.3} pieceClassName="text-shimmer" />
@@ -118,7 +114,6 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
       <section className="border-t border-line bg-deep py-20">
         <div className="wrap flex flex-wrap items-start gap-14">
           <Reveal className="min-w-0 flex-[1_1_400px]">
-            <Eyebrow>{p.highlight.eyebrow}</Eyebrow>
             <h2 className="mt-3 text-[34px] font-bold leading-[1.1] tracking-[-1.5px] md:text-[42px]"><SplitReveal text={p.highlight.title} /></h2>
             <p className="mt-4 text-[17px] leading-relaxed text-muted">{p.highlight.body}</p>
           </Reveal>
@@ -136,7 +131,6 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
       </section>
 
       <section className="wrap py-24">
-        <Eyebrow>Features</Eyebrow>
         <h2 className="mt-3 text-[34px] font-bold tracking-[-1.5px] md:text-[42px]"><SplitReveal text={`What ${p.name} does.`} /></h2>
         <Stagger className="mt-11 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {p.features.map((f) => (
@@ -152,7 +146,6 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
 
       <section className="border-t border-line bg-deep py-20">
         <div className="wrap">
-          <Eyebrow>{p.platformsSection.eyebrow}</Eyebrow>
           <h2 className="mt-3 text-[34px] font-bold tracking-[-1.5px] md:text-[42px]"><SplitReveal text={p.platformsSection.title} /></h2>
           <Stagger className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {p.platformsSection.items.map((it) => (

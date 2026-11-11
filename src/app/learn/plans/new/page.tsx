@@ -23,7 +23,6 @@ export default async function NewPlanPage({ searchParams }: { searchParams: Prom
   }));
   return (
     <div className="wrap py-10 md:py-14">
-      <span className="eyebrow">New plan</span>
       <h1 className="mt-3 text-[34px] font-extrabold tracking-[-1.2px] md:text-[44px]">Build your study plan</h1>
       <p className="mt-2 max-w-2xl text-muted">Pick a path, shape it into your own, choose your hours for each weekday, and check the timeline before you commit.</p>
       <div className="mt-8">

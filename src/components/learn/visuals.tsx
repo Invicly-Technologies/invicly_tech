@@ -51,7 +51,7 @@ export function VisualBlock({ v, active, controls, caption }: { v: Visual; activ
   return (
     <figure className="surface overflow-hidden rounded-3xl">
       <figcaption className="flex flex-wrap items-center gap-2 border-b border-fg/[.07] px-5 py-3 text-sm font-bold">
-        <span className="rounded-md bg-blue/10 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-blue-light">{LABEL[v.type]}</span>
+        <span className="rounded-md bg-blue/10 px-2 py-0.5 text-[11px] font-bold text-blue-light">{LABEL[v.type]}</span>
         <span className="min-w-0 flex-1">{v.title}</span>
         {controls}
       </figcaption>
@@ -128,7 +128,7 @@ function Layers({ layers, active }: { layers: { label: string; detail?: string }
           </div>
         </li>
       ))}
-      <li className="mt-1 flex justify-between px-1 text-[11px] font-semibold uppercase tracking-wide text-quiet" aria-hidden>
+      <li className="mt-1 flex justify-between px-1 text-[11px] font-semibold text-quiet" aria-hidden>
         <span>↑ Higher level</span>
         <span>Lower level ↓</span>
       </li>

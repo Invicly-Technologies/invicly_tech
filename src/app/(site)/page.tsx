@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { siteOg } from "@/lib/seo";
 import { Hero } from "@/components/sections/Hero";
-import { Marquee } from "@/components/ui/Marquee";
 import { ProductsGrid } from "@/components/sections/ProductsGrid";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { Process } from "@/components/sections/Process";
@@ -21,7 +20,6 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Marquee />
       <ProductsGrid />
       <ServicesGrid />
       <Process />

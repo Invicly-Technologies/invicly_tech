@@ -8,7 +8,6 @@ import { CtaBand } from "@/components/ui/CtaBand";
 import { GooglePlayBadge } from "@/components/ui/GooglePlayBadge";
 import { Reveal } from "@/components/ui/Reveal";
 import { cn } from "@/lib/cn";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { SplitReveal } from "@/components/ui/SplitReveal";
 
 export const metadata: Metadata = {
@@ -23,7 +22,6 @@ export default function ProductsPage() {
     <>
       <section className="wrap pb-10 pt-32 md:pt-40">
         <Reveal>
-          <Eyebrow>Products</Eyebrow>
           <h1 className="mt-4 text-[42px] font-extrabold leading-[1.05] tracking-[-2px] md:text-[64px]">
             <SplitReveal text="Software we built" onMount delay={0.1} />
             <br />
@@ -51,9 +49,7 @@ export default function ProductsPage() {
                 </Reveal>
               )}
               <Reveal className="min-w-0 flex-[1_1_420px]" delay={0.1}>
-                <div className="font-mono text-xs tracking-[2px]" style={{ color: p.accent }}>
-                  {p.category.toUpperCase()}
-                </div>
+                <div className="text-sm font-semibold" style={{ color: p.accent }}>{p.category}</div>
                 <h2 className="mt-2.5 text-[40px] font-bold tracking-[-1.5px] md:text-[46px]"><SplitReveal text={p.name} /></h2>
                 <p className="mt-2 text-xl font-semibold text-fg">{p.tagline}</p>
                 <p className="mt-4 text-[16.5px] leading-relaxed text-muted">{p.listText}</p>
@@ -67,7 +63,7 @@ export default function ProductsPage() {
                 <div className="mt-7 flex flex-wrap items-center gap-3">
                   <Button href={p.url}>{p.slug === "kivo" ? "Open Kivo Control" : p.linkLabel} ↗</Button>
                   <Link href={`/products/${p.slug}/`} className="inline-flex min-h-12 items-center px-2 font-bold text-blue-light hover:text-fg">
-                    Details →
+                    Details
                   </Link>
                   {p.googlePlaySoon && <GooglePlayBadge playStoreUrl={p.playStoreUrl} />}
                 </div>

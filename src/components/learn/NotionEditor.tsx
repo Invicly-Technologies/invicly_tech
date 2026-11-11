@@ -243,7 +243,7 @@ export function NotionEditor({
           className="absolute z-30 max-h-72 w-64 overflow-y-auto rounded-xl border border-fg/15 bg-card p-1.5 shadow-2xl"
           style={{ left: Math.max(0, Math.min(slash.x, (wrap.current?.clientWidth ?? 300) - 260)), top: slash.y }}
         >
-          <div className="px-2 pb-1 pt-0.5 text-[11px] font-semibold uppercase tracking-wide text-quiet">Blocks</div>
+          <div className="px-2 pb-1 pt-0.5 text-[11px] font-semibold text-quiet">Blocks</div>
           {items.map((c, i) => (
             <button
               key={c.key}

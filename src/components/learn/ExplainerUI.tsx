@@ -282,7 +282,7 @@ export function SidebarTopics({
           <div className="h-full rounded-full bg-ok transition-[width] duration-500" style={{ width: `${(doneInPath / Math.max(1, total.length)) * 100}%` }} />
         </div>
       </div>
-      <h2 className="mt-5 px-2.5 text-xs font-bold uppercase tracking-wide text-quiet">{moduleTitle}</h2>
+      <h2 className="mt-5 px-2.5 text-xs font-bold text-quiet">{moduleTitle}</h2>
       <ul className="mt-2 space-y-0.5">
         {topics.map((x) => {
           const cur = x.key === current;
@@ -337,7 +337,7 @@ export function PageToc({ items }: { items: { id: string; label: string }[] }) {
   }, [items]);
   return (
     <nav aria-label="On this page" className="hidden lg:block">
-      <h2 className="text-xs font-bold uppercase tracking-wide text-quiet">On this page</h2>
+      <h2 className="text-xs font-bold text-quiet">On this page</h2>
       <ul className="mt-2 space-y-0.5 border-l border-fg/10">
         {items.map((i) => (
           <li key={i.id}>
@@ -433,7 +433,7 @@ export function ContinueLearning({ pathSlug, topics }: { pathSlug: string; topic
       {next ? (
         <Link href={next.href} className="mt-3 flex items-center justify-between gap-2 rounded-xl bg-card px-3 py-2.5 text-sm font-bold hover:text-blue-light">
           <span className="min-w-0">
-            <span className="block text-[11px] font-semibold uppercase tracking-wide text-quiet">{done ? "Continue with" : "Start with"}</span>
+            <span className="block text-[11px] font-semibold text-quiet">{done ? "Continue with" : "Start with"}</span>
             <span className="block truncate">{next.title}</span>
           </span>
           <ChevronRight size={18} className="shrink-0" aria-hidden />
@@ -538,7 +538,7 @@ export function Practice({ items, storageKey }: { items: { level: "easy" | "medi
         <li key={i} className={cn("surface rounded-2xl p-4 md:p-5", done.includes(i) && "!border-ok/40")}>
           <div className="flex flex-wrap items-center gap-2">
             <span className="font-display text-sm font-bold">Exercise {i + 1}</span>
-            <span className={cn("rounded-md px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide", LEVEL_CLS[p.level])}>{p.level}</span>
+            <span className={cn("rounded-md px-2 py-0.5 text-[11px] font-bold", LEVEL_CLS[p.level])}>{p.level}</span>
             <button type="button" onClick={() => toggleDone(i)} aria-pressed={done.includes(i)} className={cn("ml-auto inline-flex min-h-9 items-center gap-1.5 rounded-full border px-3 text-[13px] font-bold", done.includes(i) ? "border-ok bg-ok text-white" : "border-fg/15 text-muted hover:text-fg")}>
               {done.includes(i) ? <CheckCircle2 size={14} aria-hidden /> : <Circle size={14} aria-hidden />} {done.includes(i) ? "Done" : "Mark done"}
             </button>

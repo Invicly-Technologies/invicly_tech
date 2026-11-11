@@ -3,7 +3,6 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import { useRef } from "react";
 import { process } from "@/data/site";
 import { Reveal } from "@/components/ui/Reveal";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { SplitReveal } from "@/components/ui/SplitReveal";
 
 export function Process() {
@@ -14,7 +13,6 @@ export function Process() {
   return (
     <section className="border-t border-line bg-deep py-20">
       <div className="wrap">
-        <Eyebrow>How we work</Eyebrow>
         <h2 className="mt-3 text-[36px] font-bold leading-[1.1] tracking-[-1.5px] md:text-[48px]"><SplitReveal text="Think. Build. Invicly." /></h2>
         <div ref={ref} className="relative mt-16">
           {/* horizontal on desktop, vertical on mobile */}
@@ -32,16 +30,9 @@ export function Process() {
             {process.map((p, i) => (
               <li key={p.title} className="relative pl-16 md:pl-0">
                 <Reveal delay={i * 0.12}>
-                  <motion.div
-                    className="absolute left-0 flex h-10 w-10 items-center justify-center rounded-full bg-blue font-extrabold shadow-[0_0_30px_rgba(10,132,255,.6)] md:relative"
-                    initial={{ scale: 0, rotate: -90 }}
-                    whileInView={{ scale: 1, rotate: 0 }}
-                    viewport={{ once: true, margin: "-60px" }}
-                    transition={{ type: "spring", stiffness: 260, damping: 16, delay: 0.15 + i * 0.25 }}
-                  >
-                    <span className="ping-ring" style={{ animationDelay: `${i * 0.8}s` }} />
-                    <span className="relative">{i + 1}</span>
-                  </motion.div>
+                  <div className="absolute left-0 flex h-10 w-10 items-center justify-center rounded-full bg-blue-fill font-extrabold text-white md:relative">
+                    {i + 1}
+                  </div>
                   <h3 className="text-[26px] md:mt-6">{p.title}</h3>
                   <p className="mt-2.5 leading-relaxed text-soft">{p.body}</p>
                 </Reveal>

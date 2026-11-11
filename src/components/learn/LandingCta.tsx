@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { useLearnSession } from "@/components/learn/session";
 
 /** Hero call to action: dashboard for signed-in users, sign-up otherwise (decided in the browser so the page stays static). */
@@ -8,11 +7,11 @@ export function HeroCta() {
   const { user } = useLearnSession();
   return user ? (
     <Link href="/learn/dashboard/" className="btn btn-primary">
-      Go to my dashboard <ArrowRight size={18} aria-hidden />
+      Go to my dashboard
     </Link>
   ) : (
     <Link href="/learn/signup/" className="btn btn-primary">
-      Start tracking, free <ArrowRight size={18} aria-hidden />
+      Start tracking, free
     </Link>
   );
 }
@@ -27,7 +26,7 @@ export function SignupBand() {
         <p className="mt-2 text-muted">Free, no card, takes 30 seconds.</p>
       </div>
       <Link href="/learn/signup/" className="btn btn-primary">
-        Create free account <ArrowRight size={18} aria-hidden />
+        Create free account
       </Link>
     </div>
   );

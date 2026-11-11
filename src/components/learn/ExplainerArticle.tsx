@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { AlertTriangle, ArrowLeft, ArrowRight, BookOpenCheck, Clock, ExternalLink, FlaskConical, GraduationCap, Lightbulb, ListChecks, Newspaper, Shapes, Target } from "lucide-react";
+import { AlertTriangle, ArrowLeft, ArrowRight, BookOpenCheck, Clock, ExternalLink, FlaskConical, GraduationCap, Lightbulb, ListChecks, Shapes, Target } from "lucide-react";
 import { getPath } from "@/data/learn/paths";
 import { getExplainer } from "@/data/learn/explainers";
 import { getExtra } from "@/data/learn/extra";
@@ -134,25 +134,20 @@ export function ExplainerArticle({ post, modified }: { post: BlogPost; modified:
             </div>
             <h1 className="mt-4 text-[34px] font-extrabold leading-[1.1] tracking-[-1.2px] md:text-[48px]">{t.title}</h1>
             <p className="mt-3 flex gap-2 text-lg leading-relaxed text-muted"><Target size={20} className="mt-1 shrink-0 text-blue-light" aria-hidden />{t.goal}</p>
-            <p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-quiet">
-              <span className="inline-flex items-center gap-1.5"><Newspaper size={14} aria-hidden /> By <b className="text-muted">Invicly Tech</b></span>
-              <span>·</span>
-              <span>{post.minutes} min read</span>
-              <span>·</span>
-              <time dateTime={BLOG_PUBLISHED}>{fmtDay(BLOG_PUBLISHED)}</time>
-              <span>·</span>
-              <Link href={seriesHref(slug)} className="hover:text-fg">Part of <b className="text-muted">{path.title}</b></Link>
+            <p className="mt-4 text-sm leading-relaxed text-quiet">
+              By <b className="font-semibold text-muted">Invicly Tech</b>, <time dateTime={BLOG_PUBLISHED}>{fmtDay(BLOG_PUBLISHED)}</time>, in{" "}
+              <Link href={seriesHref(slug)} className="font-semibold text-muted underline-offset-4 hover:text-fg hover:underline">{path.title}</Link>. About {post.minutes} minutes to read.
             </p>
             <div className="mt-5 flex flex-wrap items-center gap-2">
               <LearnedButton pathSlug={slug} topicKey={key} />
               <CopyLink />
-              <span className="text-xs text-quiet">Topic {idx + 1} of {flat.length}<span className="hidden md:inline"> · use ← → to move between topics</span></span>
+              <span className="text-xs text-quiet">Topic {idx + 1} of {flat.length}<span className="hidden md:inline">. Arrow keys move between topics.</span></span>
             </div>
             <div className="mt-4"><MobileJump items={toc} /></div>
           </header>
 
           <section id="in-short" className="mt-8 scroll-mt-24 rounded-3xl border border-blue/25 bg-gradient-to-br from-blue/[.08] to-transparent p-6 md:p-8" aria-labelledby="short-h">
-            <h2 id="short-h" className="text-sm font-bold uppercase tracking-wider text-blue-light">In short</h2>
+            <h2 id="short-h" className="text-sm font-bold text-blue-light">In short</h2>
             <p className="mt-2 text-[17px] leading-relaxed">{ex.summary}</p>
             {ex.analogy && (
               <p className="mt-4 flex gap-2.5 rounded-2xl bg-card/70 p-4 text-[15px] leading-relaxed text-soft">
