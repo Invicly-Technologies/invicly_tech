@@ -16,6 +16,7 @@ import linuxSystemProgramming from "./linux-system-programming";
 import linuxAdministration from "./linux-administration";
 import dataStructuresAlgorithms from "./data-structures-algorithms";
 import computerNetworking from "./computer-networking";
+import parts from "./parts";
 
 export type { ExtraContent } from "./types";
 
@@ -41,7 +42,7 @@ const registry: Record<string, ExtraMap> = {
 };
 
 export function getExtra(pathSlug: string, topicKey: string): ExtraContent | undefined {
-  return registry[pathSlug]?.[topicKey];
+  return registry[pathSlug]?.[topicKey] ?? parts[pathSlug]?.[topicKey];
 }
 
 export const hasExtra = (pathSlug: string, topicKey: string) => Boolean(getExtra(pathSlug, topicKey));

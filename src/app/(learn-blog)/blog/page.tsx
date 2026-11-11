@@ -3,6 +3,7 @@ import Link from "next/link";
 import { paths, PATH_CATEGORIES } from "@/data/learn/paths";
 import { posts, postsForPath, seriesHref } from "@/data/learn/blog";
 import { BlogBrowser } from "@/components/learn/BlogBrowser";
+import { BlogSearch } from "@/components/learn/BlogSearch";
 import { PathIcon } from "@/components/learn/bits";
 import { JsonLd, abs, organizationRef } from "@/lib/seo";
 
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 export default function BlogIndex() {
-  const cards = posts.map((p) => ({ slug: p.slug, title: p.title, summary: p.summary, path: p.pathTitle, category: p.category, minutes: p.minutes }));
+  const cards = posts.map((p) => ({ slug: p.slug, title: p.title, summary: p.summary, path: p.pathTitle, category: p.category, minutes: p.minutes, keywords: `${p.moduleTitle} ${p.keywords.join(" ")}` }));
   return (
     <div className="wrap py-10 md:py-14">
       <JsonLd
@@ -34,6 +35,7 @@ export default function BlogIndex() {
         <p className="mt-4 text-lg leading-relaxed text-muted">
           {posts.length} short guides across {paths.length} subjects. Every article has a diagram you can step through, key-term flashcards and questions to check yourself.
         </p>
+        <BlogSearch size="lg" className="mt-7 max-w-2xl" />
       </header>
 
       <section className="mt-10" aria-labelledby="series-h">
@@ -53,7 +55,7 @@ export default function BlogIndex() {
         </ul>
       </section>
 
-      <section className="mt-12" aria-labelledby="all-h">
+      <section id="all" className="mt-12 scroll-mt-24" aria-labelledby="all-h">
         <h2 id="all-h" className="mb-4 text-xl font-bold">All articles</h2>
         <BlogBrowser posts={cards} categories={[...PATH_CATEGORIES]} />
       </section>

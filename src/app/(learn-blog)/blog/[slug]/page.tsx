@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getPost, posts, postHref } from "@/data/learn/blog";
+import { BLOG_MODIFIED, getPost, posts, postHref } from "@/data/learn/blog";
 import { ExplainerArticle } from "@/components/learn/ExplainerArticle";
 
 export const dynamicParams = false;
-const BUILT = new Date().toISOString().slice(0, 10);
+const BUILT = BLOG_MODIFIED;
 
 export function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));

@@ -4,6 +4,8 @@ import { getExtra } from "./extra";
 
 /** First publication date of the blog (all topic posts went live together). */
 export const BLOG_PUBLISHED = "2026-11-10";
+/** Last time article content was substantially updated. Bump it when articles change; used for sitemap lastmod and dateModified. */
+export const BLOG_MODIFIED = "2026-11-11";
 
 export type BlogPost = {
   slug: string;

@@ -6,6 +6,7 @@ import { CircleHelp, Newspaper, LayoutDashboard, LogOut, Map, Menu, Plus, X } fr
 import { LogoMark } from "@/components/ui/Logo";
 import { logout } from "@/app/learn/actions";
 import { ThemeToggle } from "@/components/learn/ThemeToggle";
+import { BlogSearch } from "@/components/learn/BlogSearch";
 import { clearSessionCache, useLearnSession } from "@/components/learn/session";
 import { cn } from "@/lib/cn";
 
@@ -58,6 +59,8 @@ export function LearnHeader() {
             </Link>
           ))}
         </nav>
+
+        <BlogSearch className="hidden min-w-0 flex-1 md:block md:max-w-[220px] lg:max-w-xs" />
 
         <div className="hidden items-center gap-3 md:flex">
           {user && (
@@ -117,6 +120,7 @@ export function LearnHeader() {
 
       {open && (
         <nav aria-label="Learn mobile" className="wrap flex flex-col gap-1 border-t border-fg/10 pb-5 pt-3 md:hidden">
+          <BlogSearch className="mb-2" />
           {links.map((l) => (
             <Link key={l.href} href={l.href} onClick={() => setOpen(false)} className="flex min-h-12 items-center gap-3 rounded-xl px-3 font-semibold hover:bg-fg/5">
               <l.icon size={18} aria-hidden /> {l.label}

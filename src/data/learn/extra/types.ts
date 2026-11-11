@@ -8,8 +8,12 @@ import type { Visual } from "../explainers/types";
 export type ExtraContent = {
   /** "Explained simply": 3–5 short paragraphs (each ≤ 90 words) a complete beginner can follow. */
   plain: string[];
-  /** "In depth": 3–5 sections that explain how it really works. body ≤ 170 words; bullets 0–5 short items. */
-  deepDive: { heading: string; body: string; bullets?: string[] }[];
+  /**
+   * "In depth": 3–5 sections that explain how it really works. body ≤ 170 words; bullets 0–5 short items.
+   * `visual`: optional diagram shown right under that section, only where a picture makes the idea clearer
+   * (typically 1–2 sections per topic). Must show something the other diagrams don't.
+   */
+  deepDive: { heading: string; body: string; bullets?: string[]; visual?: Visual }[];
   /** 1–2 extra diagrams that show the idea from a different angle than the existing visuals. */
   moreVisuals: Visual[];
   /** Exactly 2 worked examples: a concrete scenario walked through step by step. Code optional (≤ 15 lines). */

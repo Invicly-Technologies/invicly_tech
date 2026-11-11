@@ -163,12 +163,13 @@ export async function login(_: FormState, fd: FormData): Promise<FormState> {
   if (!u || !ok) return { error: "Email or password is incorrect" };
   const tz = String(fd.get("tz") ?? "");
   const timezone = isValidTimeZone(tz) ? tz : u.timezone;
-  if (timezone !== u.timezone) await sql.query(`UPDATE users SET timezone = $1 WHERE id = $2`, [timezone, u.id]);
+  // Runs alongside the next step instead of adding its own database round trip before it.
+  const tzUpdate = timezone !== u.timezone ? sql.query(`UPDATE users SET timezone = $1 WHERE id = $2`, [timezone, u.id]) : null;
   if (!u.email_verified_at) {
-    await issueCode(u, "verify");
+    await Promise.all([tzUpdate, issueCode(u, "verify")]);
     redirect(`/learn/verify/?${qs({ email, next: fd.get("next") ? String(fd.get("next")) : undefined, sent: "login" })}`);
   }
-  await createSession({ id: u.id, name: u.name, email: u.email, tz: timezone });
+  await Promise.all([tzUpdate, createSession({ id: u.id, name: u.name, email: u.email, tz: timezone })]);
   redirect(safeNext(fd.get("next")));
 }
 

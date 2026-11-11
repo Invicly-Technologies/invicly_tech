@@ -2,17 +2,19 @@ import type { MetadataRoute } from "next";
 import { products } from "@/data/products";
 import { site } from "@/data/site";
 import { paths } from "@/data/learn/paths";
-import { posts, postHref, seriesHref } from "@/data/learn/blog";
+import { posts, postHref, seriesHref, BLOG_MODIFIED } from "@/data/learn/blog";
 
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
-  const entry = (path: string, priority: number, changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] = "monthly") => ({
+  // A stable date (not the build time): Google ignores lastmod values that change on every deploy.
+  const lastModified = new Date(`${BLOG_MODIFIED}T00:00:00Z`);
+  const entry = (path: string, priority: number, changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] = "monthly", images?: string[]) => ({
     url: `${site.url}${path}`,
-    lastModified: now,
+    lastModified,
     changeFrequency,
     priority,
+    ...(images ? { images } : {}),
   });
   return [
     entry("/", 1, "weekly"),
@@ -25,6 +27,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...paths.map((p) => entry(`/learn/paths/${p.slug}/`, 0.8, "weekly")),
     entry("/blog/", 0.9, "weekly"),
     ...paths.map((p) => entry(seriesHref(p.slug), 0.7, "weekly")),
-    ...posts.map((p) => entry(postHref(p.slug), 0.7)),
+    ...posts.map((p) => entry(postHref(p.slug), 0.8, "monthly", [`${site.url}${postHref(p.slug)}og.png`])),
   ];
 }

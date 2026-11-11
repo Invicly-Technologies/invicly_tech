@@ -199,6 +199,7 @@ export function ExplainerArticle({ post, modified }: { post: BlogPost; modified:
                         ))}
                       </ul>
                     ) : null}
+                    {d.visual ? <div className="mt-5"><StepVisual v={d.visual} /></div> : null}
                   </div>
                 ))}
               </div>

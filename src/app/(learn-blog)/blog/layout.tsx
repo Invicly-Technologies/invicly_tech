@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import { LearnShell } from "@/components/learn/LearnShell";
 
 export const metadata: Metadata = {
   title: { default: "Invicly Blog: visual guides to DevOps, security, Linux, DSA and more", template: "%s | Invicly Blog" },
 };
 
-/** The blog lives on the main Invicly Tech site; this only clears the fixed site header. */
+/** The blog is part of Invicly Learn: same header (with blog search), footer and theme. */
 export default function BlogLayout({ children }: { children: React.ReactNode }) {
-  return <div className="pt-20 md:pt-24">{children}</div>;
+  return <LearnShell>{children}</LearnShell>;
 }

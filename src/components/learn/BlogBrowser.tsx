@@ -1,10 +1,11 @@
 "use client";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { searchRows } from "@/components/learn/BlogSearch";
 import { Search } from "lucide-react";
 import { cn } from "@/lib/cn";
 
-export type PostCard = { slug: string; title: string; summary: string; path: string; category: string; minutes: number };
+export type PostCard = { slug: string; title: string; summary: string; path: string; category: string; minutes: number; keywords: string };
 
 const PAGE = 24;
 
@@ -12,9 +13,14 @@ export function BlogBrowser({ posts, categories }: { posts: PostCard[]; categori
   const [q, setQ] = useState("");
   const [cat, setCat] = useState("All");
   const [limit, setLimit] = useState(PAGE);
+  // Searches from the header arrive as /blog/?q=...
+  useEffect(() => {
+    const fromUrl = new URLSearchParams(window.location.search).get("q");
+    if (fromUrl) setQ(fromUrl);
+  }, []);
   const list = useMemo(() => {
-    const needle = q.trim().toLowerCase();
-    return posts.filter((p) => (cat === "All" || p.category === cat) && (!needle || `${p.title} ${p.summary} ${p.path}`.toLowerCase().includes(needle)));
+    const inCat = cat === "All" ? posts : posts.filter((p) => p.category === cat);
+    return searchRows(inCat, q, (p) => ({ title: p.title, rest: `${p.path} ${p.keywords} ${p.summary}` }));
   }, [posts, q, cat]);
   return (
     <div>
@@ -28,7 +34,7 @@ export function BlogBrowser({ posts, categories }: { posts: PostCard[]; categori
         </div>
         <div className="relative lg:w-80">
           <Search size={16} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-quiet" aria-hidden />
-          <input value={q} onChange={(e) => { setQ(e.target.value); setLimit(PAGE); }} placeholder="Search articles" aria-label="Search articles" className="fld !min-h-11 !pl-10" />
+          <input type="search" value={q} onChange={(e) => { setQ(e.target.value); setLimit(PAGE); }} placeholder="Filter articles" aria-label="Search articles" className="fld !min-h-11 !pl-10" />
         </div>
       </div>
       <p className="mt-4 text-sm text-quiet">{list.length} article{list.length === 1 ? "" : "s"}</p>
