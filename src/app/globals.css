@@ -42,7 +42,9 @@ body {
 h1, h2, h3, h4 { font-family: var(--font-display); text-wrap: balance; }
 a, button, input, label, select, textarea, summary, [role="button"] { touch-action: manipulation; }
 ::selection { background: rgba(10, 132, 255, 0.45); color: #fff; }
-:focus-visible { outline: 2px solid var(--color-blue-light); outline-offset: 3px; border-radius: 6px; }
+:focus-visible { outline: 2px solid var(--color-blue-light); outline-offset: 3px; }
+/* Text fields show focus with their own border and soft ring (see .fld and the search box), so no extra outline. */
+input:focus-visible, textarea:focus-visible, select:focus-visible, [contenteditable]:focus-visible { outline: none; }
 
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
@@ -65,8 +67,9 @@ html.lenis, html.lenis body { height: auto; }
 .btn:hover { transform: translateY(-1px); }
 .btn-primary { background: var(--color-blue-fill); color: #fff; }
 .btn-primary:hover { background: #005fcc; }
-.btn-ghost { border: 1px solid color-mix(in oklab, var(--color-fg) 25%, transparent); color: var(--color-fg); }
-.btn-ghost:hover { border-color: rgba(90,176,255,.7); }
+/* Solid fill (not see-through) so the background pattern never shows inside a button. */
+.btn-ghost { border: 1px solid color-mix(in oklab, var(--color-fg) 25%, transparent); color: var(--color-fg); background: color-mix(in oklab, var(--color-fg) 5%, var(--color-ground)); }
+.btn-ghost:hover { border-color: rgba(90,176,255,.7); background: color-mix(in oklab, var(--color-fg) 9%, var(--color-ground)); }
 .btn-sm { min-height: 44px; padding: 0 22px; font-size: 14px; }
 
 /* Card tilt highlight */

@@ -121,7 +121,7 @@ export function BlogSearch({ size = "sm", className, autoFocus }: { size?: "sm" 
         aria-autocomplete="list"
         aria-activedescendant={hi >= 0 ? `${listId}-${hi}` : undefined}
         className={cn(
-          "w-full rounded-full border border-fg/15 bg-card/80 text-fg outline-none placeholder:text-quiet focus:border-blue/70 [&::-webkit-search-cancel-button]:hidden",
+          "w-full rounded-full border border-fg/15 bg-card/80 text-fg outline-none placeholder:text-quiet focus:border-blue/70 focus:shadow-[0_0_0_4px_rgba(10,132,255,.18)] transition-[border-color,box-shadow] [&::-webkit-search-cancel-button]:hidden",
           lg ? "min-h-14 pl-13 pr-12 text-[16px]" : "min-h-10 pl-10 pr-9 text-[14px]",
         )}
       />
