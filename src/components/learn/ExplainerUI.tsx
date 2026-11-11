@@ -240,6 +240,25 @@ export function useLearned(pathSlug: string) {
   return { learned, toggle };
 }
 
+/** Real progress for one module of a path, from the topics marked as learned in this browser. */
+export function ModuleProgress({ pathSlug, topicKeys }: { pathSlug: string; topicKeys: string[] }) {
+  const { learned } = useLearned(pathSlug);
+  const done = topicKeys.filter((k) => learned.includes(k)).length;
+  const total = topicKeys.length;
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  const complete = total > 0 && done === total;
+  return (
+    <div className="flex items-center gap-3">
+      <div className="h-1.5 flex-1 rounded-full bg-fg/[.06]" role="progressbar" aria-valuemin={0} aria-valuemax={total} aria-valuenow={done} aria-label="Topics learned in this module">
+        <div className={cn("h-full rounded-full transition-[width] duration-500", complete ? "bg-ok" : "bg-blue")} style={{ width: `${pct}%` }} />
+      </div>
+      <span className={cn("shrink-0 text-xs font-semibold tabular-nums", complete ? "text-ok" : done ? "text-blue-light" : "text-quiet")}>
+        {complete ? "Done ✓" : done ? `${done} of ${total} learned` : "Not started"}
+      </span>
+    </div>
+  );
+}
+
 export function LearnedButton({ pathSlug, topicKey }: { pathSlug: string; topicKey: string }) {
   const { learned, toggle } = useLearned(pathSlug);
   const on = learned.includes(topicKey);

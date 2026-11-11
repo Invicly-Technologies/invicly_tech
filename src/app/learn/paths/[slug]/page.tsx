@@ -10,7 +10,7 @@ import { pathToTree } from "@/lib/learn/tree";
 import { PathViews } from "@/components/learn/PathViews";
 import { JsonLd, abs, breadcrumbLd, organizationRef } from "@/lib/seo";
 import { visualHref } from "@/data/learn/blog";
-import { ContinueLearning, LearnedTick } from "@/components/learn/ExplainerUI";
+import { ContinueLearning, LearnedTick, ModuleProgress } from "@/components/learn/ExplainerUI";
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -118,6 +118,7 @@ export default async function PathPage({ params }: { params: Promise<{ slug: str
                           <span className="block text-xs text-quiet">{m.topics.length} topics</span>
                         </span>
                       </div>
+                      <ModuleProgress pathSlug={path.slug} topicKeys={m.topics.map((t) => `${m.key}/${t.key}`)} />
                       <span className="text-xs font-semibold text-blue-light group-open:hidden">Show topics</span>
                     </summary>
                     <div className="border-t border-fg/10 px-5 pb-5 md:px-6">
