@@ -37,7 +37,7 @@ export function BlueprintField({ className, quiet = false }: { className?: strin
     const palette = () => {
       const light = document.documentElement.getAttribute("data-theme") === "light";
       // `quiet` is the site-wide background: dimmer at rest so long text stays easy to read.
-      const k = quiet ? 0.62 : 1;
+      const k = quiet ? 0.4 : 1;
       return light ? { dot: "10,99,201", base: 0.3 * k, trace: "10,99,201" } : { dot: "90,176,255", base: 0.34 * k, trace: "120,190,255" };
     };
     let pal = palette();
@@ -126,7 +126,7 @@ export function BlueprintField({ className, quiet = false }: { className?: strin
       for (let k = 0; k < cols * rows; k++) {
         const v = lit[k];
         ctx.fillStyle = `rgba(${pal.dot},${pal.base + v * 0.8})`;
-        const r = 1.05 + v * 1.5;
+        const r = (quiet ? 0.85 : 1.05) + v * 1.5;
         ctx.fillRect(px[k] - r, py[k] - r, r * 2, r * 2);
       }
     };

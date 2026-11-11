@@ -25,7 +25,7 @@ npm run dev                  # http://localhost:3000
 
 | Area | URL | Code |
 | --- | --- | --- |
-| Company site | `/`, `/products/`, `/services/`, `/about/`, `/contact/` | `src/app/(site)`, `src/components/sections`, copy in `src/data/{site,products,services}.ts` |
+| Company site | `/`, `/products/`, `/services/`, `/about/`, `/contact/` (form backend: `/api/contact/`) | `src/app/(site)`, `src/components/sections`, copy in `src/data/{site,products,services}.ts` |
 | Invicly Learn | `/learn/`, `/learn/paths/<path>/`, `/learn/dashboard/`, `/learn/plans/…` | `src/app/learn`, `src/components/learn`, `src/lib/learn` |
 | Blog | `/blog/`, `/blog/<article>/`, `/blog/series/<path>/` | `src/app/(learn-blog)/blog` (uses the Learn header and footer) |
 | Blog search index | `/blog/search.json` | static, loaded the first time someone focuses the search box |
@@ -112,7 +112,17 @@ The 21 remaining topics are in the Ethical Hacking path (web testing, exploitati
 
 ## Contact form
 
-The form posts to **FormSubmit** (`https://formsubmit.co/ajax/inviclytech@gmail.com`). After the first test message, click the activation link FormSubmit emails to `inviclytech@gmail.com`; until then, submissions are not delivered. To switch to Web3Forms, see `.env.example`. Only `src/lib/contact.ts` needs to change to move the form to another backend.
+The form on `/contact/` posts to the site's own endpoint, `POST /api/contact/` (`src/app/api/contact/route.ts`). No third-party form service is used.
+
+- **Server-side checks**: the fields are validated again on the server.
+- **Spam filtering**:
+  - A hidden field and a minimum time-to-fill filter bots; they get a fake "sent" reply.
+  - Each visitor is limited to 5 messages per 10 minutes.
+- **The email**:
+  - It goes to `CONTACT_NOTIFY_EMAIL` (falls back to `inviclytech@gmail.com`), sent through the same SMTP account as the Learn codes (`SMTP_*`).
+  - It's a formatted table: name, email, company, service, time (IST and UTC), the page it was sent from and the approximate location, followed by the message.
+  - "Reply" answers the visitor directly.
+- **Without SMTP settings**: in local development the enquiry is printed to the server log. In production the visitor is asked to email directly.
 
 ## Git and deploys
 

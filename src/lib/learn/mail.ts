@@ -7,12 +7,14 @@ const user = process.env.SMTP_USER;
 const pass = process.env.SMTP_PASS;
 
 export const mailConfigured = Boolean(host && user && pass);
+/** The SMTP account messages are sent from (shared with the contact form). */
+export const smtpUser = user;
 
-const transport = mailConfigured
+export const transport = mailConfigured
   ? nodemailer.createTransport({ host, port, secure: port === 465, auth: { user, pass } })
   : null;
 
-const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
+export const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
 
 export async function sendCodeEmail(to: string, name: string, code: string, purpose: "verify" | "reset") {
   const subject = purpose === "verify" ? `${code} is your Invicly Learn verification code` : `${code} is your Invicly Learn password reset code`;

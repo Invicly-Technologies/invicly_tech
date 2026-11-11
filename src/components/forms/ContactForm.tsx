@@ -2,7 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckCircle2, Loader2 } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { serviceOptions } from "@/data/services";
@@ -25,6 +25,7 @@ let lastSent = 0;
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [error, setError] = useState("");
+  const startedAt = useRef(Date.now());
   const {
     register,
     handleSubmit,
@@ -36,10 +37,6 @@ export function ContactForm() {
   });
 
   const onSubmit = async (values: FormValues) => {
-    if (values._honey) {
-      setStatus("success");
-      return;
-    }
     const wait = lastSent + COOLDOWN_MS - Date.now();
     if (wait > 0) {
       setError(`Please wait ${Math.ceil(wait / 1000)} seconds before sending another message.`);
@@ -49,8 +46,7 @@ export function ContactForm() {
     setStatus("sending");
     setError("");
     try {
-      const { _honey: _ignored, ...data } = values;
-      await sendContact(data);
+      await sendContact({ ...values, startedAt: startedAt.current, page: window.location.pathname });
       lastSent = Date.now();
       setStatus("success");
       reset();
