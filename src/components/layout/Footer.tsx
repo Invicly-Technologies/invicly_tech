@@ -7,7 +7,7 @@ import { FooterWordmark } from "./FooterWordmark";
 export function Footer() {
   const links = socials.filter((s) => s.url);
   return (
-    <footer className="relative border-t border-line bg-ground pb-8 pt-16">
+    <footer className="border-t border-line pb-8 pt-16">
       <div className="wrap">
         <div className="flex flex-wrap justify-between gap-12">
           <div className="flex-[1_1_300px]">
