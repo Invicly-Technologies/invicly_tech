@@ -25,7 +25,8 @@ export function BlueprintField({ className }: { className?: string }) {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
     let w = 0, h = 0, cols = 0, rows = 0, ox = 0, oy = 0;
-    let raf = 0, visible = true, energy = 0, lastMove = performance.now(), lastIdleRing = performance.now();
+    // lastIdleRing starts in the past so the first ring arrives ~1.5s after load, before anyone moves the mouse.
+    let raf = 0, visible = true, energy = 0, lastMove = performance.now(), lastIdleRing = performance.now() - 7700;
     const target = { x: -1e4, y: -1e4 };
     const cur = { x: -1e4, y: -1e4 };
     type Ring = { x: number; y: number; t0: number; speed: number; strength: number };
@@ -34,7 +35,7 @@ export function BlueprintField({ className }: { className?: string }) {
 
     const palette = () => {
       const light = document.documentElement.getAttribute("data-theme") === "light";
-      return light ? { dot: "10,99,201", base: 0.22, trace: "10,99,201" } : { dot: "90,176,255", base: 0.24, trace: "120,190,255" };
+      return light ? { dot: "10,99,201", base: 0.3, trace: "10,99,201" } : { dot: "90,176,255", base: 0.34, trace: "120,190,255" };
     };
     let pal = palette();
 
@@ -122,7 +123,7 @@ export function BlueprintField({ className }: { className?: string }) {
       for (let k = 0; k < cols * rows; k++) {
         const v = lit[k];
         ctx.fillStyle = `rgba(${pal.dot},${pal.base + v * 0.8})`;
-        const r = 0.9 + v * 1.5;
+        const r = 1.05 + v * 1.5;
         ctx.fillRect(px[k] - r, py[k] - r, r * 2, r * 2);
       }
     };
@@ -189,7 +190,7 @@ export function BlueprintField({ className }: { className?: string }) {
       window.addEventListener("pointerdown", onDown, { passive: true });
       document.documentElement.addEventListener("pointerleave", onLeave);
       document.addEventListener("visibilitychange", kick);
-      idleTimer = window.setTimeout(kick, 2500);
+      idleTimer = window.setTimeout(kick, 1300);
     }
     return () => {
       cancelAnimationFrame(raf);

@@ -315,3 +315,22 @@ html[data-theme="light"] {
 .is-step-active { opacity: 1; transition: opacity .35s, box-shadow .35s; box-shadow: 0 0 0 2px var(--color-blue), 0 12px 30px -14px rgba(10,132,255,.7); border-radius: 16px; }
 li.is-step-active.h-14 { box-shadow: none; }
 li.is-step-active.h-14 > div { filter: drop-shadow(0 0 8px rgba(10,132,255,.55)); }
+
+/* ---------- Scrollbars: thin, and hidden until you scroll ----------
+   The page scrollbar is invisible at rest and fades in while scrolling (html.is-scrolling, set by
+   ScrollbarAutoHide) or when the pointer is near the right edge, so it can still be grabbed.
+   Inner scroll areas (code, dropdowns, tables) show theirs on hover.
+   Chrome/Safari use ::-webkit-scrollbar (6px); setting the standard properties there would override it,
+   so Firefox gets the standard thin scrollbar in its own block. */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track, ::-webkit-scrollbar-corner { background: transparent; }
+::-webkit-scrollbar-thumb { background: transparent; border-radius: 9999px; }
+*:hover::-webkit-scrollbar-thumb { background: color-mix(in oklab, var(--color-fg) 22%, transparent); }
+::-webkit-scrollbar-thumb:hover { background: color-mix(in oklab, var(--color-fg) 40%, transparent) !important; }
+html::-webkit-scrollbar-thumb, html:hover::-webkit-scrollbar-thumb { background: transparent; }
+html.is-scrolling::-webkit-scrollbar-thumb { background: color-mix(in oklab, var(--color-fg) 28%, transparent); }
+@supports not selector(::-webkit-scrollbar) {
+  * { scrollbar-width: thin; scrollbar-color: color-mix(in oklab, var(--color-fg) 22%, transparent) transparent; }
+  html { scrollbar-color: transparent transparent; transition: scrollbar-color .3s; }
+  html.is-scrolling { scrollbar-color: color-mix(in oklab, var(--color-fg) 28%, transparent) transparent; }
+}

@@ -3,6 +3,7 @@ import { JetBrains_Mono, Manrope, Poppins } from "next/font/google";
 import "./globals.css";
 import { site } from "@/data/site";
 import { themeBootScript } from "@/lib/learn/theme";
+import { ScrollbarAutoHide } from "@/components/layout/ScrollbarAutoHide";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["600", "700", "800"], variable: "--font-poppins", display: "swap" });
 const manrope = Manrope({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-manrope", display: "swap" });
@@ -98,6 +99,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         {children}
+        <ScrollbarAutoHide />
       </body>
     </html>
   );

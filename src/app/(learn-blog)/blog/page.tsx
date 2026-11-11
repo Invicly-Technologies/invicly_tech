@@ -4,6 +4,7 @@ import { paths, PATH_CATEGORIES } from "@/data/learn/paths";
 import { posts, postsForPath, seriesHref } from "@/data/learn/blog";
 import { BlogBrowser } from "@/components/learn/BlogBrowser";
 import { BlogSearch } from "@/components/learn/BlogSearch";
+import { BlueprintField } from "@/components/ui/BlueprintField";
 import { PathIcon } from "@/components/learn/bits";
 import { JsonLd, abs, organizationRef } from "@/lib/seo";
 
@@ -17,7 +18,12 @@ export const metadata: Metadata = {
 export default function BlogIndex() {
   const cards = posts.map((p) => ({ slug: p.slug, title: p.title, summary: p.summary, path: p.pathTitle, category: p.category, minutes: p.minutes, keywords: `${p.moduleTitle} ${p.keywords.join(" ")}` }));
   return (
-    <div className="wrap py-10 md:py-14">
+    <>
+    <section className="relative border-b border-fg/10">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+        <BlueprintField className="absolute inset-0" />
+      </div>
+      <div className="wrap relative py-12 md:py-16">
       <JsonLd
         data={{
           "@type": "Blog",
@@ -30,14 +36,16 @@ export default function BlogIndex() {
         }}
       />
       <header className="max-w-3xl">
-        <p className="text-sm font-semibold text-blue-light">The Invicly Blog</p>
-        <h1 className="mt-2 text-[38px] font-extrabold leading-[1.08] tracking-[-1.5px] md:text-[54px]">Learn one topic at a time, with pictures.</h1>
+        <h1 className="text-[38px] font-extrabold leading-[1.08] tracking-[-1.5px] md:text-[54px]">Learn one topic at a time, with pictures.</h1>
         <p className="mt-4 text-lg leading-relaxed text-muted">
           {posts.length} short guides across {paths.length} subjects. Every article has a diagram you can step through, key-term flashcards and questions to check yourself.
         </p>
         <BlogSearch size="lg" className="mt-7 max-w-2xl" />
         <p className="mt-2.5 text-sm text-quiet">Try docker, subnetting or react hooks.</p>
       </header>
+      </div>
+    </section>
+    <div className="wrap pb-10 md:pb-14">
 
       <section className="mt-10" aria-labelledby="series-h">
         <h2 id="series-h" className="text-xl font-bold">Series</h2>
@@ -61,5 +69,6 @@ export default function BlogIndex() {
         <BlogBrowser posts={cards} categories={[...PATH_CATEGORIES]} />
       </section>
     </div>
+    </>
   );
 }
