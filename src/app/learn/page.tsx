@@ -5,7 +5,6 @@ import { PathBrowser } from "@/components/learn/PathBrowser";
 import { HeroCta, SignupBand } from "@/components/learn/LandingCta";
 import { PathIcon, ProgressRing, Bar } from "@/components/learn/bits";
 import type { Metadata } from "next";
-import { BlueprintField } from "@/components/ui/BlueprintField";
 import { JsonLd, abs, organizationRef } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -45,9 +44,6 @@ export default function LearnHome() {
         }}
       />
       <section className="relative overflow-hidden border-b border-fg/10">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-          <BlueprintField className="absolute inset-0" />
-        </div>
         <div className="wrap relative grid grid-cols-1 items-center gap-12 py-16 md:py-24 lg:grid-cols-[1.15fr_1fr]">
           <div className="hero-in">
             <h1 className="text-[42px] font-extrabold leading-[1.04] tracking-[-2px] md:text-[64px]">

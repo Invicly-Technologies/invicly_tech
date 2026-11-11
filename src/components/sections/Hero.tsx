@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { Button } from "@/components/ui/Button";
 import { HeroVisual } from "@/components/three/HeroVisual";
 import { SplitReveal } from "@/components/ui/SplitReveal";
-import { BlueprintField } from "@/components/ui/BlueprintField";
 import { products } from "@/data/products";
 import { useReducedMotion } from "@/lib/hooks";
 
@@ -27,9 +26,6 @@ export function Hero() {
 
   return (
     <section ref={ref} className="relative overflow-hidden pb-10 pt-28 md:pt-36">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <BlueprintField className="absolute inset-0" />
-      </div>
 
       <div className="wrap relative flex flex-wrap items-center gap-8">
         <motion.div className="min-w-0 flex-[1_1_520px]" style={reduced ? undefined : { y: textY, opacity: fade }}>

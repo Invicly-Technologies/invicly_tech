@@ -4,7 +4,6 @@ import { paths, PATH_CATEGORIES } from "@/data/learn/paths";
 import { posts, postsForPath, seriesHref } from "@/data/learn/blog";
 import { BlogBrowser } from "@/components/learn/BlogBrowser";
 import { BlogSearch } from "@/components/learn/BlogSearch";
-import { BlueprintField } from "@/components/ui/BlueprintField";
 import { PathIcon } from "@/components/learn/bits";
 import { JsonLd, abs, organizationRef } from "@/lib/seo";
 
@@ -20,9 +19,6 @@ export default function BlogIndex() {
   return (
     <>
     <section className="relative border-b border-fg/10">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-        <BlueprintField className="absolute inset-0" />
-      </div>
       <div className="wrap relative py-12 md:py-16">
       <JsonLd
         data={{

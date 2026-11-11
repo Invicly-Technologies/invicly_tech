@@ -9,7 +9,7 @@ import { useEffect, useRef } from "react";
  * Cheap by design: it only animates while something is happening (pointer energy or a ring), draws one static
  * frame otherwise, pauses off-screen and in background tabs, and stays still for reduced motion and touch.
  */
-export function BlueprintField({ className }: { className?: string }) {
+export function BlueprintField({ className, quiet = false }: { className?: string; quiet?: boolean }) {
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -35,7 +35,9 @@ export function BlueprintField({ className }: { className?: string }) {
 
     const palette = () => {
       const light = document.documentElement.getAttribute("data-theme") === "light";
-      return light ? { dot: "10,99,201", base: 0.3, trace: "10,99,201" } : { dot: "90,176,255", base: 0.34, trace: "120,190,255" };
+      // `quiet` is the site-wide background: dimmer at rest so long text stays easy to read.
+      const k = quiet ? 0.62 : 1;
+      return light ? { dot: "10,99,201", base: 0.3 * k, trace: "10,99,201" } : { dot: "90,176,255", base: 0.34 * k, trace: "120,190,255" };
     };
     let pal = palette();
 
@@ -211,7 +213,7 @@ export function BlueprintField({ className }: { className?: string }) {
       aria-hidden="true"
       className={className}
       // Fade the grid out toward the edges so it reads as a field, not a sheet of graph paper.
-      style={{ maskImage: "radial-gradient(130% 100% at 55% 40%, #000 45%, transparent 92%)", WebkitMaskImage: "radial-gradient(130% 100% at 55% 40%, #000 45%, transparent 92%)" }}
+      style={quiet ? undefined : { maskImage: "radial-gradient(130% 100% at 55% 40%, #000 45%, transparent 92%)", WebkitMaskImage: "radial-gradient(130% 100% at 55% 40%, #000 45%, transparent 92%)" }}
     />
   );
 }

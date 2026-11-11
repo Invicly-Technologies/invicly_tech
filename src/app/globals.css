@@ -31,7 +31,8 @@
 html { background: var(--color-ground); overflow-x: clip; }
 body {
   margin: 0;
-  background: var(--color-ground);
+  /* Transparent so the site-wide background layer shows; the page colour is painted on <html>. */
+  background: transparent;
   color: var(--color-text);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -187,7 +188,7 @@ select.fld { appearance: none; background-image: url("data:image/svg+xml,%3Csvg 
   --ring-track: rgba(255, 255, 255, 0.08);
   --mm-canvas: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
 }
-.learn-root { background: var(--color-ground); color: var(--color-text); }
+.learn-root { color: var(--color-text); }
 html[data-theme="light"] {
   color-scheme: light;
   --color-fg: #0b1220;

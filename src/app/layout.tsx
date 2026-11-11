@@ -4,6 +4,7 @@ import "./globals.css";
 import { site } from "@/data/site";
 import { themeBootScript } from "@/lib/learn/theme";
 import { ScrollbarAutoHide } from "@/components/layout/ScrollbarAutoHide";
+import { SiteBackground } from "@/components/layout/SiteBackground";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["600", "700", "800"], variable: "--font-poppins", display: "swap" });
 const manrope = Manrope({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-manrope", display: "swap" });
@@ -91,6 +92,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
       </head>
       <body>
+        <SiteBackground />
         <a
           href="#main"
           className="fixed left-4 top-4 z-[100] -translate-y-24 rounded-full bg-blue-fill px-5 py-3 font-bold text-white transition-transform focus:translate-y-0"
