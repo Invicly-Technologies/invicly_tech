@@ -1,5 +1,5 @@
 "use client";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { ArrowLeft, CircleHelp, X } from "lucide-react";
 import { completeTour } from "@/app/learn/actions";
@@ -15,7 +15,7 @@ const TOURS: TourDef[] = [
     match: (p) => p.startsWith("/learn/dashboard"),
     steps: [
       { title: "Welcome to Invicly Learn", body: "A quick tour of how to plan, study and track. It takes about a minute, and you can replay it any time from the ? button." },
-      { target: "nav-paths", title: "Learning paths", body: "11 free paths with modules, short subtopics, docs and visual explainer pages for every topic." },
+      { target: "nav-paths", title: "Learning paths", body: "17 free paths with modules, short subtopics, docs and a visual guide for every topic." },
       { target: "new-plan", title: "Make a plan", body: "Pick a path or paste a syllabus, edit it as a mind map, set hours for each weekday, then preview the timeline." },
       { target: "today", title: "Today's focus", body: "What's due today, with the next short subtopic. Press ▶ to start a timer and ✓ to tick it off." },
       { target: "log", title: "Log time by hand", body: "Studied away from the timer? Log it here. Every session counts toward your streak." },
@@ -39,6 +39,7 @@ const TOURS: TourDef[] = [
 export function LearnTours() {
   const { loaded, user, tours: done } = useLearnSession();
   const path = usePathname();
+  const router = useRouter();
   const tour = useMemo(() => TOURS.find((t) => t.match(path)) ?? null, [path]);
   const [active, setActive] = useState<TourDef | null>(null);
   const [finished, setFinished] = useState<string[]>([]);
@@ -50,11 +51,25 @@ export function LearnTours() {
     return () => clearTimeout(t);
   }, [tour, finished, done, loaded, user]);
 
+  // The "?" button is on every page, but tours exist only for the dashboard and plan pages.
+  // Elsewhere it opens the dashboard and starts the welcome tour there (?tour=1).
   useEffect(() => {
-    const replay = () => tour && setActive(tour);
+    const replay = () => {
+      if (tour) setActive(tour);
+      else router.push("/learn/dashboard/?tour=1");
+    };
     window.addEventListener("il-tour", replay);
     return () => window.removeEventListener("il-tour", replay);
-  }, [tour]);
+  }, [tour, router]);
+
+  useEffect(() => {
+    if (!tour || !new URLSearchParams(window.location.search).has("tour")) return;
+    const t = setTimeout(() => {
+      setActive(tour);
+      window.history.replaceState(null, "", window.location.pathname);
+    }, 900);
+    return () => clearTimeout(t);
+  }, [tour, path]);
 
   const close = useCallback(() => {
     if (!active) return;
