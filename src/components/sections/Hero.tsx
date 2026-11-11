@@ -38,7 +38,7 @@ export function Hero() {
             <br />
             <SplitReveal text="Build." mode="chars" onMount delay={0.3} />
             <br />
-            <SplitReveal text="Invicly." mode="chars" onMount delay={0.5} pieceClassName="text-shimmer" />
+            <SplitReveal text="Invicly." mode="chars" onMount delay={0.5} pieceClassName="text-blue" />
           </h1>
           <motion.p {...fadeUp(0.8)} className="mt-7 max-w-[520px] text-[19px] leading-relaxed text-muted">
             We make software people use every day, and we build websites, apps and cloud setups for businesses that want the same quality.
